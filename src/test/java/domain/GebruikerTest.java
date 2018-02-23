@@ -317,4 +317,18 @@ public class GebruikerTest {
         instance.makeUnfollow(a);
         assertEquals(instance.getFollowing().size(), 0);
     }
+    
+    @Test
+    public void testEqualsGebruiker(){
+        Gebruiker instance1 = new Gebruiker("test@mail.com", "123");
+        Gebruiker instance2 = new Gebruiker("test@mail.com", "123");
+        Gebruiker instance3 = new Gebruiker("123@mail.com", "456");
+        Gebruiker instance4 = new Gebruiker();
+        
+        assertTrue(instance1.equals(instance2));
+        assertFalse(instance2.equals(instance3));
+        assertFalse(instance1.equals(instance4));
+        assertFalse(instance4.equals(instance1));
+        
+    }
 }

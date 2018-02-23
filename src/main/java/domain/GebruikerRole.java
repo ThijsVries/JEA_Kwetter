@@ -1,5 +1,5 @@
 package domain;
 
 public enum GebruikerRole {
-    USER, MOD, ADMIN
+    USER, ADMIN, MOD
 }

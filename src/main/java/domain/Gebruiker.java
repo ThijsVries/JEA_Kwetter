@@ -25,6 +25,8 @@ public class Gebruiker implements Serializable{
     private String website;
     private String location;
     
+    private GebruikerRole role;
+    
     @OneToMany
     private List<Gebruiker> following = new ArrayList();
     
@@ -146,10 +148,27 @@ public class Gebruiker implements Serializable{
     }
     
     /**
-     * Changes the current user's userRole depending on the given rank
-     * @param rank the numeric representation of the userRole
+     * Promotes the selected user's role to one above the current one.
      */
-    public void changeUserRole(int rank){
+    public void promoteUser(){
+        switch(this.role){
+            case USER:
+                this.role = GebruikerRole.MOD;
+                break;
+            case MOD:
+                this.role = GebruikerRole.USER;
+                break;
+            case ADMIN:
+                break;
+            default:
+                break;
+        }
+    }
+    
+    /**
+     * Demotes the selected user's role to one below the current one.
+     */
+    public void demoteUser(){
         
     }
 
