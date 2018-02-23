@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,11 @@ public class Gebruiker implements Serializable{
     private String location;
     
     @OneToMany
-    private List<Gebruiker> following;
+    private List<Gebruiker> following = new ArrayList();
+    
+    @OneToMany
+    private List<Kweet> kweets = new ArrayList();
+    
 
     public String getFirstName() {
         return firstName;
@@ -93,23 +98,18 @@ public class Gebruiker implements Serializable{
     public List<Gebruiker> getFollowing() {
         return following;
     }
-
-    public void setFollowing(List<Gebruiker> following) {
-        this.following = following;
-    }
      
     public Gebruiker(){
         
     }
     
-    public Gebruiker(String email, String firstName, String password){
+    public Gebruiker(String email, String password){
         this.email = email;
         this.firstName = firstName;
         this.password = password;
     }
 
-    public Gebruiker(long Id, String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location) {
-        this.Id = Id;
+    public Gebruiker(String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -125,7 +125,7 @@ public class Gebruiker implements Serializable{
      * @param gebruiker the given user TO follow
      */
     public void makeFollow(Gebruiker gebruiker){
-        if(this.following != null){
+        if(this.following != null && gebruiker != null){
             if(!this.following.contains(gebruiker)){
                 this.following.add(gebruiker);
             }
@@ -137,7 +137,7 @@ public class Gebruiker implements Serializable{
      * @param gebruiker the given user TO unfollow
      */
     public void makeUnfollow(Gebruiker gebruiker){
-        if(this.following != null){
+        if(this.following != null && gebruiker != null){
             if(this.following.contains(gebruiker)){
                 this.following.remove(gebruiker);
             }

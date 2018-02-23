@@ -42,7 +42,7 @@ public class GebruikerTest {
         assertEquals(expResult, result);
         
         //Test the getter with a proper result
-        Gebruiker instance2 = new Gebruiker("jan@mail.com", "Jan", "password");
+        Gebruiker instance2 = new Gebruiker("Jan", "", "", "", "", "", "", "");
         String expResult2 = "Jan";
         assertEquals(instance2.getFirstName(), expResult2);
     }
@@ -53,11 +53,14 @@ public class GebruikerTest {
     @Test
     public void testSetFirstName() {
         System.out.println("setFirstName");
-        String firstName = "";
-        Gebruiker instance = new Gebruiker();
+        
+        String firstName = "Jan";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getFirstName(), "");
         instance.setFirstName(firstName);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getFirstName(), firstName);
+        instance.setFirstName(null);
+        assertNull(instance.getFirstName());
     }
 
     /**
@@ -67,11 +70,11 @@ public class GebruikerTest {
     public void testGetLastName() {
         System.out.println("getLastName");
         Gebruiker instance = new Gebruiker();
-        String expResult = "";
-        String result = instance.getLastName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getLastName());
+        
+        String lastName = "Pietje";
+        Gebruiker instance2 = new Gebruiker("", "Pietje", "", "", "", "", "", "");
+        assertEquals(instance2.getLastName(), lastName);
     }
 
     /**
@@ -80,11 +83,13 @@ public class GebruikerTest {
     @Test
     public void testSetLastName() {
         System.out.println("setLastName");
-        String lastName = "";
-        Gebruiker instance = new Gebruiker();
+        String lastName = "Pietje";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getLastName(), "");
         instance.setLastName(lastName);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getLastName(), lastName);
+        instance.setLastName(null);
+        assertNull(instance.getLastName());
     }
 
     /**
@@ -94,11 +99,11 @@ public class GebruikerTest {
     public void testGetEmail() {
         System.out.println("getEmail");
         Gebruiker instance = new Gebruiker();
-        String expResult = "";
-        String result = instance.getEmail();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getEmail());
+        
+        String email = "mail@mail.com";
+        Gebruiker instance2 = new Gebruiker("", "", "mail@mail.com", "", "", "", "", "");
+        assertEquals(instance2.getEmail(), email);
     }
 
     /**
@@ -107,11 +112,15 @@ public class GebruikerTest {
     @Test
     public void testSetEmail() {
         System.out.println("setEmail");
-        String email = "";
-        Gebruiker instance = new Gebruiker();
+        String email = "mail@mail.com";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getEmail(), "");
+        
         instance.setEmail(email);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getEmail(), email);
+        
+        instance.setEmail(null);
+        assertNull(instance.getEmail());
     }
 
     /**
@@ -121,11 +130,11 @@ public class GebruikerTest {
     public void testGetProfilePicture() {
         System.out.println("getProfilePicture");
         Gebruiker instance = new Gebruiker();
-        String expResult = "";
-        String result = instance.getProfilePicture();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getProfilePicture());
+        
+        String profilePicture = "test.jpg";
+        Gebruiker instance2 = new Gebruiker("", "", "", "test.jpg", "", "", "", "");
+        assertEquals(instance2.getProfilePicture(), profilePicture);
     }
 
     /**
@@ -134,11 +143,15 @@ public class GebruikerTest {
     @Test
     public void testSetProfilePicture() {
         System.out.println("setProfilePicture");
-        String profilePicture = "";
-        Gebruiker instance = new Gebruiker();
+        String profilePicture = "test.jpg";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getProfilePicture(), "");
+        
         instance.setProfilePicture(profilePicture);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getProfilePicture(), profilePicture);
+        
+        instance.setEmail(null);
+        assertNull(instance.getEmail());
     }
 
     /**
@@ -148,11 +161,11 @@ public class GebruikerTest {
     public void testGetPassword() {
         System.out.println("getPassword");
         Gebruiker instance = new Gebruiker();
-        String expResult = "";
-        String result = instance.getPassword();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getPassword());
+        
+        String password = "password";
+        Gebruiker instance2 = new Gebruiker("", "", "", "", "password", "", "", "");
+        assertEquals(instance2.getPassword(), password);
     }
 
     /**
@@ -161,11 +174,15 @@ public class GebruikerTest {
     @Test
     public void testSetPassword() {
         System.out.println("setPassword");
-        String password = "";
-        Gebruiker instance = new Gebruiker();
+        String password = "password";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getPassword(), "");
+        
         instance.setPassword(password);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getPassword(), password);
+        
+        instance.setPassword(null);
+        assertNull(instance.getPassword());
     }
 
     /**
@@ -175,11 +192,11 @@ public class GebruikerTest {
     public void testGetBio() {
         System.out.println("getBio");
         Gebruiker instance = new Gebruiker();
-        String expResult = "";
-        String result = instance.getBio();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getBio());
+        
+        String bio = "bla";
+        Gebruiker instance2 = new Gebruiker("", "", "", "", "", "bla", "", "");
+        assertEquals(instance2.getBio(), bio);
     }
 
     /**
@@ -188,11 +205,15 @@ public class GebruikerTest {
     @Test
     public void testSetBio() {
         System.out.println("setBio");
-        String bio = "";
-        Gebruiker instance = new Gebruiker();
+        String bio = "bla";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getBio(), "");
+        
         instance.setBio(bio);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getBio(), bio);
+        
+        instance.setBio(null);
+        assertNull(instance.getBio());
     }
 
     /**
@@ -202,11 +223,11 @@ public class GebruikerTest {
     public void testGetWebsite() {
         System.out.println("getWebsite");
         Gebruiker instance = new Gebruiker();
-        String expResult = "";
-        String result = instance.getWebsite();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getWebsite());
+        
+        String website = "test.com";
+        Gebruiker instance2 = new Gebruiker("", "", "", "", "", "", "test.com", "");
+        assertEquals(instance2.getWebsite(), website);
     }
 
     /**
@@ -215,11 +236,15 @@ public class GebruikerTest {
     @Test
     public void testSetWebsite() {
         System.out.println("setWebsite");
-        String website = "";
-        Gebruiker instance = new Gebruiker();
+        String website = "test.com";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getWebsite(), "");
+        
         instance.setWebsite(website);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getWebsite(), website);
+        
+        instance.setWebsite(null);
+        assertNull(instance.getWebsite());
     }
 
     /**
@@ -229,11 +254,11 @@ public class GebruikerTest {
     public void testGetLocation() {
         System.out.println("getLocation");
         Gebruiker instance = new Gebruiker();
-        String expResult = "";
-        String result = instance.getLocation();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(instance.getLocation());
+        
+        String location = "Eindhoven";
+        Gebruiker instance2 = new Gebruiker("", "", "", "", "", "", "", "Eindhoven");
+        assertEquals(instance2.getLocation(), location);
     }
 
     /**
@@ -242,51 +267,37 @@ public class GebruikerTest {
     @Test
     public void testSetLocation() {
         System.out.println("setLocation");
-        String location = "";
-        Gebruiker instance = new Gebruiker();
+        String location = "Eindhoven";
+        Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
+        assertEquals(instance.getLocation(), "");
+        
         instance.setLocation(location);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getLocation(), location);
+        
+        instance.setLocation(null);
+        assertNull(instance.getLocation());
     }
 
     /**
      * Test of getFollowing method, of class Gebruiker.
      */
     @Test
-    public void testGetFollowing() {
+    public void testGetFollowingAndMakeFollow() {
         System.out.println("getFollowing");
+        
         Gebruiker instance = new Gebruiker();
-        List<Gebruiker> expResult = null;
-        List<Gebruiker> result = instance.getFollowing();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setFollowing method, of class Gebruiker.
-     */
-    @Test
-    public void testSetFollowing() {
-        System.out.println("setFollowing");
-        List<Gebruiker> following = null;
-        Gebruiker instance = new Gebruiker();
-        instance.setFollowing(following);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of makeFollow method, of class Gebruiker.
-     */
-    @Test
-    public void testMakeFollow() {
-        System.out.println("makeFollow");
-        Gebruiker gebruiker = null;
-        Gebruiker instance = new Gebruiker();
-        instance.makeFollow(gebruiker);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Gebruiker a = new Gebruiker();
+        
+        instance.makeFollow(a);
+        
+        assertEquals(instance.getFollowing().size(), 1);
+        
+        //Test if you can add duplicates to following
+        instance.makeFollow(a);
+        assertEquals(instance.getFollowing().size(), 1);
+        
+        instance.makeFollow(null);
+        assertEquals(instance.getFollowing().size(), 1);
     }
 
     /**
@@ -295,11 +306,16 @@ public class GebruikerTest {
     @Test
     public void testMakeUnfollow() {
         System.out.println("makeUnfollow");
-        Gebruiker gebruiker = null;
+        
         Gebruiker instance = new Gebruiker();
-        instance.makeUnfollow(gebruiker);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Gebruiker a = new Gebruiker();
+        
+        instance.makeFollow(a);
+        assertEquals(instance.getFollowing().size(), 1);
+        instance.makeUnfollow(null);
+        assertEquals(instance.getFollowing().size(), 1);
+        instance.makeUnfollow(a);
+        assertEquals(instance.getFollowing().size(), 0);
     }
 
     /**
