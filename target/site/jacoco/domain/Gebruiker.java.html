@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Gebruiker.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kwetter</a> &gt; <a href="index.source.html" class="el_package">domain</a> &gt; <span class="el_source">Gebruiker.java</span></div><h1>Gebruiker.java</h1><pre class="source lang-java linenums">package domain;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Gebruiker implements Serializable{
+    
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long Id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String profilePicture;
+    private String password;
+    
+    private String bio;
+    private String website;
+    private String location;
+    
+<span class="pc" id="L27">    @OneToMany</span>
+    private List&lt;Gebruiker&gt; following = new ArrayList();
+    
+<span class="pc" id="L30">    @OneToMany</span>
+    private List&lt;Kweet&gt; kweets = new ArrayList();
+    
+
+    public String getFirstName() {
+<span class="fc" id="L35">        return firstName;</span>
+    }
+
+    public void setFirstName(String firstName) {
+<span class="fc" id="L39">        this.firstName = firstName;</span>
+<span class="fc" id="L40">    }</span>
+
+    public String getLastName() {
+<span class="fc" id="L43">        return lastName;</span>
+    }
+
+    public void setLastName(String lastName) {
+<span class="fc" id="L47">        this.lastName = lastName;</span>
+<span class="fc" id="L48">    }</span>
+
+    public String getEmail() {
+<span class="fc" id="L51">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="fc" id="L55">        this.email = email;</span>
+<span class="fc" id="L56">    }</span>
+
+    public String getProfilePicture() {
+<span class="fc" id="L59">        return profilePicture;</span>
+    }
+
+    public void setProfilePicture(String profilePicture) {
+<span class="fc" id="L63">        this.profilePicture = profilePicture;</span>
+<span class="fc" id="L64">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L67">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L71">        this.password = password;</span>
+<span class="fc" id="L72">    }</span>
+
+    public String getBio() {
+<span class="fc" id="L75">        return bio;</span>
+    }
+
+    public void setBio(String bio) {
+<span class="fc" id="L79">        this.bio = bio;</span>
+<span class="fc" id="L80">    }</span>
+
+    public String getWebsite() {
+<span class="fc" id="L83">        return website;</span>
+    }
+
+    public void setWebsite(String website) {
+<span class="fc" id="L87">        this.website = website;</span>
+<span class="fc" id="L88">    }</span>
+
+    public String getLocation() {
+<span class="fc" id="L91">        return location;</span>
+    }
+
+    public void setLocation(String location) {
+<span class="fc" id="L95">        this.location = location;</span>
+<span class="fc" id="L96">    }</span>
+
+    public List&lt;Gebruiker&gt; getFollowing() {
+<span class="fc" id="L99">        return following;</span>
+    }
+     
+<span class="fc" id="L102">    public Gebruiker(){</span>
+        
+<span class="fc" id="L104">    }</span>
+    
+<span class="nc" id="L106">    public Gebruiker(String email, String password){</span>
+<span class="nc" id="L107">        this.email = email;</span>
+<span class="nc" id="L108">        this.firstName = firstName;</span>
+<span class="nc" id="L109">        this.password = password;</span>
+<span class="nc" id="L110">    }</span>
+
+<span class="fc" id="L112">    public Gebruiker(String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location) {</span>
+<span class="fc" id="L113">        this.firstName = firstName;</span>
+<span class="fc" id="L114">        this.lastName = lastName;</span>
+<span class="fc" id="L115">        this.email = email;</span>
+<span class="fc" id="L116">        this.profilePicture = profilePicture;</span>
+<span class="fc" id="L117">        this.password = password;</span>
+<span class="fc" id="L118">        this.bio = bio;</span>
+<span class="fc" id="L119">        this.website = website;</span>
+<span class="fc" id="L120">        this.location = location;</span>
+<span class="fc" id="L121">    }</span>
+    
+    /**
+     * Makes this user follow the given user.
+     * @param gebruiker the given user TO follow
+     */
+    public void makeFollow(Gebruiker gebruiker){
+<span class="pc bpc" id="L128" title="1 of 4 branches missed.">        if(this.following != null &amp;&amp; gebruiker != null){</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">            if(!this.following.contains(gebruiker)){</span>
+<span class="fc" id="L130">                this.following.add(gebruiker);</span>
+            }
+        }
+<span class="fc" id="L133">    }</span>
+    
+    /**
+     * Makes this user ufollow the given user
+     * @param gebruiker the given user TO unfollow
+     */
+    public void makeUnfollow(Gebruiker gebruiker){
+<span class="pc bpc" id="L140" title="1 of 4 branches missed.">        if(this.following != null &amp;&amp; gebruiker != null){</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">            if(this.following.contains(gebruiker)){</span>
+<span class="fc" id="L142">                this.following.remove(gebruiker);</span>
+            }
+        }
+<span class="fc" id="L145">    }</span>
+    
+    /**
+     * Changes the current user's userRole depending on the given rank
+     * @param rank the numeric representation of the userRole
+     */
+    public void changeUserRole(int rank){
+        
+<span class="nc" id="L153">    }</span>
+    
+    
+    
+    
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

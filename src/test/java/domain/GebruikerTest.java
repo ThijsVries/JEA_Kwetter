@@ -317,18 +317,4 @@ public class GebruikerTest {
         instance.makeUnfollow(a);
         assertEquals(instance.getFollowing().size(), 0);
     }
-
-    /**
-     * Test of changeUserRole method, of class Gebruiker.
-     */
-    @Test
-    public void testChangeUserRole() {
-        System.out.println("changeUserRole");
-        int rank = 0;
-        Gebruiker instance = new Gebruiker();
-        instance.changeUserRole(rank);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

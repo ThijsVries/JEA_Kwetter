@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -102,13 +103,50 @@ public class Kweet implements Serializable{
      * @param gebruiker The user unliking the kweet.
      */
     public void unlike(Gebruiker gebruiker){
-        
+        if(likes.contains(gebruiker)){
+            likes.remove(gebruiker);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.message);
+        hash = 97 * hash + Objects.hashCode(this.date);
+        hash = 97 * hash + Objects.hashCode(this.tags);
+        hash = 97 * hash + Objects.hashCode(this.ownedBy);
+        hash = 97 * hash + Objects.hashCode(this.likes);
+        hash = 97 * hash + Objects.hashCode(this.mentioned);
+        return hash;
     }
     
-    
-    
-    
-    
-    
-    
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj){
+            return true;
+        }
+        
+        if(obj == null){
+            return false;
+        }
+        
+        if(getClass() != obj.getClass()){
+            return false;
+        }
+        
+        final Kweet other = (Kweet)obj;
+        if(!Objects.equals(this.message, other.message)){
+            return false;
+        }
+        
+        if(!Objects.equals(this.date, other.date)){
+            return false;
+        }
+
+        if(!Objects.equals(this.ownedBy, other.ownedBy)){
+            return false;
+        }
+        
+        return true;
+    }  
 }
