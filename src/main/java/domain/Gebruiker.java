@@ -102,8 +102,9 @@ public class Gebruiker implements Serializable{
         
     }
     
-    public Gebruiker(String email, String password){
+    public Gebruiker(String email, String firstName, String password){
         this.email = email;
+        this.firstName = firstName;
         this.password = password;
     }
 
@@ -119,11 +120,35 @@ public class Gebruiker implements Serializable{
         this.location = location;
     }
     
-    public void follow(Gebruiker gebruiker){
-        
+    /**
+     * Makes this user follow the given user.
+     * @param gebruiker the given user TO follow
+     */
+    public void makeFollow(Gebruiker gebruiker){
+        if(this.following != null){
+            if(!this.following.contains(gebruiker)){
+                this.following.add(gebruiker);
+            }
+        }
     }
     
-    public void unFollow(Gebruiker gebruiker){
+    /**
+     * Makes this user ufollow the given user
+     * @param gebruiker the given user TO unfollow
+     */
+    public void makeUnfollow(Gebruiker gebruiker){
+        if(this.following != null){
+            if(this.following.contains(gebruiker)){
+                this.following.remove(gebruiker);
+            }
+        }
+    }
+    
+    /**
+     * Changes the current user's userRole depending on the given rank
+     * @param rank the numeric representation of the userRole
+     */
+    public void changeUserRole(int rank){
         
     }
     

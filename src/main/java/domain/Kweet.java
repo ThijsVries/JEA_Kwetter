@@ -89,13 +89,23 @@ public class Kweet implements Serializable{
     
     /**
      * Likes the selected kweet.
-     * @param gebruiker The user liking the tweet
+     * @param gebruiker The user liking the kweet.
      */
     public void like(Gebruiker gebruiker){
         if(!likes.contains(gebruiker)){
             likes.add(gebruiker);
         }
     }
+    
+    /**
+     * Unlikes the selected kweet.
+     * @param gebruiker The user unliking the kweet.
+     */
+    public void unlike(Gebruiker gebruiker){
+        
+    }
+    
+    
     
     
     
