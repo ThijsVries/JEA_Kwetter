@@ -27,9 +27,9 @@ public class Kweet implements Serializable{
     @ManyToOne
     private Gebruiker ownedBy;
     @OneToMany
-    private List<Gebruiker> likes;
+    private List<Gebruiker> likes = new ArrayList();
     @OneToMany
-    private List<Gebruiker> mentioned;
+    private List<Gebruiker> mentioned = new ArrayList();
 
     public String getMessage() {
         return message;
@@ -93,8 +93,10 @@ public class Kweet implements Serializable{
      * @param gebruiker The user liking the kweet.
      */
     public void like(Gebruiker gebruiker){
-        if(!likes.contains(gebruiker)){
-            likes.add(gebruiker);
+        if(gebruiker != null){
+            if(!likes.contains(gebruiker)){
+                likes.add(gebruiker);
+            }
         }
     }
     
@@ -103,8 +105,10 @@ public class Kweet implements Serializable{
      * @param gebruiker The user unliking the kweet.
      */
     public void unlike(Gebruiker gebruiker){
-        if(likes.contains(gebruiker)){
-            likes.remove(gebruiker);
+        if(gebruiker != null){
+            if(likes.contains(gebruiker)){
+                likes.remove(gebruiker);
+            }
         }
     }
 
