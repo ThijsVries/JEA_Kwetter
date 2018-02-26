@@ -25,6 +25,7 @@ public class Gebruiker implements Serializable{
     private String website;
     private String location;
     
+    
     private GebruikerRole role = GebruikerRole.USER;
     
     @OneToMany
