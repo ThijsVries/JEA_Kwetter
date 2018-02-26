@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 public class Kweet implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long Id;
+    private long id;
     private String message;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -93,10 +93,12 @@ public class Kweet implements Serializable{
      * @param gebruiker The user liking the kweet.
      */
     public void like(Gebruiker gebruiker){
-        if(gebruiker != null){
-            if(!likes.contains(gebruiker)){
-                likes.add(gebruiker);
-            }
+        if(gebruiker == null){
+            return;
+        }
+        
+        if(!likes.contains(gebruiker)){
+            likes.add(gebruiker);
         }
     }
     
@@ -105,10 +107,11 @@ public class Kweet implements Serializable{
      * @param gebruiker The user unliking the kweet.
      */
     public void unlike(Gebruiker gebruiker){
-        if(gebruiker != null){
-            if(likes.contains(gebruiker)){
-                likes.remove(gebruiker);
-            }
+        if(gebruiker == null){
+            return;
+        }
+        if(likes.contains(gebruiker)){
+           likes.remove(gebruiker);
         }
     }
 

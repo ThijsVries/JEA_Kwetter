@@ -68,7 +68,7 @@ public class KweetTest {
         
         instance.setMessage(message);
         
-        assertEquals(instance.getMessage(), "Test");
+        assertEquals("Test", instance.getMessage());
         
         message = null;
         instance.setMessage(message);

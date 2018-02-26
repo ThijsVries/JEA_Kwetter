@@ -56,7 +56,7 @@ public class GebruikerTest {
         
         String firstName = "Jan";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getFirstName(), "");
+        assertEquals("", instance.getFirstName());
         instance.setFirstName(firstName);
         assertEquals(firstName, instance.getFirstName());
         instance.setFirstName(null);

@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 public class Gebruiker implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long Id;
+    private long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -108,7 +108,6 @@ public class Gebruiker implements Serializable{
     
     public Gebruiker(String email, String password){
         this.email = email;
-        this.firstName = firstName;
         this.password = password;
     }
 
@@ -128,10 +127,14 @@ public class Gebruiker implements Serializable{
      * @param gebruiker the given user TO follow
      */
     public void makeFollow(Gebruiker gebruiker){
-        if(this.following != null && gebruiker != null){
-            if(!this.following.contains(gebruiker)){
+        if(this.following == null){
+            return;
+        }
+        if(gebruiker == null){
+            return;
+        }
+        if(!this.following.contains(gebruiker)){
                 this.following.add(gebruiker);
-            }
         }
     }
     
@@ -140,10 +143,14 @@ public class Gebruiker implements Serializable{
      * @param gebruiker the given user TO unfollow
      */
     public void makeUnfollow(Gebruiker gebruiker){
-        if(this.following != null && gebruiker != null){
-            if(this.following.contains(gebruiker)){
-                this.following.remove(gebruiker);
-            }
+        if(this.following == null){
+            return;
+        }
+        if(gebruiker == null){
+            return;
+        }
+        if(this.following.contains(gebruiker)){
+            this.following.remove(gebruiker);
         }
     }
     
@@ -169,7 +176,16 @@ public class Gebruiker implements Serializable{
      * Demotes the selected user's role to one below the current one.
      */
     public void demoteUser(){
-        
+        switch(this.role){
+            case MOD:
+                this.role = GebruikerRole.USER;
+                break;
+            case ADMIN:
+                this.role = GebruikerRole.MOD;
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
