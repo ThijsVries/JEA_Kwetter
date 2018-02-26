@@ -44,7 +44,7 @@ public class GebruikerTest {
         //Test the getter with a proper result
         Gebruiker instance2 = new Gebruiker("Jan", "", "", "", "", "", "", "");
         String expResult2 = "Jan";
-        assertEquals(instance2.getFirstName(), expResult2);
+        assertEquals(expResult2, instance2.getFirstName());
     }
 
     /**
@@ -58,7 +58,7 @@ public class GebruikerTest {
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
         assertEquals(instance.getFirstName(), "");
         instance.setFirstName(firstName);
-        assertEquals(instance.getFirstName(), firstName);
+        assertEquals(firstName, instance.getFirstName());
         instance.setFirstName(null);
         assertNull(instance.getFirstName());
     }
@@ -74,7 +74,7 @@ public class GebruikerTest {
         
         String lastName = "Pietje";
         Gebruiker instance2 = new Gebruiker("", "Pietje", "", "", "", "", "", "");
-        assertEquals(instance2.getLastName(), lastName);
+        assertEquals(lastName, instance2.getLastName());
     }
 
     /**
@@ -85,9 +85,9 @@ public class GebruikerTest {
         System.out.println("setLastName");
         String lastName = "Pietje";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getLastName(), "");
+        assertEquals("", instance.getLastName());
         instance.setLastName(lastName);
-        assertEquals(instance.getLastName(), lastName);
+        assertEquals(lastName, instance.getLastName());
         instance.setLastName(null);
         assertNull(instance.getLastName());
     }
@@ -103,7 +103,7 @@ public class GebruikerTest {
         
         String email = "mail@mail.com";
         Gebruiker instance2 = new Gebruiker("", "", "mail@mail.com", "", "", "", "", "");
-        assertEquals(instance2.getEmail(), email);
+        assertEquals(email, instance2.getEmail());
     }
 
     /**
@@ -114,10 +114,10 @@ public class GebruikerTest {
         System.out.println("setEmail");
         String email = "mail@mail.com";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getEmail(), "");
+        assertEquals("", instance.getEmail());
         
         instance.setEmail(email);
-        assertEquals(instance.getEmail(), email);
+        assertEquals(email, instance.getEmail());
         
         instance.setEmail(null);
         assertNull(instance.getEmail());
@@ -134,7 +134,7 @@ public class GebruikerTest {
         
         String profilePicture = "test.jpg";
         Gebruiker instance2 = new Gebruiker("", "", "", "test.jpg", "", "", "", "");
-        assertEquals(instance2.getProfilePicture(), profilePicture);
+        assertEquals(profilePicture, instance2.getProfilePicture());
     }
 
     /**
@@ -145,10 +145,10 @@ public class GebruikerTest {
         System.out.println("setProfilePicture");
         String profilePicture = "test.jpg";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getProfilePicture(), "");
+        assertEquals("", instance.getProfilePicture());
         
         instance.setProfilePicture(profilePicture);
-        assertEquals(instance.getProfilePicture(), profilePicture);
+        assertEquals(profilePicture, instance.getProfilePicture());
         
         instance.setEmail(null);
         assertNull(instance.getEmail());
@@ -165,7 +165,7 @@ public class GebruikerTest {
         
         String password = "password";
         Gebruiker instance2 = new Gebruiker("", "", "", "", "password", "", "", "");
-        assertEquals(instance2.getPassword(), password);
+        assertEquals(password, instance2.getPassword());
     }
 
     /**
@@ -176,10 +176,10 @@ public class GebruikerTest {
         System.out.println("setPassword");
         String password = "password";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getPassword(), "");
+        assertEquals("", instance.getPassword());
         
         instance.setPassword(password);
-        assertEquals(instance.getPassword(), password);
+        assertEquals(password, instance.getPassword());
         
         instance.setPassword(null);
         assertNull(instance.getPassword());
@@ -196,7 +196,7 @@ public class GebruikerTest {
         
         String bio = "bla";
         Gebruiker instance2 = new Gebruiker("", "", "", "", "", "bla", "", "");
-        assertEquals(instance2.getBio(), bio);
+        assertEquals(bio, instance2.getBio());
     }
 
     /**
@@ -207,10 +207,10 @@ public class GebruikerTest {
         System.out.println("setBio");
         String bio = "bla";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getBio(), "");
+        assertEquals("", instance.getBio());
         
         instance.setBio(bio);
-        assertEquals(instance.getBio(), bio);
+        assertEquals(bio, instance.getBio());
         
         instance.setBio(null);
         assertNull(instance.getBio());
@@ -227,7 +227,7 @@ public class GebruikerTest {
         
         String website = "test.com";
         Gebruiker instance2 = new Gebruiker("", "", "", "", "", "", "test.com", "");
-        assertEquals(instance2.getWebsite(), website);
+        assertEquals(website, instance2.getWebsite());
     }
 
     /**
@@ -238,10 +238,10 @@ public class GebruikerTest {
         System.out.println("setWebsite");
         String website = "test.com";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getWebsite(), "");
+        assertEquals("", instance.getWebsite());
         
         instance.setWebsite(website);
-        assertEquals(instance.getWebsite(), website);
+        assertEquals(website, instance.getWebsite());
         
         instance.setWebsite(null);
         assertNull(instance.getWebsite());
@@ -258,7 +258,7 @@ public class GebruikerTest {
         
         String location = "Eindhoven";
         Gebruiker instance2 = new Gebruiker("", "", "", "", "", "", "", "Eindhoven");
-        assertEquals(instance2.getLocation(), location);
+        assertEquals(location, instance2.getLocation());
     }
 
     /**
@@ -269,10 +269,10 @@ public class GebruikerTest {
         System.out.println("setLocation");
         String location = "Eindhoven";
         Gebruiker instance = new Gebruiker("", "", "", "", "", "", "", "");
-        assertEquals(instance.getLocation(), "");
+        assertEquals("", instance.getLocation());
         
         instance.setLocation(location);
-        assertEquals(instance.getLocation(), location);
+        assertEquals(location, instance.getLocation());
         
         instance.setLocation(null);
         assertNull(instance.getLocation());
@@ -290,14 +290,14 @@ public class GebruikerTest {
         
         instance.makeFollow(a);
         
-        assertEquals(instance.getFollowing().size(), 1);
+        assertEquals(1, instance.getFollowing().size());
         
         //Test if you can add duplicates to following
         instance.makeFollow(a);
-        assertEquals(instance.getFollowing().size(), 1);
+        assertEquals(1, instance.getFollowing().size());
         
         instance.makeFollow(null);
-        assertEquals(instance.getFollowing().size(), 1);
+        assertEquals(1, instance.getFollowing().size());
     }
 
     /**
@@ -311,11 +311,11 @@ public class GebruikerTest {
         Gebruiker a = new Gebruiker();
         
         instance.makeFollow(a);
-        assertEquals(instance.getFollowing().size(), 1);
+        assertEquals(1, instance.getFollowing().size());
         instance.makeUnfollow(null);
-        assertEquals(instance.getFollowing().size(), 1);
+        assertEquals(1, instance.getFollowing().size());
         instance.makeUnfollow(a);
-        assertEquals(instance.getFollowing().size(), 0);
+        assertEquals(0, instance.getFollowing().size());
     }
     
     @Test
