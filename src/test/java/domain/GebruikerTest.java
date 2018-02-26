@@ -331,4 +331,62 @@ public class GebruikerTest {
         assertFalse(instance4.equals(instance1));
         
     }
+    
+    
+    /**
+     * Test of getGebruikerRole method, of class Gebruiker.
+     */
+    @Test
+    public void testGetGebruikerRole() {
+        System.out.println("getGebruikerRole");
+        Gebruiker instance = new Gebruiker();
+        GebruikerRole expResult = GebruikerRole.USER;
+        assertEquals(expResult, instance.getGebruikerRole());
+    }
+
+    /**
+     * Test of promoteUser method, of class Gebruiker.
+     */
+    @Test
+    public void testPromoteUser() {
+        System.out.println("promoteUser");
+        Gebruiker instance = new Gebruiker();
+        instance.promoteUser();
+        
+        GebruikerRole expResult = GebruikerRole.MOD;
+        assertEquals(expResult, instance.getGebruikerRole());
+        
+        instance.promoteUser();
+        expResult = GebruikerRole.ADMIN;
+        assertEquals(expResult, instance.getGebruikerRole());
+    }
+
+    /**
+     * Test of demoteUser method, of class Gebruiker.
+     */
+    @Test
+    public void testDemoteUser() {
+        System.out.println("demoteUser");
+        Gebruiker instance = new Gebruiker();
+        GebruikerRole expResult = GebruikerRole.MOD;
+        
+        instance.promoteUser();
+        assertEquals(expResult, instance.getGebruikerRole());
+        
+        instance.demoteUser();
+        expResult = GebruikerRole.USER;
+        assertEquals(expResult, instance.getGebruikerRole());
+    }
+    
+    @Test
+    public void testHashCode(){
+        Gebruiker instance = new Gebruiker();
+        
+        Kweet testKweet = new Kweet(instance, "123");
+        Kweet testKweet2 = new Kweet(instance, "456");
+        Kweet testKweet3 = new Kweet(instance, "123");
+        
+        assertTrue(testKweet.hashCode() == testKweet3.hashCode());
+        assertFalse(testKweet.hashCode() == testKweet2.hashCode());
+    }
 }

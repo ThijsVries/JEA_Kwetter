@@ -25,13 +25,17 @@ public class Gebruiker implements Serializable{
     private String website;
     private String location;
     
-    private GebruikerRole role;
+    private GebruikerRole role = GebruikerRole.USER;
     
     @OneToMany
     private List<Gebruiker> following = new ArrayList();
     
     @OneToMany
     private List<Kweet> kweets = new ArrayList();
+    
+    public GebruikerRole getGebruikerRole(){
+        return role;
+    }
     
 
     public String getFirstName() {
@@ -163,7 +167,7 @@ public class Gebruiker implements Serializable{
                 this.role = GebruikerRole.MOD;
                 break;
             case MOD:
-                this.role = GebruikerRole.USER;
+                this.role = GebruikerRole.ADMIN;
                 break;
             case ADMIN:
                 break;
