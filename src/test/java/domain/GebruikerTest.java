@@ -359,6 +359,9 @@ public class GebruikerTest {
         instance.promoteUser();
         expResult = GebruikerRole.ADMIN;
         assertEquals(expResult, instance.getGebruikerRole());
+        
+        instance.promoteUser();
+        assertEquals(expResult, instance.getGebruikerRole());
     }
 
     /**
@@ -373,7 +376,13 @@ public class GebruikerTest {
         instance.promoteUser();
         assertEquals(expResult, instance.getGebruikerRole());
         
+        instance.promoteUser();
+        expResult = GebruikerRole.ADMIN;
+        assertEquals(expResult, instance.getGebruikerRole());
+        
         instance.demoteUser();
+        instance.demoteUser();
+        
         expResult = GebruikerRole.USER;
         assertEquals(expResult, instance.getGebruikerRole());
     }
