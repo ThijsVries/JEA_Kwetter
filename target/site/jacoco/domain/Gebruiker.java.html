@@ -33,7 +33,7 @@ public class Gebruiker implements Serializable{
 <span class="fc" id="L33">    @Enumerated(EnumType.ORDINAL)</span>
     private GebruikerRole role = GebruikerRole.USER;
     
-<span class="fc" id="L36">    @OneToMany(cascade = ALL)</span>
+<span class="fc" id="L36">    @OneToMany</span>
     private List&lt;Gebruiker&gt; following = new ArrayList();
     
 <span class="fc" id="L39">    @OneToMany</span>

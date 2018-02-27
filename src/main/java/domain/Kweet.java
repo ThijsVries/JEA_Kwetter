@@ -43,10 +43,6 @@ public class Kweet implements Serializable{
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public List<String> getTags() {
         return tags;
     }
@@ -59,16 +55,8 @@ public class Kweet implements Serializable{
         return ownedBy;
     }
 
-    public void setOwnedBy(Gebruiker ownedBy) {
-        this.ownedBy = ownedBy;
-    }
-
     public List<Gebruiker> getLikes() {
         return likes;
-    }
-
-    public void setLikes(List<Gebruiker> likes) {
-        this.likes = likes;
     }
 
     public List<Gebruiker> getMentioned() {
@@ -86,6 +74,12 @@ public class Kweet implements Serializable{
     public Kweet(Gebruiker gebruiker, String message){
         this.ownedBy = gebruiker;
         this.message = message;
+    }
+    
+    public Kweet(Gebruiker gebruiker, String message, Date date){
+        this.ownedBy = gebruiker;
+        this.message = message;
+        this.date = date;
     }
     
     /**

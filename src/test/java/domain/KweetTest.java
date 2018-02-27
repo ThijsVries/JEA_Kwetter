@@ -79,17 +79,14 @@ public class KweetTest {
      * Test of getDate method, of class Kweet.
      */
     @Test
-    public void testGetDateSetDate() {
+    public void testGetDate() {
         System.out.println("getDate");
-        Kweet instance = new Kweet();
+        Gebruiker gebruiker = new Gebruiker();
         Date expResult = new Date(5, 12, 2016);
-        instance.setDate(new Date(5,12,2016));
+        Kweet instance = new Kweet(gebruiker, "test", expResult);
         
         Date result = instance.getDate();
         assertEquals(expResult, result);
-        
-        instance.setDate(null);
-        assertNull(instance.getDate());
     }
 
     /**
@@ -127,23 +124,6 @@ public class KweetTest {
     }
 
     /**
-     * Test of setOwnedBy method, of class Kweet.
-     */
-    @Test
-    public void testSetOwnedBy() {
-        System.out.println("setOwnedBy");
-        Gebruiker ownedBy = null;
-        Kweet instance = new Kweet();
-        instance.setOwnedBy(ownedBy);
-        
-        assertNull(instance.getOwnedBy());
-        
-        ownedBy = new Gebruiker("test@mail.com", "123");
-        instance.setOwnedBy(ownedBy);
-        assertEquals(ownedBy, instance.getOwnedBy());
-    }
-
-    /**
      * Test of getLikes method, of class Kweet.
      */
     @Test
@@ -158,13 +138,6 @@ public class KweetTest {
         
         expResult.add(test1);
         expResult.add(test2);
-        
-        instance.setLikes(expResult);
-        
-        assertEquals(expResult, instance.getLikes());
-        
-        instance.setLikes(null);
-        assertNull(instance.getLikes());
     }
 
     /**
