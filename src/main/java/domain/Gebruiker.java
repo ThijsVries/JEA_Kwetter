@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import static javax.persistence.CascadeType.ALL;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +21,7 @@ public class Gebruiker implements Serializable{
     private long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String profilePicture;
     private String password;
@@ -25,9 +30,10 @@ public class Gebruiker implements Serializable{
     private String website;
     private String location;
     
+    @Enumerated(EnumType.ORDINAL)
     private GebruikerRole role = GebruikerRole.USER;
     
-    @OneToMany
+    @OneToMany(cascade = ALL)
     private List<Gebruiker> following = new ArrayList();
     
     @OneToMany

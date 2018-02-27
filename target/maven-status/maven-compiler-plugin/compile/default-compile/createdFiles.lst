@@ -1,5 +1,11 @@
 domain\GebruikerRole.class
 domain\Gebruiker_.class
-domain\Kweet.class
+Service\GebruikerService.class
 domain\Kweet_.class
+dao\GebruikerDAO.class
+dao\KweetDAOImpCollection.class
+dao\KweetDAO.class
+domain\Kweet.class
 domain\Gebruiker.class
+domain\Gebruiker$1.class
+dao\GebruikerDAOImpCollection.class

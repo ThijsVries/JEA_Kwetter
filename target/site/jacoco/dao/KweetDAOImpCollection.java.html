@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>KweetDAOImpCollection.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kwetter</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">KweetDAOImpCollection.java</span></div><h1>KweetDAOImpCollection.java</h1><pre class="source lang-java linenums">package dao;
+
+import domain.Gebruiker;
+import domain.Kweet;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@Stateless
+<span class="nc" id="L11">public class KweetDAOImpCollection implements KweetDAO{</span>
+    
+    @PersistenceContext
+    EntityManager em;
+
+    @Override
+    public Kweet getKweet(int id) {
+<span class="nc" id="L18">        return em.find(Kweet.class, id);</span>
+    }
+
+    @Override
+    public List&lt;Kweet&gt; getAllKweets() {
+<span class="nc" id="L23">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+    @Override
+    public boolean createKweet(Gebruiker gebruiker, String message) {
+<span class="nc" id="L28">        em.persist(new Kweet(gebruiker, message));</span>
+<span class="nc" id="L29">        return true;</span>
+    }
+
+    @Override
+    public boolean deleteKweet(int id) {
+<span class="nc" id="L34">        em.remove(id);</span>
+<span class="nc" id="L35">        return true;</span>
+    }
+
+    @Override
+    public boolean updateKweet(int id) {
+<span class="nc" id="L40">        em.merge(id);</span>
+<span class="nc" id="L41">        return true;</span>
+    }
+    
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
