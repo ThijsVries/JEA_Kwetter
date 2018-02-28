@@ -31,41 +31,41 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public boolean likeKweet(Gebruiker gebruiker, Kweet kweet) {
+    public void likeKweet(Gebruiker gebruiker, Kweet kweet) {
         kweet.like(gebruiker);
         em.merge(kweet);
-        return true;
     }
     
-    //TODO fix named query to get likes.
     @Override
     public List<Gebruiker> getLikes(Kweet kweet) {
-        return null;
+        List<Kweet> kweets = em.createNamedQuery("Kweet.getKweetById").setParameter("id", kweet.getId()).getResultList();
+        return kweets.get(0).getLikes();
     }
 
     @Override
     public List<Gebruiker> getMentions(Kweet kweet) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Kweet> kweets = em.createNamedQuery("Kweet.getKweetById").setParameter("id", kweet.getId()).getResultList();
+        return kweets.get(0).getMentioned();
     }
 
     @Override
     public List<Kweet> getGebruikerKweets(Gebruiker gebruiker) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", gebruiker.getEmail()).getResultList();
     }
 
     @Override
-    public boolean createKweet(Gebruiker gebruiker, String message) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createKweet(Gebruiker gebruiker, String message) {
+        em.persist(new Kweet(gebruiker, message));
     }
 
     @Override
-    public boolean deleteKweet(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteKweet(int id) {
+        em.remove(id);
     }
 
     @Override
-    public boolean updateKweet(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateKweet(Kweet kweet) {
+        em.merge(kweet);
     }
 
 }

@@ -13,7 +13,7 @@ public interface KweetDAO {
     
     void setKweetMentions(List<Gebruiker> mentions, Kweet kweet);
     
-    boolean likeKweet(Gebruiker gebruiker, Kweet kweet);
+    void likeKweet(Gebruiker gebruiker, Kweet kweet);
     
     List<Gebruiker> getLikes(Kweet kweet);
     
@@ -21,9 +21,9 @@ public interface KweetDAO {
     
     List<Kweet> getGebruikerKweets(Gebruiker gebruiker);
     
-    boolean createKweet(Gebruiker gebruiker, String message);
+    void createKweet(Gebruiker gebruiker, String message);
     
-    boolean deleteKweet(int id);
+    void deleteKweet(int id);
     
-    boolean updateKweet(int id);
+    void updateKweet(Kweet kweet);
 }

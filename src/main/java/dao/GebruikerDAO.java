@@ -6,12 +6,17 @@ import java.util.List;
 
 public interface GebruikerDAO {
     
-    boolean addGebruiker(Gebruiker gebruiker);
+    //TODO make bools void and catch exceptions in the service layer
+    void addGebruiker(Gebruiker gebruiker);
     
-    boolean updateGebruiker(Gebruiker gebruiker);
+    void updateGebruiker(Gebruiker gebruiker);
+    
+    void deleteGebruiker(Gebruiker gebruiker);
     
     List<Gebruiker> getGebruikerFollowers(int id);
     
-    Gebruiker findGebruikerById(int id);
+    List<Gebruiker> findGebruikerByEmail(String email);
+    
+    List<Gebruiker> findGebruikerByName(String firstName);
     
 }

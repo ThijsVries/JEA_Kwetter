@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({@NamedQuery(name = "Kweet.getKweetById", query = "SELECT k FROM Kweet k WHERE k.id LIKE :id"),
+               @NamedQuery(name = "Kweet.getGebruikerKweets", query = "SELECT k FROM Kweet k WHERE k.ownedBy = (SELECT g.id FROM Gebruiker g WHERE g.email = :email) ORDER BY k.date")})
 public class Kweet implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,9 +32,11 @@ public class Kweet implements Serializable{
     private List<String> tags = new ArrayList();
     @ManyToOne
     private Gebruiker ownedBy;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "kweet_likes")
     private List<Gebruiker> likes = new ArrayList();
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "kweet_mentioned")
     private List<Gebruiker> mentioned = new ArrayList();
     
     public long getId(){

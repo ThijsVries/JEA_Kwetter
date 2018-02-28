@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +13,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({@NamedQuery(name = "Gebruiker.getAllGebruikers", query = "SELECT g FROM Gebruiker g"),
+               @NamedQuery(name = "Gebruiker.getByMail", query = "SELECT g FROM Gebruiker g WHERE g.email LIKE :email"),
+               @NamedQuery(name = "Gebruiker.getByName", query = "SELECT g FROM Gebruiker g WHERE g.firstName LIKE :firstName")})
 public class Gebruiker implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -33,9 +39,10 @@ public class Gebruiker implements Serializable{
     @Enumerated(EnumType.ORDINAL)
     private GebruikerRole role = GebruikerRole.USER;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Gebruiker> following = new ArrayList();
     
+    // <editor-fold defaultstate="collapsed" desc="Properties"> 
     @OneToMany
     private List<Kweet> kweets = new ArrayList();
     
@@ -119,7 +126,8 @@ public class Gebruiker implements Serializable{
     public List<Gebruiker> getFollowing() {
         return following;
     }
-     
+    // </editor-fold>
+    
     public Gebruiker(){
         
     }

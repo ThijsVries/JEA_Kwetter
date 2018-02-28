@@ -13,24 +13,35 @@ public class GebruikerDAOImp implements GebruikerDAO{
     EntityManager em;
     
     @Override
-    public boolean addGebruiker(Gebruiker gebruiker) {
+    public void addGebruiker(Gebruiker gebruiker) {
         em.persist(gebruiker);
-        return true;
     }
 
     @Override
-    public boolean updateGebruiker(Gebruiker gebruiker) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateGebruiker(Gebruiker gebruiker) {
+        em.merge(gebruiker);
     }
 
     @Override
     public List<Gebruiker> getGebruikerFollowers(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Gebruiker gebruiker = em.find(Gebruiker.class, id);
+        return gebruiker.getFollowing();
     }
 
     @Override
-    public Gebruiker findGebruikerById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteGebruiker(Gebruiker gebruiker) {
+        em.remove(gebruiker);
     }
+
+    @Override
+    public List<Gebruiker> findGebruikerByEmail(String email) {
+        return em.createNamedQuery("Gebruiker.getByMail").setParameter("email", email).getResultList();
+    }
+
+    @Override
+    public List<Gebruiker> findGebruikerByName(String firstName) {
+        return em.createNamedQuery("Gebruiker.getByName").setParameter("firstName", firstName).getResultList();
+    }
+
 
 }
