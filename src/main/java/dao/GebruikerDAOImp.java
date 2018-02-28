@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class GebruikerDAOImpCollection implements GebruikerDAO{
+public class GebruikerDAOImp implements GebruikerDAO{
 
     @PersistenceContext
     EntityManager em;
@@ -24,7 +24,7 @@ public class GebruikerDAOImpCollection implements GebruikerDAO{
     }
 
     @Override
-    public List<Gebruiker> getGebruikerFollowers() {
+    public List<Gebruiker> getGebruikerFollowers(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

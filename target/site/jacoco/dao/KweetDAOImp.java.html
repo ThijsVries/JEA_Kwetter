@@ -3,58 +3,69 @@
 import domain.Gebruiker;
 import domain.Kweet;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 
-<span class="nc" id="L8">public class KweetDAOImp implements KweetDAO{</span>
+@Stateless
+<span class="nc" id="L12">public class KweetDAOImp implements KweetDAO{</span>
 
+    @PersistenceContext
+    EntityManager em;
+    
     @Override
     public Kweet getKweet(int id) {
-<span class="nc" id="L12">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L19">        return (Kweet) em.find(Kweet.class, id);</span>
     }
 
     @Override
     public List&lt;Kweet&gt; getAllKweets() {
-<span class="nc" id="L17">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L24">        return em.createNamedQuery(&quot;kweet.getAll&quot;).getResultList();</span>
     }
 
     @Override
     public void setKweetMentions(List&lt;Gebruiker&gt; mentions, Kweet kweet) {
-<span class="nc" id="L22">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
-    }
+<span class="nc" id="L29">        kweet.setMentioned(mentions);</span>
+<span class="nc" id="L30">        em.persist(kweet);</span>
+<span class="nc" id="L31">    }</span>
 
     @Override
     public boolean likeKweet(Gebruiker gebruiker, Kweet kweet) {
-<span class="nc" id="L27">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L35">        kweet.like(gebruiker);</span>
+<span class="nc" id="L36">        em.merge(kweet);</span>
+<span class="nc" id="L37">        return true;</span>
     }
-
+    
+    //TODO fix named query to get likes.
     @Override
     public List&lt;Gebruiker&gt; getLikes(Kweet kweet) {
-<span class="nc" id="L32">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L43">        return null;</span>
     }
 
     @Override
     public List&lt;Gebruiker&gt; getMentions(Kweet kweet) {
-<span class="nc" id="L37">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L48">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
     @Override
     public List&lt;Kweet&gt; getGebruikerKweets(Gebruiker gebruiker) {
-<span class="nc" id="L42">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L53">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
     @Override
     public boolean createKweet(Gebruiker gebruiker, String message) {
-<span class="nc" id="L47">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L58">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
     @Override
     public boolean deleteKweet(int id) {
-<span class="nc" id="L52">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L63">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
     @Override
     public boolean updateKweet(int id) {
-<span class="nc" id="L57">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+<span class="nc" id="L68">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
     }
 
 }

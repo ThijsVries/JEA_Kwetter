@@ -10,7 +10,7 @@ public interface GebruikerDAO {
     
     boolean updateGebruiker(Gebruiker gebruiker);
     
-    List<Gebruiker> getGebruikerFollowers();
+    List<Gebruiker> getGebruikerFollowers(int id);
     
     Gebruiker findGebruikerById(int id);
     

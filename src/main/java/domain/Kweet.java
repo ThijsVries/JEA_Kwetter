@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,6 +32,14 @@ public class Kweet implements Serializable{
     private List<Gebruiker> likes = new ArrayList();
     @OneToMany
     private List<Gebruiker> mentioned = new ArrayList();
+    
+    public long getId(){
+        return this.id;
+    }
+    
+    public void setId(long id){
+        this.id = id;
+    }
 
     public String getMessage() {
         return message;

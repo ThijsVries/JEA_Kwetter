@@ -22,8 +22,8 @@ public class Init {
         Gebruiker testGebruiker4 = new Gebruiker("test@mail4.com", "1223423445");
         Gebruiker testGebruiker5 = new Gebruiker("test@mail5.com", "122445");
         
+        gebruikerDAO.addGebruiker(testGebruiker1);
         gebruikerDAO.addGebruiker(testGebruiker4);
         gebruikerDAO.addGebruiker(testGebruiker5);
-        gebruikerDAO.addGebruiker(testGebruiker2);
     }
 }

@@ -1,10 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Kwetter,dao,GebruikerDAOImpCollection,24,0,0,0,6,0,5,0,5,0
-Kwetter,dao,KweetDAOImp,53,0,0,0,11,0,11,0,11,0
+Kwetter,dao,GebruikerDAOImp,24,0,0,0,6,0,5,0,5,0
+Kwetter,dao,KweetDAOCollection,70,0,4,0,19,0,13,0,11,0
+Kwetter,dao,KweetDAOImp,62,0,0,0,15,0,11,0,11,0
 Kwetter,service,Init,49,0,0,0,10,0,2,0,2,0
 Kwetter,domain,Gebruiker_,3,0,0,0,1,0,1,0,1,0
 Kwetter,domain,Gebruiker.new Object() {...},3,23,0,0,0,1,0,1,0,1
 Kwetter,domain,Gebruiker,6,298,7,20,4,88,7,35,0,27
 Kwetter,domain,GebruikerRole,5,43,0,0,0,2,1,3,1,3
 Kwetter,domain,Kweet_,3,0,0,0,1,0,1,0,1,0
-Kwetter,domain,Kweet,8,216,5,15,4,54,5,21,0,16
+Kwetter,domain,Kweet,15,216,5,15,7,54,7,21,2,16

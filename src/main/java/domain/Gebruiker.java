@@ -39,6 +39,14 @@ public class Gebruiker implements Serializable{
     @OneToMany
     private List<Kweet> kweets = new ArrayList();
     
+    public long getId(){
+        return this.id;
+    }
+    
+    public List<Kweet> getKweets(){
+        return this.kweets;
+    }
+    
     public GebruikerRole getGebruikerRole(){
         return role;
     }
