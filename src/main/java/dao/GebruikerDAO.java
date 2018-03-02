@@ -15,8 +15,8 @@ public interface GebruikerDAO {
     
     List<Gebruiker> getGebruikerFollowers(int id);
     
-    List<Gebruiker> findGebruikerByEmail(String email);
+    List<Gebruiker> getGebruikerByEmail(String email);
     
-    List<Gebruiker> findGebruikerByName(String firstName);
+    List<Gebruiker> getGebruikerByName(String firstName);
     
 }

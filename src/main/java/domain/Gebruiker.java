@@ -40,11 +40,13 @@ public class Gebruiker implements Serializable{
     private GebruikerRole role = GebruikerRole.USER;
     
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Gebruiker> following = new ArrayList();
+    private final List<Gebruiker> following = new ArrayList();
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private final List<Kweet> kweets = new ArrayList();
     
     // <editor-fold defaultstate="collapsed" desc="Properties"> 
-    @OneToMany
-    private List<Kweet> kweets = new ArrayList();
+    
     
     public long getId(){
         return this.id;
