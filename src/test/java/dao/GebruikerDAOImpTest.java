@@ -89,6 +89,22 @@ public class GebruikerDAOImpTest {
         List<Gebruiker> instance = em.createNamedQuery("Gebruiker.getByMail").setParameter("email", newMail).getResultList();
         assertEquals(newMail, instance.get(0).getEmail());
     }
+    
+    @Test
+    public void testRemoveGebruiker(){
+        String email = "test@mail.com";
+        Gebruiker gebruiker = new Gebruiker(email, "1234234");
+        
+        tx.begin();
+        em.persist(gebruiker);
+        tx.commit();
+        
+        tx.begin();
+        em.remove(gebruiker);
+        tx.commit();
+        
+        assertTrue(em.createNamedQuery("Gebruiker.getByMail").setParameter("email", email).getResultList().size() == 0);
+    }
 
     @Test
     public void testGetGebruikerFollowers() {

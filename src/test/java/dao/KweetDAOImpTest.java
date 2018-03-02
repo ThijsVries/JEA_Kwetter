@@ -14,6 +14,7 @@ import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Before;
@@ -51,9 +52,6 @@ public class KweetDAOImpTest {
     public void tearDown() throws Exception {
     }
 
-    /**
-     * Test of getKweet method, of class KweetDAOImp.
-     */
     @Test
     public void testGetKweet() throws Exception {
         Gebruiker instance = new Gebruiker("test@mail.com", "12345");
@@ -144,6 +142,7 @@ public class KweetDAOImpTest {
         em.persist(gebruiker1);
         em.persist(gebruiker2);
         em.persist(gebruiker3);
+        em.persist(kweet);
         tx.commit();
         
         Kweet kweetCopy = em.find(Kweet.class, kweet.getId());
@@ -168,7 +167,19 @@ public class KweetDAOImpTest {
      */
     @Test
     public void testCreateKweet() throws Exception {
+        String email = "test@mail.com";
+        Gebruiker instance = new Gebruiker(email, "122423");
         
+        Kweet kweet1 = new Kweet(instance, "test kweet");
+        Kweet kweet2 = new Kweet(instance, "dfgsfsa");
+        
+        tx.begin();
+        em.persist(instance);
+        em.persist(kweet2);
+        em.persist(kweet1);
+        tx.commit();
+        
+        assertTrue(em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", email).getResultList().size() == 2);
     }
 
     /**
@@ -176,7 +187,31 @@ public class KweetDAOImpTest {
      */
     @Test
     public void testDeleteKweet() throws Exception {
+        String email = "test@mail.com";
+        Gebruiker instance = new Gebruiker(email, "password");
         
+        Kweet kweet1 = new Kweet(instance, "Hello world");
+        Kweet kweet2 = new Kweet(instance, "Hello world again");
+        
+        tx.begin();
+        em.persist(instance);
+        em.persist(kweet1);
+        em.persist(kweet2);
+        tx.commit();
+        
+        assertTrue(em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", email).getResultList().size() == 2);
+        
+        tx.begin();
+        em.remove(kweet1);
+        tx.commit();
+        
+        assertTrue(em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", email).getResultList().size() == 1);
+        
+        tx.begin();
+        em.remove(kweet2);
+        tx.commit();
+        
+        assertTrue(em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", email).getResultList().size() == 0);
     }
 
     /**
@@ -184,7 +219,27 @@ public class KweetDAOImpTest {
      */
     @Test
     public void testUpdateKweet() throws Exception {
+        String email = "test@mail.com";
+        Gebruiker instance = new Gebruiker(email, "password");
         
+        String kweetContent = "Hello world";
+        
+        Kweet kweet1 = new Kweet(instance, kweetContent);
+        
+        tx.begin();
+        em.persist(instance);
+        em.persist(kweet1);
+        tx.commit();
+        
+        
+        kweet1.setMessage("Helllo world again");
+        
+        tx.begin();
+        em.merge(kweet1);
+        tx.commit();
+        
+        Kweet k = em.find(Kweet.class, kweet1.getId());
+        assertFalse(k.getMessage().equals(kweetContent));
     }
 
 }
