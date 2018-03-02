@@ -20,8 +20,8 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public List<Kweet> getAllKweets() {
-        return em.createNamedQuery("kweet.getAll").getResultList();
+    public List<Kweet> getRecentKweets(int limit) {
+        return em.createNamedQuery("Kweet.getRecentkweets").setMaxResults(limit).getResultList();
     }
 
     @Override
@@ -49,8 +49,8 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public List<Kweet> getGebruikerKweets(Gebruiker gebruiker) {
-        return em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", gebruiker.getEmail()).getResultList();
+    public List<Kweet> getGebruikerKweets(Gebruiker gebruiker, int limit) {
+        return em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", gebruiker.getEmail()).setMaxResults(limit).getResultList();
     }
 
     @Override
@@ -59,8 +59,8 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public void deleteKweet(int id) {
-        em.remove(id);
+    public void deleteKweet(Kweet kweet) {
+        em.remove(kweet);
     }
 
     @Override

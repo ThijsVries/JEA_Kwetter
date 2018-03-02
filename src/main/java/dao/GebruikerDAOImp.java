@@ -34,12 +34,12 @@ public class GebruikerDAOImp implements GebruikerDAO{
     }
 
     @Override
-    public List<Gebruiker> findGebruikerByEmail(String email) {
+    public List<Gebruiker> getGebruikerByEmail(String email) {
         return em.createNamedQuery("Gebruiker.getByMail").setParameter("email", email).getResultList();
     }
 
     @Override
-    public List<Gebruiker> findGebruikerByName(String firstName) {
+    public List<Gebruiker> getGebruikerByName(String firstName) {
         return em.createNamedQuery("Gebruiker.getByName").setParameter("firstName", firstName).getResultList();
     }
 

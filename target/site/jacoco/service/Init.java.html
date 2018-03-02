@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Init.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kwetter</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">Init.java</span></div><h1>Init.java</h1><pre class="source lang-java linenums">package service;
+
+import dao.GebruikerDAO;
+import dao.KweetDAO;
+import domain.Gebruiker;
+import domain.Kweet;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
+
+@Startup
+@Singleton
+<span class="nc" id="L15">public class Init {</span>
+    
+    @Inject
+    GebruikerDAO gebruikerDAO;
+    
+    @Inject
+    KweetDAO kweetDAO;
+    
+    @PostConstruct
+    public void init(){
+<span class="nc" id="L25">        Gebruiker testGebruiker1 = new Gebruiker(&quot;test@mail.com&quot;, &quot;12345&quot;);</span>
+<span class="nc" id="L26">        Gebruiker testGebruiker2 = new Gebruiker(&quot;test@mail2.com&quot;, &quot;1756745&quot;);</span>
+<span class="nc" id="L27">        Gebruiker testGebruiker3 = new Gebruiker(&quot;test@mail3.com&quot;, &quot;12356755&quot;);</span>
+<span class="nc" id="L28">        Gebruiker testGebruiker4 = new Gebruiker(&quot;test@mail4.com&quot;, &quot;1223423445&quot;);</span>
+<span class="nc" id="L29">        Gebruiker testGebruiker5 = new Gebruiker(&quot;test@mail5.com&quot;, &quot;122445&quot;);</span>
+        
+<span class="nc" id="L31">        gebruikerDAO.addGebruiker(testGebruiker1);</span>
+<span class="nc" id="L32">        gebruikerDAO.addGebruiker(testGebruiker2);</span>
+<span class="nc" id="L33">        gebruikerDAO.addGebruiker(testGebruiker3);</span>
+<span class="nc" id="L34">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
+        
+<span class="nc" id="L36">        testGebruiker5.makeFollow(testGebruiker1);</span>
+<span class="nc" id="L37">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
+        
+<span class="nc" id="L39">        kweetDAO.createKweet(testGebruiker1, &quot;Hello&quot;);</span>
+<span class="nc" id="L40">        kweetDAO.createKweet(testGebruiker5, &quot;Hello world&quot;);</span>
+<span class="nc" id="L41">        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5);</span>
+        
+<span class="nc" id="L43">        kweets.get(0).like(testGebruiker3);</span>
+<span class="nc" id="L44">        kweetDAO.updateKweet(kweets.get(0));</span>
+<span class="nc" id="L45">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

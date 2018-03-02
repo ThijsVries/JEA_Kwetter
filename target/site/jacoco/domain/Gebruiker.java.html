@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Gebruiker.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kwetter</a> &gt; <a href="index.source.html" class="el_package">domain</a> &gt; <span class="el_source">Gebruiker.java</span></div><h1>Gebruiker.java</h1><pre class="source lang-java linenums">package domain;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+@Entity
+@NamedQueries({@NamedQuery(name = &quot;Gebruiker.getAllGebruikers&quot;, query = &quot;SELECT g FROM Gebruiker g&quot;),
+               @NamedQuery(name = &quot;Gebruiker.getByMail&quot;, query = &quot;SELECT g FROM Gebruiker g WHERE g.email LIKE :email&quot;),
+               @NamedQuery(name = &quot;Gebruiker.getByName&quot;, query = &quot;SELECT g FROM Gebruiker g WHERE g.firstName LIKE :firstName&quot;)})
+public class Gebruiker implements Serializable{
+    
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+    private String firstName;
+    private String lastName;
+    @Column(unique = true)
+    private String email;
+    private String profilePicture;
+    private String password;
+    
+    private String bio;
+    private String website;
+    private String location;
+    
+<span class="fc" id="L39">    @Enumerated(EnumType.ORDINAL)</span>
+    private GebruikerRole role = GebruikerRole.USER;
+    
+<span class="fc" id="L42">    @OneToMany(cascade = CascadeType.PERSIST)</span>
+    private List&lt;Gebruiker&gt; following = new ArrayList();
+    
+<span class="fc" id="L45">    @OneToMany(cascade = CascadeType.ALL)</span>
+    private List&lt;Kweet&gt; kweets = new ArrayList();
+    
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Properties&quot;&gt; 
+    
+    
+    public long getId(){
+<span class="nc" id="L52">        return this.id;</span>
+    }
+    
+    public List&lt;Kweet&gt; getKweets(){
+<span class="nc" id="L56">        return this.kweets;</span>
+    }
+    
+    public GebruikerRole getGebruikerRole(){
+<span class="fc" id="L60">        return role;</span>
+    }
+    
+
+    public String getFirstName() {
+<span class="fc" id="L65">        return firstName;</span>
+    }
+
+    public void setFirstName(String firstName) {
+<span class="fc" id="L69">        this.firstName = firstName;</span>
+<span class="fc" id="L70">    }</span>
+
+    public String getLastName() {
+<span class="fc" id="L73">        return lastName;</span>
+    }
+
+    public void setLastName(String lastName) {
+<span class="fc" id="L77">        this.lastName = lastName;</span>
+<span class="fc" id="L78">    }</span>
+
+    public String getEmail() {
+<span class="fc" id="L81">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="fc" id="L85">        this.email = email;</span>
+<span class="fc" id="L86">    }</span>
+
+    public String getProfilePicture() {
+<span class="fc" id="L89">        return profilePicture;</span>
+    }
+
+    public void setProfilePicture(String profilePicture) {
+<span class="fc" id="L93">        this.profilePicture = profilePicture;</span>
+<span class="fc" id="L94">    }</span>
+
+    public String getPassword() {
+<span class="fc" id="L97">        return password;</span>
+    }
+
+    public void setPassword(String password) {
+<span class="fc" id="L101">        this.password = password;</span>
+<span class="fc" id="L102">    }</span>
+
+    public String getBio() {
+<span class="fc" id="L105">        return bio;</span>
+    }
+
+    public void setBio(String bio) {
+<span class="fc" id="L109">        this.bio = bio;</span>
+<span class="fc" id="L110">    }</span>
+
+    public String getWebsite() {
+<span class="fc" id="L113">        return website;</span>
+    }
+
+    public void setWebsite(String website) {
+<span class="fc" id="L117">        this.website = website;</span>
+<span class="fc" id="L118">    }</span>
+
+    public String getLocation() {
+<span class="fc" id="L121">        return location;</span>
+    }
+
+    public void setLocation(String location) {
+<span class="fc" id="L125">        this.location = location;</span>
+<span class="fc" id="L126">    }</span>
+
+    public List&lt;Gebruiker&gt; getFollowing() {
+<span class="fc" id="L129">        return following;</span>
+    }
+    // &lt;/editor-fold&gt;
+    
+<span class="fc" id="L133">    public Gebruiker(){</span>
+        
+<span class="fc" id="L135">    }</span>
+    
+<span class="fc" id="L137">    public Gebruiker(String email, String password){</span>
+<span class="fc" id="L138">        this.email = email;</span>
+<span class="fc" id="L139">        this.password = password;</span>
+<span class="fc" id="L140">    }</span>
+
+<span class="fc" id="L142">    public Gebruiker(String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location) {</span>
+<span class="fc" id="L143">        this.firstName = firstName;</span>
+<span class="fc" id="L144">        this.lastName = lastName;</span>
+<span class="fc" id="L145">        this.email = email;</span>
+<span class="fc" id="L146">        this.profilePicture = profilePicture;</span>
+<span class="fc" id="L147">        this.password = password;</span>
+<span class="fc" id="L148">        this.bio = bio;</span>
+<span class="fc" id="L149">        this.website = website;</span>
+<span class="fc" id="L150">        this.location = location;</span>
+<span class="fc" id="L151">    }</span>
+    
+    /**
+     * Makes this user follow the given user.
+     * @param gebruiker the given user TO follow
+     */
+    public void makeFollow(Gebruiker gebruiker){
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if(this.following == null){</span>
+<span class="nc" id="L159">            return;</span>
+        }
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if(gebruiker == null){</span>
+<span class="fc" id="L162">            return;</span>
+        }
+<span class="fc bfc" id="L164" title="All 2 branches covered.">        if(!this.following.contains(gebruiker)){</span>
+<span class="fc" id="L165">                this.following.add(gebruiker);</span>
+        }
+<span class="fc" id="L167">    }</span>
+    
+    /**
+     * Makes this user ufollow the given user
+     * @param gebruiker the given user TO unfollow
+     */
+    public void makeUnfollow(Gebruiker gebruiker){
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        if(this.following == null){</span>
+<span class="nc" id="L175">            return;</span>
+        }
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        if(gebruiker == null){</span>
+<span class="fc" id="L178">            return;</span>
+        }
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">        if(this.following.contains(gebruiker)){</span>
+<span class="fc" id="L181">            this.following.remove(gebruiker);</span>
+        }
+<span class="fc" id="L183">    }</span>
+    
+    /**
+     * Promotes the selected user's role to one above the current one.
+     */
+    public void promoteUser(){
+<span class="pc bpc" id="L189" title="1 of 4 branches missed.">        switch(this.role){</span>
+            case USER:
+<span class="fc" id="L191">                this.role = GebruikerRole.MOD;</span>
+<span class="fc" id="L192">                break;</span>
+            case MOD:
+<span class="fc" id="L194">                this.role = GebruikerRole.ADMIN;</span>
+<span class="fc" id="L195">                break;</span>
+            case ADMIN:
+<span class="fc" id="L197">                break;</span>
+            default:
+                break;
+        }
+<span class="fc" id="L201">    }</span>
+    
+    /**
+     * Demotes the selected user's role to one below the current one.
+     */
+    public void demoteUser(){
+<span class="pc bpc" id="L207" title="1 of 3 branches missed.">        switch(this.role){</span>
+            case MOD:
+<span class="fc" id="L209">                this.role = GebruikerRole.USER;</span>
+<span class="fc" id="L210">                break;</span>
+            case ADMIN:
+<span class="fc" id="L212">                this.role = GebruikerRole.MOD;</span>
+<span class="fc" id="L213">                break;</span>
+            default:
+                break;
+        }
+<span class="fc" id="L217">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L221">        int hash = 7;</span>
+<span class="fc" id="L222">        hash = 29 * hash + Objects.hashCode(this.firstName);</span>
+<span class="fc" id="L223">        hash = 29 * hash + Objects.hashCode(this.lastName);</span>
+<span class="fc" id="L224">        hash = 29 * hash + Objects.hashCode(this.email);</span>
+<span class="fc" id="L225">        hash = 29 * hash + Objects.hashCode(this.profilePicture);</span>
+<span class="fc" id="L226">        hash = 29 * hash + Objects.hashCode(this.password);</span>
+<span class="fc" id="L227">        hash = 29 * hash + Objects.hashCode(this.bio);</span>
+<span class="fc" id="L228">        hash = 29 * hash + Objects.hashCode(this.website);</span>
+<span class="fc" id="L229">        hash = 29 * hash + Objects.hashCode(this.location);</span>
+<span class="fc" id="L230">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L235" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L236">            return true;</span>
+        }
+<span class="pc bpc" id="L238" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L239">            return false;</span>
+        }
+<span class="pc bpc" id="L241" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L242">            return false;</span>
+        }
+<span class="fc" id="L244">        final Gebruiker other = (Gebruiker) obj;</span>
+<span class="fc bfc" id="L245" title="All 2 branches covered.">        if (!Objects.equals(this.email, other.email)) {</span>
+<span class="fc" id="L246">            return false;</span>
+        }
+<span class="fc" id="L248">        return true;</span>
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -21,7 +21,8 @@ import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({@NamedQuery(name = "Kweet.getKweetById", query = "SELECT k FROM Kweet k WHERE k.id LIKE :id"),
-               @NamedQuery(name = "Kweet.getGebruikerKweets", query = "SELECT k FROM Kweet k WHERE k.ownedBy = (SELECT g.id FROM Gebruiker g WHERE g.email = :email) ORDER BY k.date")})
+               @NamedQuery(name = "Kweet.getGebruikerKweets", query = "SELECT k FROM Kweet k WHERE k.ownedBy = (SELECT g.id FROM Gebruiker g WHERE g.email = :email) ORDER BY k.date"),
+               @NamedQuery(name = "Kweet.getRecentkweets", query = "SELECT k FROM Kweet k ORDER BY k.date DESC")})
 public class Kweet implements Serializable{
     
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)

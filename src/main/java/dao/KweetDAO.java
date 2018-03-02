@@ -9,7 +9,7 @@ public interface KweetDAO {
     
     Kweet getKweet (int id);
     
-    List<Kweet> getAllKweets();
+    List<Kweet> getRecentKweets(int limit);
     
     void setKweetMentions(List<Gebruiker> mentions, Kweet kweet);
     
@@ -19,11 +19,11 @@ public interface KweetDAO {
     
     List<Gebruiker> getMentions(Kweet kweet);
     
-    List<Kweet> getGebruikerKweets(Gebruiker gebruiker);
+    List<Kweet> getGebruikerKweets(Gebruiker gebruiker, int limit);
     
     void createKweet(Gebruiker gebruiker, String message);
     
-    void deleteKweet(int id);
+    void deleteKweet(Kweet kweet);
     
     void updateKweet(Kweet kweet);
 }
