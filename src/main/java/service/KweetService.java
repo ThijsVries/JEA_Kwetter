@@ -65,23 +65,14 @@ public class KweetService {
         }
     }
     
-    public List<Kweet> getGebruikerKweetsById(int id, int limit){
-        try{
-            return kweetDAO.getGebruikerKweetsById(id, limit);
-        } catch(PersistenceException pe){
-            LOGGER.log(Level.FINE, "ERROR while performing getGebruikerkweets method; {0}", pe.getMessage());
-            return null;
-        }
-    }
-    
     /**
      * Adds a new kweet.
      * @param gebruiker The gebruiker who posts this kweet.
      * @param message The content of the kweet.
      */
-    public void addKweet(Gebruiker gebruiker, String message){
+    public void addKweet(Kweet kweet){
         try{
-            kweetDAO.createKweet(gebruiker, message);
+            kweetDAO.createKweet(kweet);
         } catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing getGebruikerkweets method; {0}", pe.getMessage());
         }

@@ -55,8 +55,8 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public void createKweet(Gebruiker gebruiker, String message) {
-        em.persist(new Kweet(gebruiker, message, new Date()));
+    public void createKweet(Kweet kweet) {
+        em.persist(kweet);
     }
 
     @Override
@@ -67,11 +67,6 @@ public class KweetDAOImp implements KweetDAO{
     @Override
     public void updateKweet(Kweet kweet) {
         em.merge(kweet);
-    }
-
-    @Override
-    public List<Kweet> getGebruikerKweetsById(int id, int limit) {
-        return em.createNamedQuery("Kweet.getGebruikerKweetsById").setParameter("id", id).setMaxResults(limit).getResultList();
     }
 
 }

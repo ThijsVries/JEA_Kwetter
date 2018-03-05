@@ -62,7 +62,7 @@
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
   <testcase classname="domain.GebruikerTest" name="testSetPassword" time="0"/>
-  <testcase classname="domain.GebruikerTest" name="testGetPassword" time="0.001"/>
+  <testcase classname="domain.GebruikerTest" name="testGetPassword" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testGetEmail" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testSetFirstName" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testDemoteUser" time="0"/>

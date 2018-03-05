@@ -65,27 +65,18 @@ public class KweetService {
         }
     }
     
-    public List&lt;Kweet&gt; getGebruikerKweetsById(int id, int limit){
-        try{
-<span class="nc" id="L70">            return kweetDAO.getGebruikerKweetsById(id, limit);</span>
-<span class="nc" id="L71">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L72">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerkweets method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L73">            return null;</span>
-        }
-    }
-    
     /**
      * Adds a new kweet.
      * @param gebruiker The gebruiker who posts this kweet.
      * @param message The content of the kweet.
      */
-    public void addKweet(Gebruiker gebruiker, String message){
+    public void addKweet(Kweet kweet){
         try{
-<span class="nc" id="L84">            kweetDAO.createKweet(gebruiker, message);</span>
-<span class="nc" id="L85">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L86">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerkweets method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L87">        }</span>
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L75">            kweetDAO.createKweet(kweet);</span>
+<span class="nc" id="L76">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L77">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerkweets method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L78">        }</span>
+<span class="nc" id="L79">    }</span>
     
     /**
      * Updates a kweet in de JPA database.
@@ -93,11 +84,11 @@ public class KweetService {
      */
     public void updateKweet(Kweet kweet){
         try{
-<span class="nc" id="L96">            kweetDAO.updateKweet(kweet);</span>
-<span class="nc" id="L97">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L98">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerkweets method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L99">        }</span>
-<span class="nc" id="L100">    }</span>
+<span class="nc" id="L87">            kweetDAO.updateKweet(kweet);</span>
+<span class="nc" id="L88">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L89">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerkweets method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L90">        }</span>
+<span class="nc" id="L91">    }</span>
     
     /**
      * Deletes a kweet in the database.
@@ -105,10 +96,10 @@ public class KweetService {
      */
     public void deleteKweet(Kweet kweet){
         try{
-<span class="nc" id="L108">            kweetDAO.deleteKweet(kweet);</span>
-<span class="nc" id="L109">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L110">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerkweets method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L111">        }</span>
-<span class="nc" id="L112">    }</span>
+<span class="nc" id="L99">            kweetDAO.deleteKweet(kweet);</span>
+<span class="nc" id="L100">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L101">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerkweets method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L102">        }</span>
+<span class="nc" id="L103">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

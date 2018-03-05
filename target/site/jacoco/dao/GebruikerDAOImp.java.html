@@ -23,9 +23,9 @@ import javax.persistence.PersistenceContext;
 <span class="nc" id="L23">    }</span>
 
     @Override
-    public List&lt;Gebruiker&gt; getGebruikerFollowers(int id) {
-<span class="nc" id="L27">        Gebruiker gebruiker = em.find(Gebruiker.class, id);</span>
-<span class="nc" id="L28">        return gebruiker.getFollowing();</span>
+    public List&lt;Gebruiker&gt; getGebruikerFollowers(String email) {
+<span class="nc" id="L27">        List&lt;Gebruiker&gt; gebruikers = em.createNamedQuery(&quot;Gebruiker.getByMail&quot;).setParameter(&quot;email&quot;, email).getResultList();</span>
+<span class="nc" id="L28">        return gebruikers.get(0).getFollowing();</span>
     }
 
     @Override

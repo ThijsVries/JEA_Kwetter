@@ -62,7 +62,7 @@
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
   <testcase classname="domain.KweetTest" name="testLike" time="0"/>
-  <testcase classname="domain.KweetTest" name="testSetMessage" time="0"/>
+  <testcase classname="domain.KweetTest" name="testSetMessage" time="0.001"/>
   <testcase classname="domain.KweetTest" name="testGetTagsSetTags" time="0"/>
   <testcase classname="domain.KweetTest" name="testGetOwnedBy" time="0"/>
   <testcase classname="domain.KweetTest" name="testGetLikesSetLikes" time="0"/>

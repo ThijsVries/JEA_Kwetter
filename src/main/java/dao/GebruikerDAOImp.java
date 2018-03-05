@@ -23,9 +23,9 @@ public class GebruikerDAOImp implements GebruikerDAO{
     }
 
     @Override
-    public List<Gebruiker> getGebruikerFollowers(int id) {
-        Gebruiker gebruiker = em.find(Gebruiker.class, id);
-        return gebruiker.getFollowing();
+    public List<Gebruiker> getGebruikerFollowers(String email) {
+        List<Gebruiker> gebruikers = em.createNamedQuery("Gebruiker.getByMail").setParameter("email", email).getResultList();
+        return gebruikers.get(0).getFollowing();
     }
 
     @Override

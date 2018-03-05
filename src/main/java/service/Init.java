@@ -36,9 +36,9 @@ public class Init {
         testGebruiker5.makeFollow(testGebruiker1);
         gebruikerDAO.addGebruiker(testGebruiker5);
         
-        kweetDAO.createKweet(testGebruiker1, "Hello");
-        kweetDAO.createKweet(testGebruiker5, "Hello world");
-        kweetDAO.createKweet(testGebruiker2, "Swagg");
+        kweetDAO.createKweet(new Kweet(testGebruiker1, "Hello"));
+        kweetDAO.createKweet(new Kweet(testGebruiker5, "Hello world"));
+        kweetDAO.createKweet(new Kweet(testGebruiker2, "Swagg"));
         List<Kweet> kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);
         
         kweets.get(0).like(testGebruiker3);

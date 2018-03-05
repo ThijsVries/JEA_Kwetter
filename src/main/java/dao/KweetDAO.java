@@ -21,9 +21,7 @@ public interface KweetDAO {
     
     List<Kweet> getGebruikerKweets(String email, int limit);
     
-    List<Kweet> getGebruikerKweetsById(int id, int limit);
-    
-    void createKweet(Gebruiker gebruiker, String message);
+    void createKweet(Kweet kweet);
     
     void deleteKweet(Kweet kweet);
     

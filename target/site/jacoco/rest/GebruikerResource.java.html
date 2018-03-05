@@ -4,7 +4,9 @@ import domain.Gebruiker;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -13,27 +15,51 @@ import service.GebruikerService;
 
 @Stateless
 @Path(&quot;gebruiker&quot;)
-<span class="nc" id="L16">public class GebruikerResource {</span>
+<span class="nc" id="L18">public class GebruikerResource {</span>
 
     @Inject
     GebruikerService gebruikerService;
     
     @GET
-    @Path(&quot;getbyemail/{email}&quot;)
+    @Path(&quot;byemail/{email}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
     public List&lt;Gebruiker&gt; getGebruikerByEmail(@PathParam(&quot;email&quot;) String email){
-<span class="nc" id="L25">        return gebruikerService.getGebruikerByEmail(email);</span>
+<span class="nc" id="L27">        return gebruikerService.getGebruikerByEmail(email);</span>
     }
     
     @GET
-    @Path(&quot;getbyname/{name}&quot;)
+    @Path(&quot;byname/{name}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
     public List&lt;Gebruiker&gt; getGebruikerByName(@PathParam(&quot;name&quot;) String name){
-<span class="nc" id="L32">        return gebruikerService.getGebruikerByName(name);</span>
+<span class="nc" id="L34">        return gebruikerService.getGebruikerByName(name);</span>
     }
     
+    @GET
+    @Path(&quot;followers/{email}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Gebruiker&gt; getGebruikerFollowers(@PathParam(&quot;email&quot;) String email){
+<span class="nc" id="L41">        return gebruikerService.getGebruikerFollowers(email);</span>
+    }
     
+    @POST
+    @Path(&quot;create&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addGebruiker(Gebruiker gebruiker){
+<span class="nc" id="L48">        gebruikerService.addGebruiker(gebruiker);</span>
+<span class="nc" id="L49">    }</span>
     
+    @POST
+    @Path(&quot;update&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateGebruiker(Gebruiker gebruiker){
+<span class="nc" id="L55">        gebruikerService.updateGebruiker(gebruiker);</span>
+<span class="nc" id="L56">    }</span>
     
+    @POST
+    @Path(&quot;delete&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteGebruiker(Gebruiker gebruiker){
+<span class="nc" id="L62">        gebruikerService.deleteGebruiker(gebruiker);</span>
+<span class="nc" id="L63">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

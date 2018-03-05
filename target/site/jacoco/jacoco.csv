@@ -1,12 +1,12 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Kwetter,rest,KweetResource,14,0,0,0,3,0,3,0,3,0
-Kwetter,rest,GebruikerResource,13,0,0,0,3,0,3,0,3,0
+Kwetter,rest,KweetResource,34,0,0,0,10,0,7,0,7,0
+Kwetter,rest,GebruikerResource,33,0,0,0,10,0,7,0,7,0
 Kwetter,rest,JAXRSconfig,3,0,0,0,1,0,1,0,1,0
-Kwetter,dao,GebruikerDAOImp,48,0,0,0,11,0,7,0,7,0
-Kwetter,dao,KweetDAOImp,118,0,0,0,21,0,12,0,12,0
-Kwetter,service,KweetService,106,0,0,0,34,0,9,0,9,0
+Kwetter,dao,GebruikerDAOImp,52,0,0,0,11,0,7,0,7,0
+Kwetter,dao,KweetDAOImp,99,0,0,0,20,0,11,0,11,0
+Kwetter,service,KweetService,90,0,0,0,30,0,8,0,8,0
 Kwetter,service,GebruikerService,89,0,0,0,30,0,8,0,8,0
-Kwetter,service,Init,92,0,0,0,19,0,2,0,2,0
+Kwetter,service,Init,101,0,0,0,19,0,2,0,2,0
 Kwetter,domain,Gebruiker_,3,0,0,0,1,0,1,0,1,0
 Kwetter,domain,Gebruiker.new Object() {...},3,23,0,0,0,1,0,1,0,1
 Kwetter,domain,Gebruiker,74,298,7,20,7,88,10,35,3,27

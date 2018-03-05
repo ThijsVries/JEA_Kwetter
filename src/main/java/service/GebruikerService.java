@@ -55,9 +55,9 @@ public class GebruikerService {
         }
     }
     
-    public List<Gebruiker> getGebruikerFollowers(int id){
+    public List<Gebruiker> getGebruikerFollowers(String email){
         try{
-            return gebruikerDAO.getGebruikerFollowers(id);
+            return gebruikerDAO.getGebruikerFollowers(email);
         } catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing addGebruiker method; {0}", pe.getMessage());
             return null;

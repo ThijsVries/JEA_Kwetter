@@ -13,7 +13,7 @@ public interface GebruikerDAO {
     
     void deleteGebruiker(Gebruiker gebruiker);
     
-    List<Gebruiker> getGebruikerFollowers(int id);
+    List<Gebruiker> getGebruikerFollowers(String email);
     
     List<Gebruiker> getGebruikerByEmail(String email);
     
