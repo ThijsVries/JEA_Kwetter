@@ -38,7 +38,8 @@ public class Init {
         
         kweetDAO.createKweet(testGebruiker1, "Hello");
         kweetDAO.createKweet(testGebruiker5, "Hello world");
-        List<Kweet> kweets = kweetDAO.getGebruikerKweets(testGebruiker5, 20);
+        kweetDAO.createKweet(testGebruiker2, "Swagg");
+        List<Kweet> kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);
         
         kweets.get(0).like(testGebruiker3);
         kweetDAO.updateKweet(kweets.get(0));

@@ -21,8 +21,15 @@ import service.KweetService;
     @GET
     @Path(&quot;getkweet/{id}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
-    public List&lt;Kweet&gt; getKweet(@PathParam(&quot;id&quot;) String id){
-<span class="nc" id="L25">        return kweetService.getKweet(Integer.parseInt(id)); </span>
+    public List&lt;Kweet&gt; getKweet(@PathParam(&quot;id&quot;) int id){
+<span class="nc" id="L25">        return kweetService.getKweet(id);</span>
+    }
+    
+    @GET
+    @Path(&quot;getgebruikerkweets/{email}&quot;)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List&lt;Kweet&gt; getGebruikerKweets(@PathParam(&quot;email&quot;) String email){
+<span class="nc" id="L32">        return kweetService.getGebruikerKweets(email, 10);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

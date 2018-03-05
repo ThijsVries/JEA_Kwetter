@@ -56,9 +56,18 @@ public class KweetService {
      * @param limit The limited amount of kweets to be returned.
      * @return A list of all return kweets from this gebruiker.
      */
-    public List<Kweet> getGebruikerKweets(Gebruiker gebruiker, int limit){
+    public List<Kweet> getGebruikerKweets(String email, int limit){
         try{
-            return kweetDAO.getGebruikerKweets(gebruiker, limit);
+            return kweetDAO.getGebruikerKweets(email, limit);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing getGebruikerkweets method; {0}", pe.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Kweet> getGebruikerKweetsById(int id, int limit){
+        try{
+            return kweetDAO.getGebruikerKweetsById(id, limit);
         } catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing getGebruikerkweets method; {0}", pe.getMessage());
             return null;

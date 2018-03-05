@@ -19,7 +19,9 @@ public interface KweetDAO {
     
     List<Gebruiker> getMentions(Kweet kweet);
     
-    List<Kweet> getGebruikerKweets(Gebruiker gebruiker, int limit);
+    List<Kweet> getGebruikerKweets(String email, int limit);
+    
+    List<Kweet> getGebruikerKweetsById(int id, int limit);
     
     void createKweet(Gebruiker gebruiker, String message);
     

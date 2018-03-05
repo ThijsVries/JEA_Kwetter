@@ -38,10 +38,11 @@ import javax.inject.Inject;
         
 <span class="nc" id="L39">        kweetDAO.createKweet(testGebruiker1, &quot;Hello&quot;);</span>
 <span class="nc" id="L40">        kweetDAO.createKweet(testGebruiker5, &quot;Hello world&quot;);</span>
-<span class="nc" id="L41">        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5, 20);</span>
+<span class="nc" id="L41">        kweetDAO.createKweet(testGebruiker2, &quot;Swagg&quot;);</span>
+<span class="nc" id="L42">        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);</span>
         
-<span class="nc" id="L43">        kweets.get(0).like(testGebruiker3);</span>
-<span class="nc" id="L44">        kweetDAO.updateKweet(kweets.get(0));</span>
-<span class="nc" id="L45">    }</span>
+<span class="nc" id="L44">        kweets.get(0).like(testGebruiker3);</span>
+<span class="nc" id="L45">        kweetDAO.updateKweet(kweets.get(0));</span>
+<span class="nc" id="L46">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

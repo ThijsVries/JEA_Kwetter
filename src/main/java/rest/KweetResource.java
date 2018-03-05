@@ -21,7 +21,14 @@ public class KweetResource {
     @GET
     @Path("getkweet/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Kweet> getKweet(@PathParam("id") String id){
-        return kweetService.getKweet(Integer.parseInt(id)); 
+    public List<Kweet> getKweet(@PathParam("id") int id){
+        return kweetService.getKweet(id);
+    }
+    
+    @GET
+    @Path("getgebruikerkweets/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Kweet> getGebruikerKweets(@PathParam("email") String email){
+        return kweetService.getGebruikerKweets(email, 10);
     }
 }

@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQueries({@NamedQuery(name = &quot;Kweet.getKweetById&quot;, query = &quot;SELECT k FROM Kweet k WHERE k.id LIKE :id&quot;),
                @NamedQuery(name = &quot;Kweet.getGebruikerKweets&quot;, query = &quot;SELECT k FROM Kweet k WHERE k.ownedBy = (SELECT g.id FROM Gebruiker g WHERE g.email = :email) ORDER BY k.date&quot;),
+               @NamedQuery(name = &quot;Kweet.getGebruikerKweetsById&quot;, query = &quot;SELECT k FROM Kweet k WHERE k.ownedBy = :id&quot;),
                @NamedQuery(name = &quot;Kweet.getRecentkweets&quot;, query = &quot;SELECT k FROM Kweet k ORDER BY k.date DESC&quot;)})
 public class Kweet implements Serializable{
     
@@ -30,142 +31,149 @@ public class Kweet implements Serializable{
     private String message;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-<span class="fc" id="L33">    private List&lt;String&gt; tags = new ArrayList();</span>
+<span class="fc" id="L34">    private List&lt;String&gt; tags = new ArrayList();</span>
     @ManyToOne
     private Gebruiker ownedBy;
-<span class="fc" id="L36">    @OneToMany(cascade = CascadeType.MERGE)</span>
+<span class="fc" id="L37">    @OneToMany(cascade = CascadeType.MERGE)</span>
     @JoinTable(name = &quot;kweet_likes&quot;)
     private List&lt;Gebruiker&gt; likes = new ArrayList();
-<span class="fc" id="L39">    @OneToMany(cascade = CascadeType.MERGE)</span>
+<span class="fc" id="L40">    @OneToMany(cascade = CascadeType.MERGE)</span>
     @JoinTable(name = &quot;kweet_mentioned&quot;)
     private List&lt;Gebruiker&gt; mentioned = new ArrayList();
     
     public long getId(){
-<span class="fc" id="L44">        return this.id;</span>
+<span class="fc" id="L45">        return this.id;</span>
     }
     
     public void setId(long id){
-<span class="nc" id="L48">        this.id = id;</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L49">        this.id = id;</span>
+<span class="nc" id="L50">    }</span>
 
     public String getMessage() {
-<span class="fc" id="L52">        return message;</span>
+<span class="fc" id="L53">        return message;</span>
     }
 
     public void setMessage(String message) {
-<span class="fc" id="L56">        this.message = message;</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L57">        this.message = message;</span>
+<span class="fc" id="L58">    }</span>
 
     public Date getDate() {
-<span class="fc" id="L60">        return date;</span>
+<span class="fc" id="L61">        return date;</span>
     }
 
     public List&lt;String&gt; getTags() {
-<span class="fc" id="L64">        return tags;</span>
+<span class="fc" id="L65">        return tags;</span>
     }
 
     public void setTags(List&lt;String&gt; tags) {
-<span class="fc" id="L68">        this.tags = tags;</span>
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L69">        this.tags = tags;</span>
+<span class="fc" id="L70">    }</span>
 
     public Gebruiker getOwnedBy() {
-<span class="fc" id="L72">        return ownedBy;</span>
+<span class="fc" id="L73">        return ownedBy;</span>
     }
 
     public List&lt;Gebruiker&gt; getLikes() {
-<span class="fc" id="L76">        return likes;</span>
+<span class="fc" id="L77">        return likes;</span>
     }
 
     public List&lt;Gebruiker&gt; getMentioned() {
-<span class="fc" id="L80">        return mentioned;</span>
+<span class="fc" id="L81">        return mentioned;</span>
     }
 
     public void setMentioned(List&lt;Gebruiker&gt; mentioned) {
-<span class="fc" id="L84">        this.mentioned = mentioned;</span>
-<span class="fc" id="L85">    }</span>
+<span class="fc" id="L85">        this.mentioned = mentioned;</span>
+<span class="fc" id="L86">    }</span>
     
-<span class="fc" id="L87">    public Kweet(){</span>
+<span class="fc" id="L88">    public Kweet(){</span>
         
-<span class="fc" id="L89">    }</span>
+<span class="fc" id="L90">    }</span>
     
-<span class="fc" id="L91">    public Kweet(Gebruiker gebruiker, String message){</span>
-<span class="fc" id="L92">        this.ownedBy = gebruiker;</span>
-<span class="fc" id="L93">        this.message = message;</span>
-<span class="fc" id="L94">    }</span>
+<span class="fc" id="L92">    public Kweet(Gebruiker gebruiker, String message){</span>
+<span class="fc" id="L93">        this.ownedBy = gebruiker;</span>
+<span class="fc" id="L94">        this.message = message;</span>
+<span class="fc" id="L95">    }</span>
     
-<span class="fc" id="L96">    public Kweet(Gebruiker gebruiker, String message, Date date){</span>
-<span class="fc" id="L97">        this.ownedBy = gebruiker;</span>
-<span class="fc" id="L98">        this.message = message;</span>
-<span class="fc" id="L99">        this.date = date;</span>
-<span class="fc" id="L100">    }</span>
+<span class="fc" id="L97">    public Kweet(Gebruiker gebruiker, String message, Date date){</span>
+<span class="fc" id="L98">        this.ownedBy = gebruiker;</span>
+<span class="fc" id="L99">        this.message = message;</span>
+<span class="fc" id="L100">        this.date = date;</span>
+<span class="fc" id="L101">    }</span>
     
     /**
      * Likes the selected kweet.
      * @param gebruiker The user liking the kweet.
      */
     public void like(Gebruiker gebruiker){
-<span class="fc bfc" id="L107" title="All 2 branches covered.">        if(gebruiker == null){</span>
-<span class="fc" id="L108">            return;</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        if(gebruiker == null){</span>
+<span class="fc" id="L109">            return;</span>
         }
         
-<span class="fc bfc" id="L111" title="All 2 branches covered.">        if(!likes.contains(gebruiker)){</span>
-<span class="fc" id="L112">            likes.add(gebruiker);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if(!likes.contains(gebruiker)){</span>
+<span class="fc" id="L113">            likes.add(gebruiker);</span>
         }
-<span class="fc" id="L114">    }</span>
+<span class="fc" id="L115">    }</span>
     
     /**
      * Unlikes the selected kweet.
      * @param gebruiker The user unliking the kweet.
      */
     public void unlike(Gebruiker gebruiker){
-<span class="fc bfc" id="L121" title="All 2 branches covered.">        if(gebruiker == null){</span>
-<span class="fc" id="L122">            return;</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if(gebruiker == null){</span>
+<span class="fc" id="L123">            return;</span>
         }
-<span class="pc bpc" id="L124" title="1 of 2 branches missed.">        if(likes.contains(gebruiker)){</span>
-<span class="fc" id="L125">           likes.remove(gebruiker);</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if(likes.contains(gebruiker)){</span>
+<span class="fc" id="L126">           likes.remove(gebruiker);</span>
         }
-<span class="fc" id="L127">    }</span>
+<span class="fc" id="L128">    }</span>
 
     @Override
     public int hashCode() {
-<span class="fc" id="L131">        int hash = 7;</span>
-<span class="fc" id="L132">        hash = 97 * hash + Objects.hashCode(this.message);</span>
-<span class="fc" id="L133">        hash = 97 * hash + Objects.hashCode(this.date);</span>
-<span class="fc" id="L134">        hash = 97 * hash + Objects.hashCode(this.tags);</span>
-<span class="fc" id="L135">        hash = 97 * hash + Objects.hashCode(this.ownedBy);</span>
-<span class="fc" id="L136">        hash = 97 * hash + Objects.hashCode(this.likes);</span>
-<span class="fc" id="L137">        hash = 97 * hash + Objects.hashCode(this.mentioned);</span>
-<span class="fc" id="L138">        return hash;</span>
+<span class="fc" id="L132">        int hash = 7;</span>
+<span class="fc" id="L133">        hash = 97 * hash + Objects.hashCode(this.message);</span>
+<span class="fc" id="L134">        hash = 97 * hash + Objects.hashCode(this.date);</span>
+<span class="fc" id="L135">        hash = 97 * hash + Objects.hashCode(this.tags);</span>
+<span class="fc" id="L136">        hash = 97 * hash + Objects.hashCode(this.ownedBy);</span>
+<span class="fc" id="L137">        hash = 97 * hash + Objects.hashCode(this.likes);</span>
+<span class="fc" id="L138">        hash = 97 * hash + Objects.hashCode(this.mentioned);</span>
+<span class="fc" id="L139">        return hash;</span>
     }
     
     @Override
     public boolean equals(Object obj){
-<span class="fc bfc" id="L143" title="All 2 branches covered.">        if(this == obj){</span>
-<span class="fc" id="L144">            return true;</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        if(this == obj){</span>
+<span class="fc" id="L145">            return true;</span>
         }
         
-<span class="pc bpc" id="L147" title="1 of 2 branches missed.">        if(obj == null){</span>
-<span class="nc" id="L148">            return false;</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">        if(obj == null){</span>
+<span class="nc" id="L149">            return false;</span>
         }
         
-<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if(getClass() != obj.getClass()){</span>
-<span class="nc" id="L152">            return false;</span>
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">        if(getClass() != obj.getClass()){</span>
+<span class="nc" id="L153">            return false;</span>
         }
         
-<span class="fc" id="L155">        final Kweet other = (Kweet)obj;</span>
-<span class="fc bfc" id="L156" title="All 2 branches covered.">        if(!Objects.equals(this.message, other.message)){</span>
-<span class="fc" id="L157">            return false;</span>
+<span class="fc" id="L156">        final Kweet other = (Kweet)obj;</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        if(!Objects.equals(this.message, other.message)){</span>
+<span class="fc" id="L158">            return false;</span>
         }
         
-<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if(!Objects.equals(this.date, other.date)){</span>
-<span class="nc" id="L161">            return false;</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">        if(!Objects.equals(this.date, other.date)){</span>
+<span class="nc" id="L162">            return false;</span>
         }
 
-<span class="pc bpc" id="L164" title="1 of 2 branches missed.">        if(!Objects.equals(this.ownedBy, other.ownedBy)){</span>
-<span class="fc" id="L165">            return false;</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">        if(!Objects.equals(this.ownedBy, other.ownedBy)){</span>
+<span class="fc" id="L166">            return false;</span>
         }
         
-<span class="nc" id="L168">        return true;</span>
-    }  
+<span class="nc" id="L169">        return true;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L174">        return &quot;Kweet{&quot; + &quot;id=&quot; + id + &quot;, message=&quot; + message + &quot;, date=&quot; + date + &quot;, tags=&quot; + tags + &quot;, ownedBy=&quot; + ownedBy + &quot;, likes=&quot; + likes + &quot;, mentioned=&quot; + mentioned + '}';</span>
+    }
+    
+    
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

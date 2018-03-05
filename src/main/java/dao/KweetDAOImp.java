@@ -2,6 +2,7 @@ package dao;
 
 import domain.Gebruiker;
 import domain.Kweet;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,13 +50,13 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public List<Kweet> getGebruikerKweets(Gebruiker gebruiker, int limit) {
-        return em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", gebruiker.getEmail()).setMaxResults(limit).getResultList();
+    public List<Kweet> getGebruikerKweets(String email, int limit) {
+        return em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", email).setMaxResults(limit).getResultList();
     }
 
     @Override
     public void createKweet(Gebruiker gebruiker, String message) {
-        em.persist(new Kweet(gebruiker, message));
+        em.persist(new Kweet(gebruiker, message, new Date()));
     }
 
     @Override
@@ -66,6 +67,11 @@ public class KweetDAOImp implements KweetDAO{
     @Override
     public void updateKweet(Kweet kweet) {
         em.merge(kweet);
+    }
+
+    @Override
+    public List<Kweet> getGebruikerKweetsById(int id, int limit) {
+        return em.createNamedQuery("Kweet.getGebruikerKweetsById").setParameter("id", id).setMaxResults(limit).getResultList();
     }
 
 }
