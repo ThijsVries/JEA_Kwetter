@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="23" failures="0" name="domain.GebruikerTest" time="0.002" errors="0" skipped="0">
+<testsuite tests="23" failures="0" name="domain.GebruikerTest" time="0.025" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.8.0_131\jre\bin"/>
@@ -61,27 +61,27 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase classname="domain.GebruikerTest" name="testSetPassword" time="0"/>
-  <testcase classname="domain.GebruikerTest" name="testGetPassword" time="0"/>
+  <testcase classname="domain.GebruikerTest" name="testSetPassword" time="0.004"/>
+  <testcase classname="domain.GebruikerTest" name="testGetPassword" time="0.001"/>
   <testcase classname="domain.GebruikerTest" name="testGetEmail" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testSetFirstName" time="0"/>
-  <testcase classname="domain.GebruikerTest" name="testDemoteUser" time="0"/>
+  <testcase classname="domain.GebruikerTest" name="testDemoteUser" time="0.001"/>
   <testcase classname="domain.GebruikerTest" name="testEqualsGebruiker" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testSetLocation" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testGetLocation" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testSetWebsite" time="0"/>
-  <testcase classname="domain.GebruikerTest" name="testSetProfilePicture" time="0"/>
+  <testcase classname="domain.GebruikerTest" name="testSetProfilePicture" time="0.001"/>
   <testcase classname="domain.GebruikerTest" name="testGetFollowingAndMakeFollow" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testSetLastName" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testGetLastName" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testPromoteUser" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testGetProfilePicture" time="0"/>
-  <testcase classname="domain.GebruikerTest" name="testHashCode" time="0"/>
+  <testcase classname="domain.GebruikerTest" name="testHashCode" time="0.002"/>
   <testcase classname="domain.GebruikerTest" name="testGetFirstName" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testGetBio" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testGetWebsite" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testSetBio" time="0"/>
-  <testcase classname="domain.GebruikerTest" name="testGetGebruikerRole" time="0"/>
+  <testcase classname="domain.GebruikerTest" name="testGetGebruikerRole" time="0.001"/>
   <testcase classname="domain.GebruikerTest" name="testMakeUnfollow" time="0"/>
   <testcase classname="domain.GebruikerTest" name="testSetEmail" time="0"/>
 </testsuite>

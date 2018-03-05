@@ -34,11 +34,17 @@ public class Init {
         gebruikerDAO.addGebruiker(testGebruiker4);
         
         testGebruiker5.makeFollow(testGebruiker1);
+        testGebruiker5.makeFollow(testGebruiker2);
+        testGebruiker4.makeFollow(testGebruiker3);
+        testGebruiker2.makeFollow(testGebruiker2);
         gebruikerDAO.addGebruiker(testGebruiker5);
         
         kweetDAO.createKweet(new Kweet(testGebruiker1, "Hello"));
         kweetDAO.createKweet(new Kweet(testGebruiker5, "Hello world"));
         kweetDAO.createKweet(new Kweet(testGebruiker2, "Swagg"));
+        List<Kweet> kweetsGebruiker1 = kweetDAO.getGebruikerKweets("test@mail.com", 20);
+        kweetsGebruiker1.get(0).like(testGebruiker5);
+        
         List<Kweet> kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);
         
         kweets.get(0).like(testGebruiker3);

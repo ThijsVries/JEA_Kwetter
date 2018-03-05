@@ -1,5 +1,7 @@
 domain\GebruikerTest.class
-domain\KweetTest.class
+service\KweetServiceTest.class
+service\GebruikerServiceTest.class
 dao\GebruikerDAOImpTest.class
+domain\KweetTest.class
 util\DatabaseCleaner.class
 dao\KweetDAOImpTest.class

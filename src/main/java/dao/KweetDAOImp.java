@@ -26,12 +26,6 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public void setKweetMentions(List<Gebruiker> mentions, Kweet kweet) {
-        kweet.setMentioned(mentions);
-        em.persist(kweet);
-    }
-
-    @Override
     public void likeKweet(Gebruiker gebruiker, Kweet kweet) {
         kweet.like(gebruiker);
         em.merge(kweet);
@@ -66,6 +60,36 @@ public class KweetDAOImp implements KweetDAO{
 
     @Override
     public void updateKweet(Kweet kweet) {
+        em.merge(kweet);
+    }
+
+    @Override
+    public void addKweetMention(Gebruiker gebruiker, Kweet kweet) {
+        kweet.addMention(gebruiker);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void removeKweetMention(Gebruiker gebruiker, Kweet kweet) {
+        kweet.removeMention(gebruiker);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void addTag(String tag, Kweet kweet) {
+        kweet.addTag(tag);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void removeTag(String tag, Kweet kweet) {
+        kweet.removeTag(tag);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void unlikeKweet(Gebruiker gebruiker, Kweet kweet) {
+        kweet.unlike(gebruiker);
         em.merge(kweet);
     }
 

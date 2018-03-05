@@ -65,6 +65,14 @@ public class KweetService {
         }
     }
     
+    public void likeKweet(Kweet kweet, Gebruiker gebruiker){
+        try{
+            kweetDAO.likeKweet(gebruiker, kweet);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing likeKweet method; {0}", pe.getMessage());
+        }
+    }
+    
     /**
      * Adds a new kweet.
      * @param gebruiker The gebruiker who posts this kweet.

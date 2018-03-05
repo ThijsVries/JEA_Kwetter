@@ -34,15 +34,21 @@ import javax.inject.Inject;
 <span class="nc" id="L34">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
         
 <span class="nc" id="L36">        testGebruiker5.makeFollow(testGebruiker1);</span>
-<span class="nc" id="L37">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
+<span class="nc" id="L37">        testGebruiker5.makeFollow(testGebruiker2);</span>
+<span class="nc" id="L38">        testGebruiker4.makeFollow(testGebruiker3);</span>
+<span class="nc" id="L39">        testGebruiker2.makeFollow(testGebruiker2);</span>
+<span class="nc" id="L40">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
         
-<span class="nc" id="L39">        kweetDAO.createKweet(new Kweet(testGebruiker1, &quot;Hello&quot;));</span>
-<span class="nc" id="L40">        kweetDAO.createKweet(new Kweet(testGebruiker5, &quot;Hello world&quot;));</span>
-<span class="nc" id="L41">        kweetDAO.createKweet(new Kweet(testGebruiker2, &quot;Swagg&quot;));</span>
-<span class="nc" id="L42">        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);</span>
+<span class="nc" id="L42">        kweetDAO.createKweet(new Kweet(testGebruiker1, &quot;Hello&quot;));</span>
+<span class="nc" id="L43">        kweetDAO.createKweet(new Kweet(testGebruiker5, &quot;Hello world&quot;));</span>
+<span class="nc" id="L44">        kweetDAO.createKweet(new Kweet(testGebruiker2, &quot;Swagg&quot;));</span>
+<span class="nc" id="L45">        List&lt;Kweet&gt; kweetsGebruiker1 = kweetDAO.getGebruikerKweets(&quot;test@mail.com&quot;, 20);</span>
+<span class="nc" id="L46">        kweetsGebruiker1.get(0).like(testGebruiker5);</span>
         
-<span class="nc" id="L44">        kweets.get(0).like(testGebruiker3);</span>
-<span class="nc" id="L45">        kweetDAO.updateKweet(kweets.get(0));</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L48">        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);</span>
+        
+<span class="nc" id="L50">        kweets.get(0).like(testGebruiker3);</span>
+<span class="nc" id="L51">        kweetDAO.updateKweet(kweets.get(0));</span>
+<span class="nc" id="L52">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>KweetResource.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kwetter</a> &gt; <a href="index.source.html" class="el_package">rest</a> &gt; <span class="el_source">KweetResource.java</span></div><h1>KweetResource.java</h1><pre class="source lang-java linenums">package rest;
 
+import domain.Gebruiker;
 import domain.Kweet;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -15,7 +16,7 @@ import service.KweetService;
 
 @Stateless
 @Path(&quot;kweet&quot;)
-<span class="nc" id="L18">public class KweetResource {</span>
+<span class="nc" id="L19">public class KweetResource {</span>
 
     @Inject
     KweetService kweetService;
@@ -24,42 +25,42 @@ import service.KweetService;
     @Path(&quot;kweet/{id}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
     public List&lt;Kweet&gt; getKweet(@PathParam(&quot;id&quot;) int id){
-<span class="nc" id="L27">        return kweetService.getKweet(id);</span>
+<span class="nc" id="L28">        return kweetService.getKweet(id);</span>
     }
     
     @GET
     @Path(&quot;recent/{limit}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
     public List&lt;Kweet&gt; getRecentKweets(@PathParam(&quot;limit&quot;) int limit){
-<span class="nc" id="L34">        return kweetService.getRecentKweets(limit);</span>
+<span class="nc" id="L35">        return kweetService.getRecentKweets(limit);</span>
     }
     
     @GET
     @Path(&quot;gebruikerkweets/{email}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
     public List&lt;Kweet&gt; getGebruikerKweets(@PathParam(&quot;email&quot;) String email){
-<span class="nc" id="L41">        return kweetService.getGebruikerKweets(email, 10);</span>
+<span class="nc" id="L42">        return kweetService.getGebruikerKweets(email, 10);</span>
     }
     
     @POST
-    @Path(&quot;create&quot;)
+    @Path(&quot;like/{id}&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addKweet(Kweet kweet){
-<span class="nc" id="L48">        kweetService.addKweet(kweet);</span>
-<span class="nc" id="L49">    }</span>
+    public void likeKweet(@PathParam(&quot;id&quot;) int id, Gebruiker gebruiker){
+<span class="nc" id="L49">        kweetService.likeKweet(getKweet(id).get(0), gebruiker);</span>
+<span class="nc" id="L50">    }</span>
     
     @POST
     @Path(&quot;update&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateKweet(Kweet kweet){
-<span class="nc" id="L55">        kweetService.updateKweet(kweet);</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L56">        kweetService.updateKweet(kweet);</span>
+<span class="nc" id="L57">    }</span>
     
     @POST
     @Path(&quot;delete&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteKweet(Kweet kweet){
-<span class="nc" id="L62">        kweetService.deleteKweet(kweet);</span>
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L63">        kweetService.deleteKweet(kweet);</span>
+<span class="nc" id="L64">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

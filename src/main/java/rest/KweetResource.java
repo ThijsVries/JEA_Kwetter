@@ -1,5 +1,6 @@
 package rest;
 
+import domain.Gebruiker;
 import domain.Kweet;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -42,10 +43,10 @@ public class KweetResource {
     }
     
     @POST
-    @Path("create")
+    @Path("like/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addKweet(Kweet kweet){
-        kweetService.addKweet(kweet);
+    public void likeKweet(@PathParam("id") int id, Gebruiker gebruiker){
+        kweetService.likeKweet(getKweet(id).get(0), gebruiker);
     }
     
     @POST

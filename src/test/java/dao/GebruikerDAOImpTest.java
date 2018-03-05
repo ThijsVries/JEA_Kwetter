@@ -21,12 +21,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import util.DatabaseCleaner;
 
 /**
  *
  * @author Tvrie
  */
+@Ignore
 public class GebruikerDAOImpTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("kwetter_testPU");

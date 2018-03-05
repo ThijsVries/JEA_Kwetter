@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -124,6 +125,39 @@ public class Kweet implements Serializable{
         }
         if(likes.contains(gebruiker)){
            likes.remove(gebruiker);
+        }
+    }
+    
+    public void addMention(Gebruiker gebruiker){
+        if(gebruiker == null){
+            return;
+        }
+        if(!mentioned.contains(gebruiker)){
+            mentioned.add(gebruiker);
+        }
+    }
+    
+    public void removeMention(Gebruiker gebruiker){
+        if(gebruiker == null){
+            return;
+        }
+        if(mentioned.contains(gebruiker)){
+            mentioned.remove(gebruiker);
+        }
+    }
+    
+    public void addTag(String tag){
+        if(tag == "" || tag == " " || tag == null){
+            return;
+        }
+        if(!tags.contains(tag)){
+            tags.add(tag);
+        }
+    }
+    
+    public void removeTag(String tag){
+        if(tags.contains(tag)){
+            tags.remove(tag);
         }
     }
 

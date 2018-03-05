@@ -11,9 +11,17 @@ public interface KweetDAO {
     
     List<Kweet> getRecentKweets(int limit);
     
-    void setKweetMentions(List<Gebruiker> mentions, Kweet kweet);
+    void addKweetMention(Gebruiker gebruiker, Kweet kweet);
+    
+    void removeKweetMention(Gebruiker gebruiker, Kweet kweet);
+    
+    void addTag(String tag, Kweet kweet);
+    
+    void removeTag(String tag, Kweet kweet);
     
     void likeKweet(Gebruiker gebruiker, Kweet kweet);
+    
+    void unlikeKweet(Gebruiker gebruiker, Kweet kweet);
     
     List<Gebruiker> getLikes(Kweet kweet);
     

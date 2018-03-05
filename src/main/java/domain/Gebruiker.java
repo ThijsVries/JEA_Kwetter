@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -52,6 +52,7 @@ public class Gebruiker implements Serializable{
         return this.id;
     }
     
+    @JsonbTransient
     public List<Kweet> getKweets(){
         return this.kweets;
     }
@@ -125,6 +126,7 @@ public class Gebruiker implements Serializable{
         this.location = location;
     }
 
+    @JsonbTransient
     public List<Gebruiker> getFollowing() {
         return following;
     }

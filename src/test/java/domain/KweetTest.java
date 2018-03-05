@@ -227,5 +227,56 @@ public class KweetTest {
         assertFalse(kweet1.equals(kweet3));
         assertTrue(kweet1.equals(kweet1));
     }
+
+    /**
+     * Test of addMention method, of class Kweet.
+     */
+    @Test
+    public void testAddMentionRemoveMention() {
+        Gebruiker instance = new Gebruiker();
+        Gebruiker instance2 = new Gebruiker("Janpie", "1231231");
+        Gebruiker instance3 = new Gebruiker();
+        
+        Kweet testKweet = new Kweet(instance, "test kweet");
+        
+        testKweet.addMention(instance3);
+        assertTrue(testKweet.getMentioned().size() == 1);
+        
+        testKweet.addMention(instance3);
+        assertTrue(testKweet.getMentioned().size() == 1);
+        
+        testKweet.addMention(null);
+        assertTrue(testKweet.getMentioned().size() == 1);
+        
+        testKweet.addMention(instance2);
+        System.out.println(testKweet.getMentioned().size());
+        assertTrue(testKweet.getMentioned().size() == 2);
+        
+        testKweet.removeMention(instance3);
+        assertTrue(testKweet.getMentioned().size() == 1);
+        
+        testKweet.removeMention(null);
+        assertTrue(testKweet.getMentioned().size() == 1);
+        
+        testKweet.removeMention(instance);
+        assertTrue(testKweet.getMentioned().size() == 1);
+    }
     
+    @Test
+    public void testAddTagRemoveTag(){
+        Gebruiker gebruiker = new Gebruiker();
+        Kweet testKweet = new Kweet(gebruiker, "Swaaag");
+        
+        testKweet.addTag("Swag");
+        assertTrue(testKweet.getTags().size() == 1);
+        
+        testKweet.addTag("Swag");
+        assertTrue(testKweet.getTags().size() == 1);
+        
+        testKweet.addTag("Swaag");
+        assertTrue(testKweet.getTags().size() == 2);
+        
+        testKweet.removeTag("Swag");
+        assertTrue(testKweet.getTags().size() == 1);
+    }
 }
