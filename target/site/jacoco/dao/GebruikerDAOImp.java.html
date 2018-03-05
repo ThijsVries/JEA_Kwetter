@@ -34,12 +34,12 @@ import javax.persistence.PersistenceContext;
 <span class="nc" id="L34">    }</span>
 
     @Override
-    public List&lt;Gebruiker&gt; findGebruikerByEmail(String email) {
+    public List&lt;Gebruiker&gt; getGebruikerByEmail(String email) {
 <span class="nc" id="L38">        return em.createNamedQuery(&quot;Gebruiker.getByMail&quot;).setParameter(&quot;email&quot;, email).getResultList();</span>
     }
 
     @Override
-    public List&lt;Gebruiker&gt; findGebruikerByName(String firstName) {
+    public List&lt;Gebruiker&gt; getGebruikerByName(String firstName) {
 <span class="nc" id="L43">        return em.createNamedQuery(&quot;Gebruiker.getByName&quot;).setParameter(&quot;firstName&quot;, firstName).getResultList();</span>
     }
 

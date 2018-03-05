@@ -15,8 +15,8 @@ public class KweetDAOImp implements KweetDAO{
     EntityManager em;
     
     @Override
-    public Kweet getKweet(int id) {
-        return (Kweet) em.find(Kweet.class, id);
+    public List<Kweet> getKweet(int id) {
+        return em.createNamedQuery("Kweet.getKweetById").setParameter("id", id).getResultList();
     }
 
     @Override

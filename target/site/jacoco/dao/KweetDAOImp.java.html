@@ -15,13 +15,13 @@ import javax.persistence.PersistenceContext;
     EntityManager em;
     
     @Override
-    public Kweet getKweet(int id) {
-<span class="nc" id="L19">        return (Kweet) em.find(Kweet.class, id);</span>
+    public List&lt;Kweet&gt; getKweet(int id) {
+<span class="nc" id="L19">        return em.createNamedQuery(&quot;Kweet.getKweetById&quot;).setParameter(&quot;id&quot;, id).getResultList();</span>
     }
 
     @Override
-    public List&lt;Kweet&gt; getAllKweets() {
-<span class="nc" id="L24">        return em.createNamedQuery(&quot;kweet.getAll&quot;).getResultList();</span>
+    public List&lt;Kweet&gt; getRecentKweets(int limit) {
+<span class="nc" id="L24">        return em.createNamedQuery(&quot;Kweet.getRecentkweets&quot;).setMaxResults(limit).getResultList();</span>
     }
 
     @Override
@@ -49,8 +49,8 @@ import javax.persistence.PersistenceContext;
     }
 
     @Override
-    public List&lt;Kweet&gt; getGebruikerKweets(Gebruiker gebruiker) {
-<span class="nc" id="L53">        return em.createNamedQuery(&quot;Kweet.getGebruikerKweets&quot;).setParameter(&quot;email&quot;, gebruiker.getEmail()).getResultList();</span>
+    public List&lt;Kweet&gt; getGebruikerKweets(Gebruiker gebruiker, int limit) {
+<span class="nc" id="L53">        return em.createNamedQuery(&quot;Kweet.getGebruikerKweets&quot;).setParameter(&quot;email&quot;, gebruiker.getEmail()).setMaxResults(limit).getResultList();</span>
     }
 
     @Override
@@ -59,8 +59,8 @@ import javax.persistence.PersistenceContext;
 <span class="nc" id="L59">    }</span>
 
     @Override
-    public void deleteKweet(int id) {
-<span class="nc" id="L63">        em.remove(id);</span>
+    public void deleteKweet(Kweet kweet) {
+<span class="nc" id="L63">        em.remove(kweet);</span>
 <span class="nc" id="L64">    }</span>
 
     @Override

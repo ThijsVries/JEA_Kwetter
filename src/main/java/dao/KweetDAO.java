@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface KweetDAO {
     
-    Kweet getKweet (int id);
+    List<Kweet> getKweet (int id);
     
     List<Kweet> getRecentKweets(int limit);
     

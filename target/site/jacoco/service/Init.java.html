@@ -38,7 +38,7 @@ import javax.inject.Inject;
         
 <span class="nc" id="L39">        kweetDAO.createKweet(testGebruiker1, &quot;Hello&quot;);</span>
 <span class="nc" id="L40">        kweetDAO.createKweet(testGebruiker5, &quot;Hello world&quot;);</span>
-<span class="nc" id="L41">        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5);</span>
+<span class="nc" id="L41">        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5, 20);</span>
         
 <span class="nc" id="L43">        kweets.get(0).like(testGebruiker3);</span>
 <span class="nc" id="L44">        kweetDAO.updateKweet(kweets.get(0));</span>

@@ -27,7 +27,7 @@ public class KweetService {
      * @param id the id of the requested kweet.
      * @return the kweet object, if found.
      */
-    public Kweet getKweet(int id){
+    public List<Kweet> getKweet(int id){
         try{
             return kweetDAO.getKweet(id);
         } catch(PersistenceException pe){

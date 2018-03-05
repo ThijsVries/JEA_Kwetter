@@ -40,10 +40,10 @@ public class Gebruiker implements Serializable{
     private GebruikerRole role = GebruikerRole.USER;
     
 <span class="fc" id="L42">    @OneToMany(cascade = CascadeType.PERSIST)</span>
-    private List&lt;Gebruiker&gt; following = new ArrayList();
+    private final List&lt;Gebruiker&gt; following = new ArrayList();
     
 <span class="fc" id="L45">    @OneToMany(cascade = CascadeType.ALL)</span>
-    private List&lt;Kweet&gt; kweets = new ArrayList();
+    private final List&lt;Kweet&gt; kweets = new ArrayList();
     
     // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Properties&quot;&gt; 
     
@@ -246,15 +246,11 @@ public class Gebruiker implements Serializable{
 <span class="fc" id="L246">            return false;</span>
         }
 <span class="fc" id="L248">        return true;</span>
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+<span class="nc" id="L253">        return &quot;Gebruiker{&quot; + &quot;id=&quot; + id + &quot;, firstName=&quot; + firstName + &quot;, lastName=&quot; + lastName + &quot;, email=&quot; + email + &quot;, profilePicture=&quot; + profilePicture + &quot;, password=&quot; + password + &quot;, bio=&quot; + bio + &quot;, website=&quot; + website + &quot;, location=&quot; + location + &quot;, role=&quot; + role + &quot;, following=&quot; + following + '}';</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

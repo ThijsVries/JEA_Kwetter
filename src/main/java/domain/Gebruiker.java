@@ -247,12 +247,9 @@ public class Gebruiker implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Gebruiker{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", profilePicture=" + profilePicture + ", password=" + password + ", bio=" + bio + ", website=" + website + ", location=" + location + ", role=" + role + ", following=" + following + '}';
+    }
 }
