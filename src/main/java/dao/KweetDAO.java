@@ -29,7 +29,7 @@ public interface KweetDAO {
     
     List<Kweet> getGebruikerKweets(String email, int limit);
     
-    void createKweet(Kweet kweet);
+    void createKweet(int gebruikerid, String content);
     
     void deleteKweet(Kweet kweet);
     

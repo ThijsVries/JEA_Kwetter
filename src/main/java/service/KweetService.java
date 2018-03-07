@@ -65,6 +65,14 @@ public class KweetService {
         }
     }
     
+    public void addMention(Kweet kweet, Gebruiker gebruiker){
+        try{
+            kweetDAO.addKweetMention(gebruiker, kweet);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing addMention method; {0}", pe.getMessage());
+        }
+    }
+    
     public void likeKweet(Kweet kweet, Gebruiker gebruiker){
         try{
             kweetDAO.likeKweet(gebruiker, kweet);
@@ -78,9 +86,9 @@ public class KweetService {
      * @param gebruiker The gebruiker who posts this kweet.
      * @param message The content of the kweet.
      */
-    public void addKweet(Kweet kweet){
+    public void addKweet(int gebruikerid, String content){
         try{
-            kweetDAO.createKweet(kweet);
+            kweetDAO.createKweet(gebruikerid, content);
         } catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing getGebruikerkweets method; {0}", pe.getMessage());
         }

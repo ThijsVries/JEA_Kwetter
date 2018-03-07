@@ -49,8 +49,10 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public void createKweet(Kweet kweet) {
-        em.persist(kweet);
+    public void createKweet(int gebruikerid, String content) {
+        
+        List<Gebruiker> gebruiker = em.createNamedQuery("Gebruiker.getById").setParameter("id", gebruikerid).getResultList();
+        em.persist(new Kweet(gebruiker.get(0), content));
     }
 
     @Override

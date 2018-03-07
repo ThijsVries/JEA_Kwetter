@@ -22,7 +22,7 @@ import service.KweetService;
     KweetService kweetService;
     
     @GET
-    @Path(&quot;kweet/{id}&quot;)
+    @Path(&quot;{id}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
     public List&lt;Kweet&gt; getKweet(@PathParam(&quot;id&quot;) int id){
 <span class="nc" id="L28">        return kweetService.getKweet(id);</span>
@@ -36,31 +36,45 @@ import service.KweetService;
     }
     
     @GET
-    @Path(&quot;gebruikerkweets/{email}&quot;)
+    @Path(&quot;gebruiker/{email}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
     public List&lt;Kweet&gt; getGebruikerKweets(@PathParam(&quot;email&quot;) String email){
 <span class="nc" id="L42">        return kweetService.getGebruikerKweets(email, 10);</span>
     }
     
     @POST
+    @Path(&quot;mention/{id}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addMention(@PathParam(&quot;id&quot;) int id, Gebruiker gebruiker){
+<span class="nc" id="L49">        kweetService.addMention(getKweet(id).get(0), gebruiker);</span>
+<span class="nc" id="L50">    }</span>
+    
+    @POST
+    @Path(&quot;create/{id}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createkweet(@PathParam(&quot;id&quot;) int id, String content){
+<span class="nc" id="L56">        kweetService.addKweet(id, content);</span>
+<span class="nc" id="L57">    }</span>
+    
+    @POST
     @Path(&quot;like/{id}&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void likeKweet(@PathParam(&quot;id&quot;) int id, Gebruiker gebruiker){
-<span class="nc" id="L49">        kweetService.likeKweet(getKweet(id).get(0), gebruiker);</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L63">        kweetService.likeKweet(getKweet(id).get(0), gebruiker);</span>
+<span class="nc" id="L64">    }</span>
     
     @POST
     @Path(&quot;update&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateKweet(Kweet kweet){
-<span class="nc" id="L56">        kweetService.updateKweet(kweet);</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L70">        kweetService.updateKweet(kweet);</span>
+<span class="nc" id="L71">    }</span>
     
     @POST
     @Path(&quot;delete&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteKweet(Kweet kweet){
-<span class="nc" id="L63">        kweetService.deleteKweet(kweet);</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L77">        kweetService.deleteKweet(kweet);</span>
+<span class="nc" id="L78">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

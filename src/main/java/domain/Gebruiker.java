@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({@NamedQuery(name = "Gebruiker.getAllGebruikers", query = "SELECT g FROM Gebruiker g"),
                @NamedQuery(name = "Gebruiker.getByMail", query = "SELECT g FROM Gebruiker g WHERE g.email LIKE :email"),
+               @NamedQuery(name = "Gebruiker.getById", query = "SELECT g FROM Gebruiker g WHERE g.id LIKE :id"),
                @NamedQuery(name = "Gebruiker.getByName", query = "SELECT g FROM Gebruiker g WHERE g.firstName LIKE :firstName")})
 public class Gebruiker implements Serializable{
     
@@ -50,6 +51,10 @@ public class Gebruiker implements Serializable{
     
     public long getId(){
         return this.id;
+    }
+    
+    public void setId(long id){
+        this.id = id;
     }
     
     @JsonbTransient

@@ -62,7 +62,7 @@ public class KweetServiceTest {
         Gebruiker instance = new Gebruiker();
         Kweet kweet = new Kweet(instance, "Swah");
         
-        kweetService.addKweet(kweet);
+        kweetService.addKweet(0, "Swah");
         kweetService.getKweet(1);
         
         verify(kweetDAO, times(1)).getKweet(1);
@@ -91,8 +91,8 @@ public class KweetServiceTest {
      */
     @Test
     public void testAddKweet() throws Exception {
-        kweetService.addKweet(new Kweet(null, "Swag"));
-        verify(kweetDAO, times(1)).createKweet(new Kweet(null, "Swag"));
+        kweetService.addKweet(1, "swag");
+        verify(kweetDAO, times(1)).createKweet(1, "swag");
     }
 
     /**

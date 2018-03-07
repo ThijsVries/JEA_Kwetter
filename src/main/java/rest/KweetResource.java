@@ -22,7 +22,7 @@ public class KweetResource {
     KweetService kweetService;
     
     @GET
-    @Path("kweet/{id}")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Kweet> getKweet(@PathParam("id") int id){
         return kweetService.getKweet(id);
@@ -36,10 +36,24 @@ public class KweetResource {
     }
     
     @GET
-    @Path("gebruikerkweets/{email}")
+    @Path("gebruiker/{email}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Kweet> getGebruikerKweets(@PathParam("email") String email){
         return kweetService.getGebruikerKweets(email, 10);
+    }
+    
+    @POST
+    @Path("mention/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addMention(@PathParam("id") int id, Gebruiker gebruiker){
+        kweetService.addMention(getKweet(id).get(0), gebruiker);
+    }
+    
+    @POST
+    @Path("create/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createkweet(@PathParam("id") int id, String content){
+        kweetService.addKweet(id, content);
     }
     
     @POST
