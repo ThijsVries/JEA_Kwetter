@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -49,6 +50,8 @@ public class KweetResource {
         kweetService.addMention(getKweet(id).get(0), gebruiker);
     }
     
+    //TODO: add tags method
+
     @POST
     @Path("create/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -70,6 +73,8 @@ public class KweetResource {
         kweetService.updateKweet(kweet);
     }
     
+    //TODO: make this post a delete, make sure to delete mentions and likes before deleting the kweet!!
+    //BUG get the managed version of the tweet and delete those lists before removing!
     @POST
     @Path("delete")
     @Consumes(MediaType.APPLICATION_JSON)

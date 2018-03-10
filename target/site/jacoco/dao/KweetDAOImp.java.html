@@ -57,43 +57,47 @@ import javax.persistence.PersistenceContext;
 
     @Override
     public void deleteKweet(Kweet kweet) {
-<span class="nc" id="L60">        em.remove(kweet);</span>
-<span class="nc" id="L61">    }</span>
+        
+<span class="nc" id="L61">        Kweet tempKweet = em.find(Kweet.class, kweet.getId());</span>
+        
+<span class="nc" id="L63">        tempKweet.clearKweet();</span>
+<span class="nc" id="L64">        em.remove(tempKweet);</span>
+<span class="nc" id="L65">    }</span>
 
     @Override
     public void updateKweet(Kweet kweet) {
-<span class="nc" id="L65">        em.merge(kweet);</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L69">        em.merge(kweet);</span>
+<span class="nc" id="L70">    }</span>
 
     @Override
     public void addKweetMention(Gebruiker gebruiker, Kweet kweet) {
-<span class="nc" id="L70">        kweet.addMention(gebruiker);</span>
-<span class="nc" id="L71">        em.merge(kweet);</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L74">        kweet.addMention(gebruiker);</span>
+<span class="nc" id="L75">        em.merge(kweet);</span>
+<span class="nc" id="L76">    }</span>
 
     @Override
     public void removeKweetMention(Gebruiker gebruiker, Kweet kweet) {
-<span class="nc" id="L76">        kweet.removeMention(gebruiker);</span>
-<span class="nc" id="L77">        em.merge(kweet);</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L80">        kweet.removeMention(gebruiker);</span>
+<span class="nc" id="L81">        em.merge(kweet);</span>
+<span class="nc" id="L82">    }</span>
 
     @Override
     public void addTag(String tag, Kweet kweet) {
-<span class="nc" id="L82">        kweet.addTag(tag);</span>
-<span class="nc" id="L83">        em.merge(kweet);</span>
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L86">        kweet.addTag(tag);</span>
+<span class="nc" id="L87">        em.merge(kweet);</span>
+<span class="nc" id="L88">    }</span>
 
     @Override
     public void removeTag(String tag, Kweet kweet) {
-<span class="nc" id="L88">        kweet.removeTag(tag);</span>
-<span class="nc" id="L89">        em.merge(kweet);</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L92">        kweet.removeTag(tag);</span>
+<span class="nc" id="L93">        em.merge(kweet);</span>
+<span class="nc" id="L94">    }</span>
 
     @Override
     public void unlikeKweet(Gebruiker gebruiker, Kweet kweet) {
-<span class="nc" id="L94">        kweet.unlike(gebruiker);</span>
-<span class="nc" id="L95">        em.merge(kweet);</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L98">        kweet.unlike(gebruiker);</span>
+<span class="nc" id="L99">        em.merge(kweet);</span>
+<span class="nc" id="L100">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -3,13 +3,13 @@ Kwetter,rest,KweetResource,57,0,0,0,14,0,9,0,9,0
 Kwetter,rest,GebruikerResource,33,0,0,0,10,0,7,0,7,0
 Kwetter,rest,JAXRSconfig,3,0,0,0,1,0,1,0,1,0
 Kwetter,dao,GebruikerDAOImp,86,0,2,0,16,0,8,0,7,0
-Kwetter,dao,KweetDAOImp,153,0,0,0,33,0,15,0,15,0
+Kwetter,dao,KweetDAOImp,164,0,0,0,35,0,15,0,15,0
 Kwetter,service,KweetService,76,43,0,0,25,15,2,8,2,8
 Kwetter,service,GebruikerService,48,41,0,0,15,15,0,8,0,8
 Kwetter,service,Init,66,0,0,0,16,0,2,0,2,0
 Kwetter,domain,Gebruiker_,3,0,0,0,1,0,1,0,1,0
 Kwetter,domain,Gebruiker.new Object() {...},3,23,0,0,0,1,0,1,0,1
 Kwetter,domain,Gebruiker,78,298,7,20,9,88,11,35,4,27
-Kwetter,domain,Kweet,56,276,8,30,8,72,11,31,3,20
+Kwetter,domain,Kweet,67,282,8,30,13,73,13,31,5,20
 Kwetter,domain,GebruikerRole,5,43,0,0,0,2,1,3,1,3
 Kwetter,domain,Kweet_,3,0,0,0,1,0,1,0,1,0

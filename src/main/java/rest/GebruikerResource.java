@@ -61,4 +61,6 @@ public class GebruikerResource {
     public void deleteGebruiker(Gebruiker gebruiker){
         gebruikerService.deleteGebruiker(gebruiker);
     }
+    
+    //TODO: add follow function for user
 }

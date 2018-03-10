@@ -20,60 +20,36 @@ import javax.persistence.PersistenceContext;
 
     @Override
     public void updateGebruiker(Gebruiker gebruiker) {
-        
-//        Gebruiker managedGebruiker = em.find(Gebruiker.class, gebruiker.getId());
-//        
-//        if(gebruiker.getFirstName()!= null)
-//        managedGebruiker.setFirstName(gebruiker.getFirstName());
-//        
-//        if(gebruiker.getLastName()!= null)
-//        managedGebruiker.setLastName(gebruiker.getLastName());
-//        
-//        if(gebruiker.getBio()!= null)
-//        managedGebruiker.setBio(gebruiker.getBio());
-//        
-//        if(gebruiker.getEmail()!= null)
-//        managedGebruiker.setEmail(gebruiker.getEmail());
-//        
-//        if(gebruiker.getLocation()!= null)
-//        managedGebruiker.setLocation(gebruiker.getLocation());
-//        
-//        if(gebruiker.getProfilePicture()!= null)
-//        managedGebruiker.setProfilePicture(gebruiker.getProfilePicture());
-//        
-//        if(gebruiker.getWebsite()!= null)
-//        managedGebruiker.setWebsite(gebruiker.getWebsite());
-
-<span class="nc" id="L47">          em.merge(gebruiker);</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L23">          em.merge(gebruiker);</span>
+<span class="nc" id="L24">    }</span>
 
     @Override
     public List&lt;Gebruiker&gt; getGebruikerFollowers(String email) {
-<span class="nc" id="L52">        List&lt;Gebruiker&gt; gebruikers = em.createNamedQuery(&quot;Gebruiker.getByMail&quot;).setParameter(&quot;email&quot;, email).getResultList();</span>
-<span class="nc" id="L53">        return gebruikers.get(0).getFollowing();</span>
+<span class="nc" id="L28">        List&lt;Gebruiker&gt; gebruikers = em.createNamedQuery(&quot;Gebruiker.getByMail&quot;).setParameter(&quot;email&quot;, email).getResultList();</span>
+<span class="nc" id="L29">        return gebruikers.get(0).getFollowing();</span>
     }
 
     @Override
     public void deleteGebruiker(Gebruiker gebruiker) {
-<span class="nc" id="L58">        Gebruiker managedGebruiker = em.find(Gebruiker.class, gebruiker.getId());</span>
+<span class="nc" id="L34">        Gebruiker managedGebruiker = em.find(Gebruiker.class, gebruiker.getId());</span>
         
-<span class="nc" id="L60">        List&lt;Kweet&gt; gebruikerKweets = em.createNamedQuery(&quot;Kweet.getGebruikerKweets&quot;).setParameter(&quot;email&quot;, gebruiker.getEmail()).getResultList();</span>
+<span class="nc" id="L36">        List&lt;Kweet&gt; gebruikerKweets = em.createNamedQuery(&quot;Kweet.getGebruikerKweets&quot;).setParameter(&quot;email&quot;, gebruiker.getEmail()).getResultList();</span>
         
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        for (Kweet kweet : gebruikerKweets) {</span>
-<span class="nc" id="L63">            em.remove(kweet);</span>
-<span class="nc" id="L64">        }</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        for (Kweet kweet : gebruikerKweets) {</span>
+<span class="nc" id="L39">            em.remove(kweet);</span>
+<span class="nc" id="L40">        }</span>
         
-<span class="nc" id="L66">        em.remove(managedGebruiker);</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L42">        em.remove(managedGebruiker);</span>
+<span class="nc" id="L43">    }</span>
 
     @Override
     public List&lt;Gebruiker&gt; getGebruikerByEmail(String email) {
-<span class="nc" id="L71">        return em.createNamedQuery(&quot;Gebruiker.getByMail&quot;).setParameter(&quot;email&quot;, email).getResultList();</span>
+<span class="nc" id="L47">        return em.createNamedQuery(&quot;Gebruiker.getByMail&quot;).setParameter(&quot;email&quot;, email).getResultList();</span>
     }
 
     @Override
     public List&lt;Gebruiker&gt; getGebruikerByName(String firstName) {
-<span class="nc" id="L76">        return em.createNamedQuery(&quot;Gebruiker.getByName&quot;).setParameter(&quot;firstName&quot;, firstName).getResultList();</span>
+<span class="nc" id="L52">        return em.createNamedQuery(&quot;Gebruiker.getByName&quot;).setParameter(&quot;firstName&quot;, firstName).getResultList();</span>
     }
 
 

@@ -20,30 +20,6 @@ public class GebruikerDAOImp implements GebruikerDAO{
 
     @Override
     public void updateGebruiker(Gebruiker gebruiker) {
-        
-//        Gebruiker managedGebruiker = em.find(Gebruiker.class, gebruiker.getId());
-//        
-//        if(gebruiker.getFirstName()!= null)
-//        managedGebruiker.setFirstName(gebruiker.getFirstName());
-//        
-//        if(gebruiker.getLastName()!= null)
-//        managedGebruiker.setLastName(gebruiker.getLastName());
-//        
-//        if(gebruiker.getBio()!= null)
-//        managedGebruiker.setBio(gebruiker.getBio());
-//        
-//        if(gebruiker.getEmail()!= null)
-//        managedGebruiker.setEmail(gebruiker.getEmail());
-//        
-//        if(gebruiker.getLocation()!= null)
-//        managedGebruiker.setLocation(gebruiker.getLocation());
-//        
-//        if(gebruiker.getProfilePicture()!= null)
-//        managedGebruiker.setProfilePicture(gebruiker.getProfilePicture());
-//        
-//        if(gebruiker.getWebsite()!= null)
-//        managedGebruiker.setWebsite(gebruiker.getWebsite());
-
           em.merge(gebruiker);
     }
 

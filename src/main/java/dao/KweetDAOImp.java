@@ -57,7 +57,11 @@ public class KweetDAOImp implements KweetDAO{
 
     @Override
     public void deleteKweet(Kweet kweet) {
-        em.remove(kweet);
+        
+        Kweet tempKweet = em.find(Kweet.class, kweet.getId());
+        
+        tempKweet.clearKweet();
+        em.remove(tempKweet);
     }
 
     @Override

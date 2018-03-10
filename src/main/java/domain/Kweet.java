@@ -61,6 +61,10 @@ public class Kweet implements Serializable{
     public Date getDate() {
         return date;
     }
+    
+    public void setDate(Date date){
+        this.date = date;
+    }
 
     public List<String> getTags() {
         return tags;
@@ -93,6 +97,7 @@ public class Kweet implements Serializable{
     public Kweet(Gebruiker gebruiker, String message){
         this.ownedBy = gebruiker;
         this.message = message;
+        this.date = new Date(System.currentTimeMillis());
     }
     
     public Kweet(Gebruiker gebruiker, String message, Date date){
@@ -144,6 +149,11 @@ public class Kweet implements Serializable{
         if(mentioned.contains(gebruiker)){
             mentioned.remove(gebruiker);
         }
+    }
+    
+    public void clearKweet(){
+        this.likes.clear();
+        this.mentioned.clear();
     }
     
     public void addTag(String tag){
