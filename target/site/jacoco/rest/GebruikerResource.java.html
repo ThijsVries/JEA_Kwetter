@@ -23,45 +23,50 @@ import service.GebruikerService;
     @GET
     @Path(&quot;byemail/{email}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
-    public List&lt;Gebruiker&gt; getGebruikerByEmail(@PathParam(&quot;email&quot;) String email){
+    public List&lt;Gebruiker&gt; byMail(@PathParam(&quot;email&quot;) String email){
 <span class="nc" id="L27">        return gebruikerService.getGebruikerByEmail(email);</span>
     }
     
     @GET
     @Path(&quot;byname/{name}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
-    public List&lt;Gebruiker&gt; getGebruikerByName(@PathParam(&quot;name&quot;) String name){
+    public List&lt;Gebruiker&gt; byName(@PathParam(&quot;name&quot;) String name){
 <span class="nc" id="L34">        return gebruikerService.getGebruikerByName(name);</span>
     }
     
     @GET
     @Path(&quot;followers/{email}&quot;)
     @Produces(MediaType.APPLICATION_JSON)
-    public List&lt;Gebruiker&gt; getGebruikerFollowers(@PathParam(&quot;email&quot;) String email){
+    public List&lt;Gebruiker&gt; followers(@PathParam(&quot;email&quot;) String email){
 <span class="nc" id="L41">        return gebruikerService.getGebruikerFollowers(email);</span>
     }
     
     @POST
+    @Path(&quot;follow/{email}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void follow(@PathParam(&quot;email&quot;) String email, Gebruiker gebruiker){
+<span class="nc" id="L48">        gebruikerService.followGebruiker(byMail(email).get(0), gebruiker);</span>
+<span class="nc" id="L49">    }</span>
+    
+    @POST
     @Path(&quot;create&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addGebruiker(Gebruiker gebruiker){
-<span class="nc" id="L48">        gebruikerService.addGebruiker(gebruiker);</span>
-<span class="nc" id="L49">    }</span>
+    public void add(Gebruiker gebruiker){
+<span class="nc" id="L55">        gebruikerService.addGebruiker(gebruiker);</span>
+<span class="nc" id="L56">    }</span>
     
     @POST
     @Path(&quot;update&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateGebruiker(Gebruiker gebruiker){
-<span class="nc" id="L55">        gebruikerService.updateGebruiker(gebruiker);</span>
-<span class="nc" id="L56">    }</span>
+    public void update(Gebruiker gebruiker){
+<span class="nc" id="L62">        gebruikerService.updateGebruiker(gebruiker);</span>
+<span class="nc" id="L63">    }</span>
     
     @POST
     @Path(&quot;delete&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteGebruiker(Gebruiker gebruiker){
-<span class="nc" id="L62">        gebruikerService.deleteGebruiker(gebruiker);</span>
-<span class="nc" id="L63">    }</span>
-    
-    //TODO: add follow function for user
+    public void delete(Gebruiker gebruiker){
+<span class="nc" id="L69">        gebruikerService.deleteGebruiker(gebruiker);</span>
+<span class="nc" id="L70">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

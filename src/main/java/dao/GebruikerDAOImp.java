@@ -51,6 +51,4 @@ public class GebruikerDAOImp implements GebruikerDAO{
     public List<Gebruiker> getGebruikerByName(String firstName) {
         return em.createNamedQuery("Gebruiker.getByName").setParameter("firstName", firstName).getResultList();
     }
-
-
 }

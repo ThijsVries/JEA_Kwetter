@@ -50,7 +50,13 @@ public class KweetResource {
         kweetService.addMention(getKweet(id).get(0), gebruiker);
     }
     
-    //TODO: add tags method
+    //TODO: test this method
+    @POST
+    @Path("addtag/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addTag(@PathParam("id") int id, String tag){
+        kweetService.addTag(tag, getKweet(id).get(0));
+    }
 
     @POST
     @Path("create/{id}")
@@ -73,8 +79,6 @@ public class KweetResource {
         kweetService.updateKweet(kweet);
     }
     
-    //TODO: make this post a delete, make sure to delete mentions and likes before deleting the kweet!!
-    //BUG get the managed version of the tweet and delete those lists before removing!
     @POST
     @Path("delete")
     @Consumes(MediaType.APPLICATION_JSON)

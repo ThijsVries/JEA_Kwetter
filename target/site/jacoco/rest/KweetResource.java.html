@@ -50,36 +50,40 @@ import service.KweetService;
 <span class="nc" id="L50">        kweetService.addMention(getKweet(id).get(0), gebruiker);</span>
 <span class="nc" id="L51">    }</span>
     
-    //TODO: add tags method
+    //TODO: test this method
+    @POST
+    @Path(&quot;addtag/{id}&quot;)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addTag(@PathParam(&quot;id&quot;) int id, String tag){
+<span class="nc" id="L58">        kweetService.addTag(tag, getKweet(id).get(0));</span>
+<span class="nc" id="L59">    }</span>
 
     @POST
     @Path(&quot;create/{id}&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void createkweet(@PathParam(&quot;id&quot;) int id, String content){
-<span class="nc" id="L59">        kweetService.addKweet(id, content);</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L65">        kweetService.addKweet(id, content);</span>
+<span class="nc" id="L66">    }</span>
     
     @POST
     @Path(&quot;like/{id}&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void likeKweet(@PathParam(&quot;id&quot;) int id, Gebruiker gebruiker){
-<span class="nc" id="L66">        kweetService.likeKweet(getKweet(id).get(0), gebruiker);</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L72">        kweetService.likeKweet(getKweet(id).get(0), gebruiker);</span>
+<span class="nc" id="L73">    }</span>
     
     @POST
     @Path(&quot;update&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateKweet(Kweet kweet){
-<span class="nc" id="L73">        kweetService.updateKweet(kweet);</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L79">        kweetService.updateKweet(kweet);</span>
+<span class="nc" id="L80">    }</span>
     
-    //TODO: make this post a delete, make sure to delete mentions and likes before deleting the kweet!!
-    //BUG get the managed version of the tweet and delete those lists before removing!
     @POST
     @Path(&quot;delete&quot;)
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteKweet(Kweet kweet){
-<span class="nc" id="L82">        kweetService.deleteKweet(kweet);</span>
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L86">        kweetService.deleteKweet(kweet);</span>
+<span class="nc" id="L87">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

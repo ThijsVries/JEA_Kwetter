@@ -30,6 +30,11 @@ public class GebruikerService {
         }
     }
     
+    
+    public void followGebruiker(Gebruiker gebruiker, Gebruiker gebruikerToFollow){
+        gebruiker.makeFollow(gebruikerToFollow);
+        updateGebruiker(gebruiker);
+    }
     public void updateGebruiker(Gebruiker gebruiker){
         try{
             gebruikerDAO.updateGebruiker(gebruiker);

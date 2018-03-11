@@ -81,6 +81,14 @@ public class KweetService {
         }
     }
     
+    public void addTag(String tag, Kweet kweet){
+        try{
+            kweetDAO.addTag(tag, kweet);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing addTag method; {0}", pe.getMessage());
+        }
+    }
+    
     /**
      * Adds a new kweet.
      * @param gebruiker The gebruiker who posts this kweet.
