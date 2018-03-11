@@ -27,7 +27,7 @@ public class KweetService {
      * @param id the id of the requested kweet.
      * @return the kweet object, if found.
      */
-    public Kweet getKweet(int id){
+    public List<Kweet> getKweet(int id){
         try{
             return kweetDAO.getKweet(id);
         } catch(PersistenceException pe){
@@ -56,12 +56,36 @@ public class KweetService {
      * @param limit The limited amount of kweets to be returned.
      * @return A list of all return kweets from this gebruiker.
      */
-    public List<Kweet> getGebruikerKweets(Gebruiker gebruiker, int limit){
+    public List<Kweet> getGebruikerKweets(String email, int limit){
         try{
-            return kweetDAO.getGebruikerKweets(gebruiker, limit);
+            return kweetDAO.getGebruikerKweets(email, limit);
         } catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing getGebruikerkweets method; {0}", pe.getMessage());
             return null;
+        }
+    }
+    
+    public void addMention(Kweet kweet, Gebruiker gebruiker){
+        try{
+            kweetDAO.addKweetMention(gebruiker, kweet);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing addMention method; {0}", pe.getMessage());
+        }
+    }
+    
+    public void likeKweet(Kweet kweet, Gebruiker gebruiker){
+        try{
+            kweetDAO.likeKweet(gebruiker, kweet);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing likeKweet method; {0}", pe.getMessage());
+        }
+    }
+    
+    public void addTag(String tag, Kweet kweet){
+        try{
+            kweetDAO.addTag(tag, kweet);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing addTag method; {0}", pe.getMessage());
         }
     }
     
@@ -70,9 +94,9 @@ public class KweetService {
      * @param gebruiker The gebruiker who posts this kweet.
      * @param message The content of the kweet.
      */
-    public void addKweet(Gebruiker gebruiker, String message){
+    public void addKweet(int gebruikerid, String content){
         try{
-            kweetDAO.createKweet(gebruiker, message);
+            kweetDAO.createKweet(gebruikerid, content);
         } catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing getGebruikerkweets method; {0}", pe.getMessage());
         }

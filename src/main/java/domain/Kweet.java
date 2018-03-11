@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQueries({@NamedQuery(name = "Kweet.getKweetById", query = "SELECT k FROM Kweet k WHERE k.id LIKE :id"),
                @NamedQuery(name = "Kweet.getGebruikerKweets", query = "SELECT k FROM Kweet k WHERE k.ownedBy = (SELECT g.id FROM Gebruiker g WHERE g.email = :email) ORDER BY k.date"),
+               @NamedQuery(name = "Kweet.getGebruikerKweetsById", query = "SELECT k FROM Kweet k WHERE k.ownedBy = :id"),
                @NamedQuery(name = "Kweet.getRecentkweets", query = "SELECT k FROM Kweet k ORDER BY k.date DESC")})
 public class Kweet implements Serializable{
     
@@ -59,6 +61,10 @@ public class Kweet implements Serializable{
     public Date getDate() {
         return date;
     }
+    
+    public void setDate(Date date){
+        this.date = date;
+    }
 
     public List<String> getTags() {
         return tags;
@@ -91,6 +97,7 @@ public class Kweet implements Serializable{
     public Kweet(Gebruiker gebruiker, String message){
         this.ownedBy = gebruiker;
         this.message = message;
+        this.date = new Date(System.currentTimeMillis());
     }
     
     public Kweet(Gebruiker gebruiker, String message, Date date){
@@ -123,6 +130,44 @@ public class Kweet implements Serializable{
         }
         if(likes.contains(gebruiker)){
            likes.remove(gebruiker);
+        }
+    }
+    
+    public void addMention(Gebruiker gebruiker){
+        if(gebruiker == null){
+            return;
+        }
+        if(!mentioned.contains(gebruiker)){
+            mentioned.add(gebruiker);
+        }
+    }
+    
+    public void removeMention(Gebruiker gebruiker){
+        if(gebruiker == null){
+            return;
+        }
+        if(mentioned.contains(gebruiker)){
+            mentioned.remove(gebruiker);
+        }
+    }
+    
+    public void clearKweet(){
+        this.likes.clear();
+        this.mentioned.clear();
+    }
+    
+    public void addTag(String tag){
+        if(tag == "" || tag == " " || tag == null){
+            return;
+        }
+        if(!tags.contains(tag)){
+            tags.add(tag);
+        }
+    }
+    
+    public void removeTag(String tag){
+        if(tags.contains(tag)){
+            tags.remove(tag);
         }
     }
 
@@ -166,5 +211,12 @@ public class Kweet implements Serializable{
         }
         
         return true;
-    }  
+    }
+
+    @Override
+    public String toString() {
+        return "Kweet{" + "id=" + id + ", message=" + message + ", date=" + date + ", tags=" + tags + ", ownedBy=" + ownedBy + ", likes=" + likes + ", mentioned=" + mentioned + '}';
+    }
+    
+    
 }

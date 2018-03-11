@@ -2,6 +2,7 @@ package dao;
 
 import domain.Gebruiker;
 import domain.Kweet;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,19 +16,13 @@ public class KweetDAOImp implements KweetDAO{
     EntityManager em;
     
     @Override
-    public Kweet getKweet(int id) {
-        return (Kweet) em.find(Kweet.class, id);
+    public List<Kweet> getKweet(int id) {
+        return em.createNamedQuery("Kweet.getKweetById").setParameter("id", id).getResultList();
     }
 
     @Override
     public List<Kweet> getRecentKweets(int limit) {
         return em.createNamedQuery("Kweet.getRecentkweets").setMaxResults(limit).getResultList();
-    }
-
-    @Override
-    public void setKweetMentions(List<Gebruiker> mentions, Kweet kweet) {
-        kweet.setMentioned(mentions);
-        em.persist(kweet);
     }
 
     @Override
@@ -49,22 +44,58 @@ public class KweetDAOImp implements KweetDAO{
     }
 
     @Override
-    public List<Kweet> getGebruikerKweets(Gebruiker gebruiker, int limit) {
-        return em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", gebruiker.getEmail()).setMaxResults(limit).getResultList();
+    public List<Kweet> getGebruikerKweets(String email, int limit) {
+        return em.createNamedQuery("Kweet.getGebruikerKweets").setParameter("email", email).setMaxResults(limit).getResultList();
     }
 
     @Override
-    public void createKweet(Gebruiker gebruiker, String message) {
-        em.persist(new Kweet(gebruiker, message));
+    public void createKweet(int gebruikerid, String content) {
+        
+        List<Gebruiker> gebruiker = em.createNamedQuery("Gebruiker.getById").setParameter("id", gebruikerid).getResultList();
+        em.persist(new Kweet(gebruiker.get(0), content));
     }
 
     @Override
     public void deleteKweet(Kweet kweet) {
-        em.remove(kweet);
+        
+        Kweet tempKweet = em.find(Kweet.class, kweet.getId());
+        
+        tempKweet.clearKweet();
+        em.remove(tempKweet);
     }
 
     @Override
     public void updateKweet(Kweet kweet) {
+        em.merge(kweet);
+    }
+
+    @Override
+    public void addKweetMention(Gebruiker gebruiker, Kweet kweet) {
+        kweet.addMention(gebruiker);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void removeKweetMention(Gebruiker gebruiker, Kweet kweet) {
+        kweet.removeMention(gebruiker);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void addTag(String tag, Kweet kweet) {
+        kweet.addTag(tag);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void removeTag(String tag, Kweet kweet) {
+        kweet.removeTag(tag);
+        em.merge(kweet);
+    }
+
+    @Override
+    public void unlikeKweet(Gebruiker gebruiker, Kweet kweet) {
+        kweet.unlike(gebruiker);
         em.merge(kweet);
     }
 

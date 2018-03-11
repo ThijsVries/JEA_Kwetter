@@ -1,7 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GebruikerService.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kwetter</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">GebruikerService.java</span></div><h1>GebruikerService.java</h1><pre class="source lang-java linenums">package service;
 
+import dao.GebruikerDAO;
+import domain.Gebruiker;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.PersistenceException;
 
-<span class="nc" id="L4">public class GebruikerService {</span>
-
+@Stateless
+public class GebruikerService {
+    
+    //TODO Add JavaDoc
+    @Inject
+    GebruikerDAO gebruikerDAO;
+    
+<span class="fc" id="L19">    private static final Logger LOGGER = Logger.getLogger(GebruikerService.class.getName());</span>
+    
+<span class="fc" id="L21">    public GebruikerService(){</span>
+        
+<span class="fc" id="L23">    }</span>
+    
+    public void addGebruiker(Gebruiker gebruiker){
+        try{
+<span class="fc" id="L27">            gebruikerDAO.addGebruiker(gebruiker);</span>
+<span class="nc" id="L28">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L29">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="fc" id="L30">        }</span>
+<span class="fc" id="L31">    }</span>
+    
+    
+    public void followGebruiker(Gebruiker gebruiker, Gebruiker gebruikerToFollow){
+<span class="nc" id="L35">        gebruiker.makeFollow(gebruikerToFollow);</span>
+<span class="nc" id="L36">        updateGebruiker(gebruiker);</span>
+<span class="nc" id="L37">    }</span>
+    public void updateGebruiker(Gebruiker gebruiker){
+        try{
+<span class="fc" id="L40">            gebruikerDAO.updateGebruiker(gebruiker);</span>
+<span class="nc" id="L41">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L42">            LOGGER.log(Level.FINE, &quot;ERROR while performing updateGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">    }</span>
+    
+    public void deleteGebruiker(Gebruiker gebruiker){
+        try{
+<span class="fc" id="L48">            gebruikerDAO.deleteGebruiker(gebruiker);</span>
+<span class="nc" id="L49">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L50">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="fc" id="L51">        }</span>
+<span class="fc" id="L52">    }</span>
+    
+    public List&lt;Gebruiker&gt; getGebruikerByEmail(String email){
+        try{
+<span class="fc" id="L56">            return gebruikerDAO.getGebruikerByEmail(email);</span>
+<span class="nc" id="L57">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L58">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L59">            return null;</span>
+        }
+    }
+    
+    public List&lt;Gebruiker&gt; getGebruikerFollowers(String email){
+        try{
+<span class="fc" id="L65">            return gebruikerDAO.getGebruikerFollowers(email);</span>
+<span class="nc" id="L66">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L67">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L68">            return null;</span>
+        }
+    }
+    
+    public List&lt;Gebruiker&gt; getGebruikerByName(String firstName){
+        try{
+<span class="fc" id="L74">            return gebruikerDAO.getGebruikerByName(firstName);</span>
+<span class="nc" id="L75">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L76">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L77">            return null;</span>
+        }
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

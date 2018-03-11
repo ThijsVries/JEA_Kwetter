@@ -2,6 +2,7 @@
 
 import domain.Gebruiker;
 import domain.Kweet;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,64 +10,94 @@ import javax.persistence.PersistenceContext;
 
 
 @Stateless
-<span class="nc" id="L12">public class KweetDAOImp implements KweetDAO{</span>
+<span class="nc" id="L13">public class KweetDAOImp implements KweetDAO{</span>
 
     @PersistenceContext
     EntityManager em;
     
     @Override
-    public Kweet getKweet(int id) {
-<span class="nc" id="L19">        return (Kweet) em.find(Kweet.class, id);</span>
+    public List&lt;Kweet&gt; getKweet(int id) {
+<span class="nc" id="L20">        return em.createNamedQuery(&quot;Kweet.getKweetById&quot;).setParameter(&quot;id&quot;, id).getResultList();</span>
     }
 
     @Override
-    public List&lt;Kweet&gt; getAllKweets() {
-<span class="nc" id="L24">        return em.createNamedQuery(&quot;kweet.getAll&quot;).getResultList();</span>
+    public List&lt;Kweet&gt; getRecentKweets(int limit) {
+<span class="nc" id="L25">        return em.createNamedQuery(&quot;Kweet.getRecentkweets&quot;).setMaxResults(limit).getResultList();</span>
     }
-
-    @Override
-    public void setKweetMentions(List&lt;Gebruiker&gt; mentions, Kweet kweet) {
-<span class="nc" id="L29">        kweet.setMentioned(mentions);</span>
-<span class="nc" id="L30">        em.persist(kweet);</span>
-<span class="nc" id="L31">    }</span>
 
     @Override
     public void likeKweet(Gebruiker gebruiker, Kweet kweet) {
-<span class="nc" id="L35">        kweet.like(gebruiker);</span>
-<span class="nc" id="L36">        em.merge(kweet);</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L30">        kweet.like(gebruiker);</span>
+<span class="nc" id="L31">        em.merge(kweet);</span>
+<span class="nc" id="L32">    }</span>
     
     @Override
     public List&lt;Gebruiker&gt; getLikes(Kweet kweet) {
-<span class="nc" id="L41">        List&lt;Kweet&gt; kweets = em.createNamedQuery(&quot;Kweet.getKweetById&quot;).setParameter(&quot;id&quot;, kweet.getId()).getResultList();</span>
-<span class="nc" id="L42">        return kweets.get(0).getLikes();</span>
+<span class="nc" id="L36">        List&lt;Kweet&gt; kweets = em.createNamedQuery(&quot;Kweet.getKweetById&quot;).setParameter(&quot;id&quot;, kweet.getId()).getResultList();</span>
+<span class="nc" id="L37">        return kweets.get(0).getLikes();</span>
     }
 
     @Override
     public List&lt;Gebruiker&gt; getMentions(Kweet kweet) {
-<span class="nc" id="L47">        List&lt;Kweet&gt; kweets = em.createNamedQuery(&quot;Kweet.getKweetById&quot;).setParameter(&quot;id&quot;, kweet.getId()).getResultList();</span>
-<span class="nc" id="L48">        return kweets.get(0).getMentioned();</span>
+<span class="nc" id="L42">        List&lt;Kweet&gt; kweets = em.createNamedQuery(&quot;Kweet.getKweetById&quot;).setParameter(&quot;id&quot;, kweet.getId()).getResultList();</span>
+<span class="nc" id="L43">        return kweets.get(0).getMentioned();</span>
     }
 
     @Override
-    public List&lt;Kweet&gt; getGebruikerKweets(Gebruiker gebruiker) {
-<span class="nc" id="L53">        return em.createNamedQuery(&quot;Kweet.getGebruikerKweets&quot;).setParameter(&quot;email&quot;, gebruiker.getEmail()).getResultList();</span>
+    public List&lt;Kweet&gt; getGebruikerKweets(String email, int limit) {
+<span class="nc" id="L48">        return em.createNamedQuery(&quot;Kweet.getGebruikerKweets&quot;).setParameter(&quot;email&quot;, email).setMaxResults(limit).getResultList();</span>
     }
 
     @Override
-    public void createKweet(Gebruiker gebruiker, String message) {
-<span class="nc" id="L58">        em.persist(new Kweet(gebruiker, message));</span>
-<span class="nc" id="L59">    }</span>
+    public void createKweet(int gebruikerid, String content) {
+        
+<span class="nc" id="L54">        List&lt;Gebruiker&gt; gebruiker = em.createNamedQuery(&quot;Gebruiker.getById&quot;).setParameter(&quot;id&quot;, gebruikerid).getResultList();</span>
+<span class="nc" id="L55">        em.persist(new Kweet(gebruiker.get(0), content));</span>
+<span class="nc" id="L56">    }</span>
 
     @Override
-    public void deleteKweet(int id) {
-<span class="nc" id="L63">        em.remove(id);</span>
-<span class="nc" id="L64">    }</span>
+    public void deleteKweet(Kweet kweet) {
+        
+<span class="nc" id="L61">        Kweet tempKweet = em.find(Kweet.class, kweet.getId());</span>
+        
+<span class="nc" id="L63">        tempKweet.clearKweet();</span>
+<span class="nc" id="L64">        em.remove(tempKweet);</span>
+<span class="nc" id="L65">    }</span>
 
     @Override
     public void updateKweet(Kweet kweet) {
-<span class="nc" id="L68">        em.merge(kweet);</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L69">        em.merge(kweet);</span>
+<span class="nc" id="L70">    }</span>
+
+    @Override
+    public void addKweetMention(Gebruiker gebruiker, Kweet kweet) {
+<span class="nc" id="L74">        kweet.addMention(gebruiker);</span>
+<span class="nc" id="L75">        em.merge(kweet);</span>
+<span class="nc" id="L76">    }</span>
+
+    @Override
+    public void removeKweetMention(Gebruiker gebruiker, Kweet kweet) {
+<span class="nc" id="L80">        kweet.removeMention(gebruiker);</span>
+<span class="nc" id="L81">        em.merge(kweet);</span>
+<span class="nc" id="L82">    }</span>
+
+    @Override
+    public void addTag(String tag, Kweet kweet) {
+<span class="nc" id="L86">        kweet.addTag(tag);</span>
+<span class="nc" id="L87">        em.merge(kweet);</span>
+<span class="nc" id="L88">    }</span>
+
+    @Override
+    public void removeTag(String tag, Kweet kweet) {
+<span class="nc" id="L92">        kweet.removeTag(tag);</span>
+<span class="nc" id="L93">        em.merge(kweet);</span>
+<span class="nc" id="L94">    }</span>
+
+    @Override
+    public void unlikeKweet(Gebruiker gebruiker, Kweet kweet) {
+<span class="nc" id="L98">        kweet.unlike(gebruiker);</span>
+<span class="nc" id="L99">        em.merge(kweet);</span>
+<span class="nc" id="L100">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({@NamedQuery(name = "Gebruiker.getAllGebruikers", query = "SELECT g FROM Gebruiker g"),
                @NamedQuery(name = "Gebruiker.getByMail", query = "SELECT g FROM Gebruiker g WHERE g.email LIKE :email"),
+               @NamedQuery(name = "Gebruiker.getById", query = "SELECT g FROM Gebruiker g WHERE g.id LIKE :id"),
                @NamedQuery(name = "Gebruiker.getByName", query = "SELECT g FROM Gebruiker g WHERE g.firstName LIKE :firstName")})
 public class Gebruiker implements Serializable{
     
@@ -52,6 +53,11 @@ public class Gebruiker implements Serializable{
         return this.id;
     }
     
+    public void setId(long id){
+        this.id = id;
+    }
+    
+    @JsonbTransient
     public List<Kweet> getKweets(){
         return this.kweets;
     }
@@ -125,6 +131,7 @@ public class Gebruiker implements Serializable{
         this.location = location;
     }
 
+    @JsonbTransient
     public List<Gebruiker> getFollowing() {
         return following;
     }
@@ -247,12 +254,9 @@ public class Gebruiker implements Serializable{
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Gebruiker{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", profilePicture=" + profilePicture + ", password=" + password + ", bio=" + bio + ", website=" + website + ", location=" + location + ", role=" + role + ", following=" + following + '}';
+    }
 }
