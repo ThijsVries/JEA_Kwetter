@@ -11,6 +11,7 @@ domain\Gebruiker$1.class
 rest\GebruikerResource.class
 domain\GebruikerRole.class
 domain\Gebruiker_.class
+boundary\controllers\GebruikerController.class
 service\Init.class
 service\KweetService.class
 dao\GebruikerDAOImp.class

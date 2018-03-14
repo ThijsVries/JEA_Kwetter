@@ -69,6 +69,15 @@ public class GebruikerService {
         }
     }
     
+    public List<Gebruiker> getAllGebruikers(){
+        try{
+            return gebruikerDAO.getAllGebruikers();
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing getAllGebruikers method; {0}", pe.getMessage());
+            return null;
+        }
+    }
+    
     public List<Gebruiker> getGebruikerByName(String firstName){
         try{
             return gebruikerDAO.getGebruikerByName(firstName);

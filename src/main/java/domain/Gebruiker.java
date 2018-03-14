@@ -40,6 +40,7 @@ public class Gebruiker implements Serializable{
     @Enumerated(EnumType.ORDINAL)
     private GebruikerRole role = GebruikerRole.USER;
     
+    //TODO: change to ManyToMany
     @OneToMany(cascade = CascadeType.PERSIST)
     private final List<Gebruiker> following = new ArrayList();
     

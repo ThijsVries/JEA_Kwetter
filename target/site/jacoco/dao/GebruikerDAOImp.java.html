@@ -51,5 +51,10 @@ import javax.persistence.PersistenceContext;
     public List&lt;Gebruiker&gt; getGebruikerByName(String firstName) {
 <span class="nc" id="L52">        return em.createNamedQuery(&quot;Gebruiker.getByName&quot;).setParameter(&quot;firstName&quot;, firstName).getResultList();</span>
     }
+
+    @Override
+    public List&lt;Gebruiker&gt; getAllGebruikers() {
+<span class="nc" id="L57">        return em.createNamedQuery(&quot;Gebruiker.getAllGebruikers&quot;).getResultList();</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

@@ -69,12 +69,21 @@ public class GebruikerService {
         }
     }
     
+    public List&lt;Gebruiker&gt; getAllGebruikers(){
+        try{
+<span class="nc" id="L74">            return gebruikerDAO.getAllGebruikers();</span>
+<span class="nc" id="L75">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L76">            LOGGER.log(Level.FINE, &quot;ERROR while performing getAllGebruikers method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L77">            return null;</span>
+        }
+    }
+    
     public List&lt;Gebruiker&gt; getGebruikerByName(String firstName){
         try{
-<span class="fc" id="L74">            return gebruikerDAO.getGebruikerByName(firstName);</span>
-<span class="nc" id="L75">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L76">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L77">            return null;</span>
+<span class="fc" id="L83">            return gebruikerDAO.getGebruikerByName(firstName);</span>
+<span class="nc" id="L84">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L85">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L86">            return null;</span>
         }
     }
 }

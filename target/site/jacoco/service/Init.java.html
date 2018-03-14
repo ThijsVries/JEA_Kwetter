@@ -36,19 +36,9 @@ import javax.inject.Inject;
 <span class="nc" id="L36">        testGebruiker5.makeFollow(testGebruiker1);</span>
 <span class="nc" id="L37">        testGebruiker5.makeFollow(testGebruiker2);</span>
 <span class="nc" id="L38">        testGebruiker4.makeFollow(testGebruiker3);</span>
-<span class="nc" id="L39">        testGebruiker2.makeFollow(testGebruiker2);</span>
-<span class="nc" id="L40">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
-        
-//        kweetDAO
-//        kweetDAO.createKweet(new Kweet(2, &quot;Hello world&quot;));
-//        kweetDAO.createKweet(new Kweet(3, &quot;Swagg&quot;));
-//        List&lt;Kweet&gt; kweetsGebruiker1 = kweetDAO.getGebruikerKweets(&quot;test@mail.com&quot;, 20);
-//        kweetsGebruiker1.get(0).like(testGebruiker5);
-//        
-//        List&lt;Kweet&gt; kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);
-//        
-//        kweets.get(0).like(testGebruiker3);
-//        kweetDAO.updateKweet(kweets.get(0));
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L39">        testGebruiker2.makeFollow(testGebruiker1);</span>
+<span class="nc" id="L40">        testGebruiker5.promoteUser();</span>
+<span class="nc" id="L41">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
+<span class="nc" id="L42">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
