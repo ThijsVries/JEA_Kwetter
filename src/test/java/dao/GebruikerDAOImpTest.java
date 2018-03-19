@@ -28,6 +28,7 @@ import util.DatabaseCleaner;
  *
  * @author Tvrie
  */
+@Ignore
 public class GebruikerDAOImpTest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("kwetter_testPU");

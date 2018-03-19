@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Gebruiker;
+import domain.GebruikerGroup;
 import domain.Kweet;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -55,5 +56,21 @@ public class GebruikerDAOImp implements GebruikerDAO{
     @Override
     public List<Gebruiker> getAllGebruikers() {
         return em.createNamedQuery("Gebruiker.getAllGebruikers").getResultList();
+    }
+
+    @Override
+    public void addGebruikerGroup(String gebruikerGroupName) {
+        em.persist(new GebruikerGroup(gebruikerGroupName));
+    }
+
+    @Override
+    public GebruikerGroup getGebruikerGroup(String groupName) {
+        List<GebruikerGroup> gebruikerGroup = em.createNamedQuery("GebruikerGroup.getByName").setParameter("groupname", groupName).getResultList();
+        return gebruikerGroup.get(0);
+    }
+
+    @Override
+    public void updateGebruikerGroup(GebruikerGroup gebruikerGroup) {
+        em.merge(gebruikerGroup);
     }
 }

@@ -3,6 +3,7 @@
 import dao.GebruikerDAO;
 import dao.KweetDAO;
 import domain.Gebruiker;
+import domain.GebruikerGroup;
 import domain.Kweet;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -12,7 +13,7 @@ import javax.inject.Inject;
 
 @Startup
 @Singleton
-<span class="nc" id="L15">public class Init {</span>
+<span class="nc" id="L16">public class Init {</span>
     
     @Inject
     GebruikerDAO gebruikerDAO;
@@ -22,23 +23,32 @@ import javax.inject.Inject;
     
     @PostConstruct
     public void init(){
-<span class="nc" id="L25">        Gebruiker testGebruiker1 = new Gebruiker(&quot;test@mail.com&quot;, &quot;12345&quot;);</span>
-<span class="nc" id="L26">        Gebruiker testGebruiker2 = new Gebruiker(&quot;test@mail2.com&quot;, &quot;1756745&quot;);</span>
-<span class="nc" id="L27">        Gebruiker testGebruiker3 = new Gebruiker(&quot;test@mail3.com&quot;, &quot;12356755&quot;);</span>
-<span class="nc" id="L28">        Gebruiker testGebruiker4 = new Gebruiker(&quot;test@mail4.com&quot;, &quot;1223423445&quot;);</span>
-<span class="nc" id="L29">        Gebruiker testGebruiker5 = new Gebruiker(&quot;test@mail5.com&quot;, &quot;122445&quot;);</span>
+<span class="nc" id="L26">        Gebruiker testGebruiker1 = new Gebruiker(&quot;test@mail.com&quot;, &quot;12345&quot;);</span>
+<span class="nc" id="L27">        Gebruiker testGebruiker2 = new Gebruiker(&quot;test@mail2.com&quot;, &quot;1756745&quot;);</span>
+<span class="nc" id="L28">        Gebruiker testGebruiker3 = new Gebruiker(&quot;test@mail3.com&quot;, &quot;12356755&quot;);</span>
+<span class="nc" id="L29">        Gebruiker testGebruiker4 = new Gebruiker(&quot;test@mail4.com&quot;, &quot;1223423445&quot;);</span>
+<span class="nc" id="L30">        Gebruiker testGebruiker5 = new Gebruiker(&quot;test@mail5.com&quot;, &quot;122445&quot;);</span>
         
-<span class="nc" id="L31">        gebruikerDAO.addGebruiker(testGebruiker1);</span>
-<span class="nc" id="L32">        gebruikerDAO.addGebruiker(testGebruiker2);</span>
-<span class="nc" id="L33">        gebruikerDAO.addGebruiker(testGebruiker3);</span>
-<span class="nc" id="L34">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
+<span class="nc" id="L32">        gebruikerDAO.addGebruikerGroup(&quot;Admin&quot;);</span>
+<span class="nc" id="L33">        gebruikerDAO.addGebruikerGroup(&quot;Moderator&quot;);</span>
+<span class="nc" id="L34">        gebruikerDAO.addGebruikerGroup(&quot;Gebruiker&quot;);</span>
         
-<span class="nc" id="L36">        testGebruiker5.makeFollow(testGebruiker1);</span>
-<span class="nc" id="L37">        testGebruiker5.makeFollow(testGebruiker2);</span>
-<span class="nc" id="L38">        testGebruiker4.makeFollow(testGebruiker3);</span>
-<span class="nc" id="L39">        testGebruiker2.makeFollow(testGebruiker1);</span>
-<span class="nc" id="L40">        testGebruiker5.promoteUser();</span>
-<span class="nc" id="L41">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L36">        GebruikerGroup group = gebruikerDAO.getGebruikerGroup(&quot;Admin&quot;);</span>
+        
+<span class="nc" id="L38">        gebruikerDAO.addGebruiker(testGebruiker1);</span>
+<span class="nc" id="L39">        gebruikerDAO.addGebruiker(testGebruiker2);</span>
+<span class="nc" id="L40">        gebruikerDAO.addGebruiker(testGebruiker3);</span>
+<span class="nc" id="L41">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
+        
+<span class="nc" id="L43">        group.AddGebruikerToUserGroup(testGebruiker5);</span>
+<span class="nc" id="L44">        gebruikerDAO.updateGebruikerGroup(group);</span>
+        
+<span class="nc" id="L46">        testGebruiker5.makeFollow(testGebruiker1);</span>
+<span class="nc" id="L47">        testGebruiker5.makeFollow(testGebruiker2);</span>
+<span class="nc" id="L48">        testGebruiker4.makeFollow(testGebruiker3);</span>
+<span class="nc" id="L49">        testGebruiker2.makeFollow(testGebruiker1);</span>
+
+<span class="nc" id="L51">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
+<span class="nc" id="L52">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

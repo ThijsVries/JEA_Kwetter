@@ -3,6 +3,7 @@ package service;
 import dao.GebruikerDAO;
 import dao.KweetDAO;
 import domain.Gebruiker;
+import domain.GebruikerGroup;
 import domain.Kweet;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,16 +29,25 @@ public class Init {
         Gebruiker testGebruiker4 = new Gebruiker("test@mail4.com", "1223423445");
         Gebruiker testGebruiker5 = new Gebruiker("test@mail5.com", "122445");
         
+        gebruikerDAO.addGebruikerGroup("Admin");
+        gebruikerDAO.addGebruikerGroup("Moderator");
+        gebruikerDAO.addGebruikerGroup("Gebruiker");
+        
+        GebruikerGroup group = gebruikerDAO.getGebruikerGroup("Admin");
+        
         gebruikerDAO.addGebruiker(testGebruiker1);
         gebruikerDAO.addGebruiker(testGebruiker2);
         gebruikerDAO.addGebruiker(testGebruiker3);
         gebruikerDAO.addGebruiker(testGebruiker4);
         
+        group.AddGebruikerToUserGroup(testGebruiker5);
+        gebruikerDAO.updateGebruikerGroup(group);
+        
         testGebruiker5.makeFollow(testGebruiker1);
         testGebruiker5.makeFollow(testGebruiker2);
         testGebruiker4.makeFollow(testGebruiker3);
         testGebruiker2.makeFollow(testGebruiker1);
-        testGebruiker5.promoteUser();
+
         gebruikerDAO.addGebruiker(testGebruiker5);
     }
 }

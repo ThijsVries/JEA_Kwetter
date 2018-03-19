@@ -45,19 +45,19 @@ public class GebruikerController implements Serializable{
         
     }
     
-    public String logIn(){
-        Gebruiker gebruiker = gebruikerService.getGebruikerByEmail(userMail).get(0);
-        if(userMail.equals(gebruiker.getEmail()) && password.equals(gebruiker.getPassword())){
-            if(gebruiker.getGebruikerRole() == GebruikerRole.ADMIN || gebruiker.getGebruikerRole() == GebruikerRole.MOD){
-                return "adminPanel";
-            }else{
-                return "gebruikerPage";
-            }
-        }
-        else{
-            return "login";
-        }
-    }
+//    public String logIn(){
+//        Gebruiker gebruiker = gebruikerService.getGebruikerByEmail(userMail).get(0);
+//        if(userMail.equals(gebruiker.getEmail()) && password.equals(gebruiker.getPassword())){
+//            if(gebruiker.getGebruikerRole() == GebruikerRole.ADMIN || gebruiker.getGebruikerRole() == GebruikerRole.MOD){
+//                return "adminPanel";
+//            }else{
+//                return "gebruikerPage";
+//            }
+//        }
+//        else{
+//            return "login";
+//        }
+//    }
     
     public List<Gebruiker> getAllGebruikers(){
         List<Gebruiker> gebruikers = gebruikerService.getAllGebruikers();

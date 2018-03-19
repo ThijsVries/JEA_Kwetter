@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Gebruiker;
+import domain.GebruikerGroup;
 import java.util.List;
 
 
@@ -20,5 +21,11 @@ public interface GebruikerDAO {
     List<Gebruiker> getGebruikerByEmail(String email);
     
     List<Gebruiker> getGebruikerByName(String firstName);
+    
+    void addGebruikerGroup(String gebruikerGroupName);
+    
+    void updateGebruikerGroup(GebruikerGroup gebruikerGroup);
+    
+    GebruikerGroup getGebruikerGroup(String groupName);
     
 }

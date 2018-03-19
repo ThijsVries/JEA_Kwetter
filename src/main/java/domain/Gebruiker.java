@@ -13,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,8 +38,6 @@ public class Gebruiker implements Serializable{
     private String website;
     private String location;
     
-    @Enumerated(EnumType.ORDINAL)
-    private GebruikerRole role = GebruikerRole.USER;
     
     //TODO: change to ManyToMany
     @OneToMany(cascade = CascadeType.PERSIST)
@@ -47,8 +46,18 @@ public class Gebruiker implements Serializable{
     @OneToMany(cascade = CascadeType.ALL)
     private final List<Kweet> kweets = new ArrayList();
     
+    @ManyToMany(mappedBy = "gebruikers")
+    private List<GebruikerGroup> gebruikerGroups = new ArrayList();
+    
     // <editor-fold defaultstate="collapsed" desc="Properties"> 
     
+    public List<GebruikerGroup> getGebruikerGroups() {
+        return gebruikerGroups;
+    }
+
+    public void setGebruikerGroups(List<GebruikerGroup> gebruikerGroups) {
+        this.gebruikerGroups = gebruikerGroups;
+    }
     
     public long getId(){
         return this.id;
@@ -62,11 +71,6 @@ public class Gebruiker implements Serializable{
     public List<Kweet> getKweets(){
         return this.kweets;
     }
-    
-    public GebruikerRole getGebruikerRole(){
-        return role;
-    }
-    
 
     public String getFirstName() {
         return firstName;
@@ -190,40 +194,47 @@ public class Gebruiker implements Serializable{
         }
     }
     
+    // <editor-fold defaultstate="collapsed" desc="Old user role code"> 
     /**
      * Promotes the selected user's role to one above the current one.
      */
-    public void promoteUser(){
-        switch(this.role){
-            case USER:
-                this.role = GebruikerRole.MOD;
-                break;
-            case MOD:
-                this.role = GebruikerRole.ADMIN;
-                break;
-            case ADMIN:
-                break;
-            default:
-                break;
-        }
+//    public void promoteUser(){
+//        switch(this.role){
+//            case USER:
+//                this.role = GebruikerRole.MOD;
+//                break;
+//            case MOD:
+//                this.role = GebruikerRole.ADMIN;
+//                break;
+//            case ADMIN:
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+//    
+//    /**
+//     * Demotes the selected user's role to one below the current one.
+//     */
+//    public void demoteUser(){
+//        switch(this.role){
+//            case MOD:
+//                this.role = GebruikerRole.USER;
+//                break;
+//            case ADMIN:
+//                this.role = GebruikerRole.MOD;
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+
+    //</editor-fold>
+    
+    public String getGebruikerRole(){
+        return this.gebruikerGroups.get(0).toString();
     }
     
-    /**
-     * Demotes the selected user's role to one below the current one.
-     */
-    public void demoteUser(){
-        switch(this.role){
-            case MOD:
-                this.role = GebruikerRole.USER;
-                break;
-            case ADMIN:
-                this.role = GebruikerRole.MOD;
-                break;
-            default:
-                break;
-        }
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -258,6 +269,6 @@ public class Gebruiker implements Serializable{
 
     @Override
     public String toString() {
-        return "Gebruiker{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", profilePicture=" + profilePicture + ", password=" + password + ", bio=" + bio + ", website=" + website + ", location=" + location + ", role=" + role + ", following=" + following + '}';
+        return "Gebruiker{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", profilePicture=" + profilePicture + ", password=" + password + ", bio=" + bio + ", website=" + website + ", location=" + location + ", following=" + following + '}';
     }
 }

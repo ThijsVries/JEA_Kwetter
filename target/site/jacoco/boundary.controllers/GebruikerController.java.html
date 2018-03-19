@@ -45,19 +45,19 @@ public class GebruikerController implements Serializable{
         
 <span class="nc" id="L46">    }</span>
     
-    public String logIn(){
-<span class="nc" id="L49">        Gebruiker gebruiker = gebruikerService.getGebruikerByEmail(userMail).get(0);</span>
-<span class="nc bnc" id="L50" title="All 4 branches missed.">        if(userMail.equals(gebruiker.getEmail()) &amp;&amp; password.equals(gebruiker.getPassword())){</span>
-<span class="nc bnc" id="L51" title="All 4 branches missed.">            if(gebruiker.getGebruikerRole() == GebruikerRole.ADMIN || gebruiker.getGebruikerRole() == GebruikerRole.MOD){</span>
-<span class="nc" id="L52">                return &quot;adminPanel&quot;;</span>
-            }else{
-<span class="nc" id="L54">                return &quot;gebruikerPage&quot;;</span>
-            }
-        }
-        else{
-<span class="nc" id="L58">            return &quot;login&quot;;</span>
-        }
-    }
+//    public String logIn(){
+//        Gebruiker gebruiker = gebruikerService.getGebruikerByEmail(userMail).get(0);
+//        if(userMail.equals(gebruiker.getEmail()) &amp;&amp; password.equals(gebruiker.getPassword())){
+//            if(gebruiker.getGebruikerRole() == GebruikerRole.ADMIN || gebruiker.getGebruikerRole() == GebruikerRole.MOD){
+//                return &quot;adminPanel&quot;;
+//            }else{
+//                return &quot;gebruikerPage&quot;;
+//            }
+//        }
+//        else{
+//            return &quot;login&quot;;
+//        }
+//    }
     
     public List&lt;Gebruiker&gt; getAllGebruikers(){
 <span class="nc" id="L63">        List&lt;Gebruiker&gt; gebruikers = gebruikerService.getAllGebruikers();</span>
