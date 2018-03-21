@@ -9,7 +9,7 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    
+
     <h:head>
         <title>Admin page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,7 +17,7 @@ and open the template in the editor.
     <h:body>
         <div>Admin Panel</div>
         <h:form>
-            <p:dataTable var="Gebruiker" value="#{gebruikerController.allGebruikers}">
+            <p:dataTable id="gebruikersTable" var="Gebruiker" value="#{adminController.allGebruikers}" selection="#{adminController.selectedGebruiker}" selectionMode="single" rowKey="#{Gebruiker.email}">
                 <p:column headerText="Email">
                     <h:outputText value="#{Gebruiker.email}"/>
                 </p:column>
@@ -25,7 +25,26 @@ and open the template in the editor.
                     <h:outputText value="#{Gebruiker.firstName}"/>
                 </p:column>
                 <p:column headerText="Role">
-                    <h:outputText value="#{Gebruiker.gebruikerRole}"/>
+                    <h:outputText value="#{Gebruiker.gebruikerGroupsToString}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:selectOneMenu id="GebruikerGroups" value="#{adminController.selectedGroup}" style="width:150px">
+                        <f:selectItem itemValue="" noSelectionOption="true"/>
+                        <f:selectItems value="#{adminController.gebruikerGroups}" />
+                    </p:selectOneMenu>
+                    <p:commandButton id="selectUsedBtn" value="Promote" action="#{adminController.promoteGebruiker()}" update="gebruikersTable"/>
+                    <p:commandButton id="demoteUserBtn" value="Demote" action="#{adminController.demoteGebruiker()}" update="gebruikersTable"/>
+                </f:facet>
+            </p:dataTable>
+            <p:dataTable id="kweetsTable" var="Kweet" value="#{adminController.allKweets}" selection="#{adminController.selectedKweet}" selectionMode="single" rowKey="#{Kweet.id}">
+                <p:column headerText="Kweet ID">
+                    <h:outputText value="#{Kweet.id}" />
+                </p:column>
+                <p:column headerText="Kweet Content">
+                    <h:outputText value="#{Kweet.message}" />
+                </p:column>
+                <p:column headerText="Kweeted by">
+                    <h:outputText value="#{Kweet.ownedBy.firstName}" />
                 </p:column>
             </p:dataTable>
         </h:form>

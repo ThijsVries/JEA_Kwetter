@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,17 +47,14 @@ public class Gebruiker implements Serializable{
     @OneToMany(cascade = CascadeType.ALL)
     private final List<Kweet> kweets = new ArrayList();
     
-    @ManyToMany(mappedBy = "gebruikers")
+    @ManyToMany(mappedBy = "gebruikers", cascade = ALL)
     private List<GebruikerGroup> gebruikerGroups = new ArrayList();
     
     // <editor-fold defaultstate="collapsed" desc="Properties"> 
     
+    @JsonbTransient
     public List<GebruikerGroup> getGebruikerGroups() {
         return gebruikerGroups;
-    }
-
-    public void setGebruikerGroups(List<GebruikerGroup> gebruikerGroups) {
-        this.gebruikerGroups = gebruikerGroups;
     }
     
     public long getId(){
@@ -162,6 +160,18 @@ public class Gebruiker implements Serializable{
         this.location = location;
     }
     
+    public Gebruiker(String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location, GebruikerGroup group) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.profilePicture = profilePicture;
+        this.password = password;
+        this.bio = bio;
+        this.website = website;
+        this.location = location;
+        this.addGebruikerGroup(group);
+    }
+    
     /**
      * Makes this user follow the given user.
      * @param gebruiker the given user TO follow
@@ -231,8 +241,32 @@ public class Gebruiker implements Serializable{
 
     //</editor-fold>
     
-    public String getGebruikerRole(){
-        return this.gebruikerGroups.get(0).toString();
+    public void addGebruikerGroup(GebruikerGroup group){
+        if(!this.gebruikerGroups.contains(group)){
+            this.gebruikerGroups.add(group);
+            group.addGebruikerToUserGroup(this);
+        }
+    }
+    
+    public void removeGebruikerGroup(GebruikerGroup group){
+        if(this.gebruikerGroups.contains(group)){
+            this.gebruikerGroups.remove(group);
+            group.removeGebruikerFromUserGroup(this);
+        }
+    }
+    
+    public String getGebruikerGroupsToString(){
+        if(this.gebruikerGroups.size() > 0){
+            StringBuilder sb = new StringBuilder();
+            for(GebruikerGroup gg : this.getGebruikerGroups()){
+                sb.append(gg.getGroupName());
+                sb.append(" - ");
+            }
+            
+            return sb.toString();
+        }else{
+            return "None";
+        }
     }
     
     @Override

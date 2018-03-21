@@ -59,8 +59,8 @@ import javax.persistence.PersistenceContext;
     }
 
     @Override
-    public void addGebruikerGroup(String gebruikerGroupName) {
-<span class="nc" id="L63">        em.persist(new GebruikerGroup(gebruikerGroupName));</span>
+    public void addGebruikerGroup(GebruikerGroup gebruikerGroup) {
+<span class="nc" id="L63">        em.persist(gebruikerGroup);</span>
 <span class="nc" id="L64">    }</span>
 
     @Override
@@ -73,5 +73,11 @@ import javax.persistence.PersistenceContext;
     public void updateGebruikerGroup(GebruikerGroup gebruikerGroup) {
 <span class="nc" id="L74">        em.merge(gebruikerGroup);</span>
 <span class="nc" id="L75">    }</span>
+
+    @Override
+    public List&lt;GebruikerGroup&gt; getAllGebruikerGroups() {
+<span class="nc" id="L79">        List&lt;GebruikerGroup&gt; gebruikerGroups = em.createNamedQuery(&quot;GebruikerGroup.getAll&quot;).getResultList();</span>
+<span class="nc" id="L80">        return gebruikerGroups;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

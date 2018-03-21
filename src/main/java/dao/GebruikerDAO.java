@@ -22,10 +22,12 @@ public interface GebruikerDAO {
     
     List<Gebruiker> getGebruikerByName(String firstName);
     
-    void addGebruikerGroup(String gebruikerGroupName);
+    void addGebruikerGroup(GebruikerGroup gebruikerGroup);
     
     void updateGebruikerGroup(GebruikerGroup gebruikerGroup);
     
     GebruikerGroup getGebruikerGroup(String groupName);
+    
+    List<GebruikerGroup> getAllGebruikerGroups();
     
 }

@@ -2,6 +2,7 @@ package service;
 
 import dao.GebruikerDAO;
 import domain.Gebruiker;
+import domain.GebruikerGroup;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,6 +84,32 @@ public class GebruikerService {
             return gebruikerDAO.getGebruikerByName(firstName);
         } catch(PersistenceException pe){
             LOGGER.log(Level.FINE, "ERROR while performing addGebruiker method; {0}", pe.getMessage());
+            return null;
+        }
+    }
+    
+    public void updateGebruikerGroup(GebruikerGroup gebruikerGroup){
+        try{
+            gebruikerDAO.updateGebruikerGroup(gebruikerGroup);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing updateGebruikerGroup method; {0}", pe.getMessage());
+        }
+    }
+    
+    public GebruikerGroup getGebruikerGroup(String groupName){
+        try{
+            return gebruikerDAO.getGebruikerGroup(groupName);
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing getGebruikerGroup method; {0}", pe.getMessage());
+            return null;
+        }
+    }
+    
+    public List<GebruikerGroup> getAllGebruikerGroups(){
+        try{
+            return gebruikerDAO.getAllGebruikerGroups();
+        } catch(PersistenceException pe){
+            LOGGER.log(Level.FINE, "ERROR while performing getAllGebruikerGroups method; {0}", pe.getMessage());
             return null;
         }
     }

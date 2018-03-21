@@ -23,32 +23,46 @@ import javax.inject.Inject;
     
     @PostConstruct
     public void init(){
-<span class="nc" id="L26">        Gebruiker testGebruiker1 = new Gebruiker(&quot;test@mail.com&quot;, &quot;12345&quot;);</span>
-<span class="nc" id="L27">        Gebruiker testGebruiker2 = new Gebruiker(&quot;test@mail2.com&quot;, &quot;1756745&quot;);</span>
-<span class="nc" id="L28">        Gebruiker testGebruiker3 = new Gebruiker(&quot;test@mail3.com&quot;, &quot;12356755&quot;);</span>
-<span class="nc" id="L29">        Gebruiker testGebruiker4 = new Gebruiker(&quot;test@mail4.com&quot;, &quot;1223423445&quot;);</span>
-<span class="nc" id="L30">        Gebruiker testGebruiker5 = new Gebruiker(&quot;test@mail5.com&quot;, &quot;122445&quot;);</span>
         
-<span class="nc" id="L32">        gebruikerDAO.addGebruikerGroup(&quot;Admin&quot;);</span>
-<span class="nc" id="L33">        gebruikerDAO.addGebruikerGroup(&quot;Moderator&quot;);</span>
-<span class="nc" id="L34">        gebruikerDAO.addGebruikerGroup(&quot;Gebruiker&quot;);</span>
+<span class="nc" id="L27">        GebruikerGroup gebruikerGroupAdmin = new GebruikerGroup(&quot;Admin&quot;);</span>
+<span class="nc" id="L28">        GebruikerGroup gebruikerGroupUser = new GebruikerGroup(&quot;User&quot;);</span>
+<span class="nc" id="L29">        GebruikerGroup gebruikerGroupMod = new GebruikerGroup(&quot;Moderator&quot;);</span>
         
-<span class="nc" id="L36">        GebruikerGroup group = gebruikerDAO.getGebruikerGroup(&quot;Admin&quot;);</span>
+<span class="nc" id="L31">        Gebruiker testGebruiker1 = new Gebruiker(&quot;Jan&quot;, &quot;Pietersen&quot;, &quot;jantje@mail.com&quot;, &quot;Z:/janjteheeftswag.png&quot;, &quot;123456789&quot;, &quot;Ik ben Jantjuuuuh&quot;, &quot;www.reddit.com&quot;, &quot;Eindhoven&quot;);</span>
+<span class="nc" id="L32">        Gebruiker testGebruiker2 = new Gebruiker(&quot;Mary-Jane&quot;, &quot;Sensi&quot;, &quot;damail@mail.jm&quot;, &quot;Z:/plants.png&quot;, &quot;420erryday&quot;, &quot;Sup people&quot;, &quot;www.reddit.com/r/trees&quot;, &quot;Everywhere?&quot;);</span>
+<span class="nc" id="L33">        Gebruiker testGebruiker3 = new Gebruiker(&quot;Ka hing&quot;, &quot;Wong&quot;, &quot;kahing@mail.com&quot;, &quot;Z:/china_flag.png&quot;, &quot;13371337&quot;, &quot;mr. Wong&quot;, &quot;fhict.nl&quot;, &quot;Den Bosch&quot;);</span>
+<span class="nc" id="L34">        Gebruiker testGebruiker4 = new Gebruiker(&quot;Nicole&quot;, &quot;Pietersen&quot;, &quot;nico@mail.com&quot;, &quot;Z:/janjteheeftswag.png&quot;, &quot;123456789&quot;, &quot;Ik ben Jantjuuuuh&quot;, &quot;www.reddit.com&quot;, &quot;Eindhoven&quot;);</span>
+<span class="nc" id="L35">        Gebruiker testGebruiker6 = new Gebruiker(&quot;Thijs&quot;, &quot;Vries&quot;, &quot;thijs@mail.com&quot;, &quot;Z:/admin&quot;, &quot;admin&quot;, &quot;admin&quot;, &quot;www.reddit.com&quot;, &quot;Den Bosch&quot;);</span>
+<span class="nc" id="L36">        Gebruiker testGebruiker5 = new Gebruiker(&quot;test@mail5.com&quot;, &quot;122445&quot;);</span>
         
-<span class="nc" id="L38">        gebruikerDAO.addGebruiker(testGebruiker1);</span>
-<span class="nc" id="L39">        gebruikerDAO.addGebruiker(testGebruiker2);</span>
-<span class="nc" id="L40">        gebruikerDAO.addGebruiker(testGebruiker3);</span>
-<span class="nc" id="L41">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
+<span class="nc" id="L38">        testGebruiker6.addGebruikerGroup(gebruikerGroupAdmin);</span>
+<span class="nc" id="L39">        testGebruiker5.addGebruikerGroup(gebruikerGroupAdmin);</span>
+<span class="nc" id="L40">        testGebruiker1.addGebruikerGroup(gebruikerGroupAdmin);</span>
         
-<span class="nc" id="L43">        group.AddGebruikerToUserGroup(testGebruiker5);</span>
-<span class="nc" id="L44">        gebruikerDAO.updateGebruikerGroup(group);</span>
+<span class="nc" id="L42">        gebruikerDAO.addGebruikerGroup(gebruikerGroupAdmin);</span>
+<span class="nc" id="L43">        gebruikerDAO.addGebruikerGroup(gebruikerGroupMod);</span>
+<span class="nc" id="L44">        gebruikerDAO.addGebruikerGroup(gebruikerGroupUser);</span>
         
-<span class="nc" id="L46">        testGebruiker5.makeFollow(testGebruiker1);</span>
-<span class="nc" id="L47">        testGebruiker5.makeFollow(testGebruiker2);</span>
-<span class="nc" id="L48">        testGebruiker4.makeFollow(testGebruiker3);</span>
-<span class="nc" id="L49">        testGebruiker2.makeFollow(testGebruiker1);</span>
+<span class="nc" id="L46">        testGebruiker1.makeFollow(testGebruiker5);</span>
+<span class="nc" id="L47">        testGebruiker1.makeFollow(testGebruiker6);</span>
+        
+<span class="nc" id="L49">        gebruikerDAO.addGebruiker(testGebruiker1);</span>
+<span class="nc" id="L50">        gebruikerDAO.addGebruiker(testGebruiker2);</span>
+<span class="nc" id="L51">        gebruikerDAO.addGebruiker(testGebruiker3);</span>
+<span class="nc" id="L52">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
+<span class="nc" id="L53">        gebruikerDAO.addGebruiker(testGebruiker6);</span>
+        
+        
+<span class="nc" id="L56">        testGebruiker5.makeFollow(testGebruiker1);</span>
+<span class="nc" id="L57">        testGebruiker5.makeFollow(testGebruiker2);</span>
+<span class="nc" id="L58">        testGebruiker4.makeFollow(testGebruiker3);</span>
+<span class="nc" id="L59">        testGebruiker2.makeFollow(testGebruiker1);</span>
 
-<span class="nc" id="L51">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L61">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
+        
+<span class="nc" id="L63">        kweetDAO.createKweet(3, &quot;Dit is een test kweet&quot;);</span>
+<span class="nc" id="L64">        kweetDAO.createKweet(2, &quot;Hallo allemaal!&quot;);</span>
+<span class="nc" id="L65">        kweetDAO.createKweet(6, &quot;C# &gt; Java&quot;);</span>
+<span class="nc" id="L66">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

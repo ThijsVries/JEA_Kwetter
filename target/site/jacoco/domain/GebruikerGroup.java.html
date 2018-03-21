@@ -2,7 +2,9 @@
 
 import java.io.Serializable;
 import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,44 +15,73 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = &quot;gebruikerGroup&quot;)
-@NamedQueries({@NamedQuery(name = &quot;GebruikerGroup.getByName&quot;, query = &quot;SELECT gp FROM GebruikerGroup gp WHERE gp.groupName LIKE :groupname&quot;)})
+@NamedQueries({@NamedQuery(name = &quot;GebruikerGroup.getByName&quot;, query = &quot;SELECT gp FROM GebruikerGroup gp WHERE gp.groupName LIKE :groupname&quot;),
+               @NamedQuery(name = &quot;GebruikerGroup.getAll&quot;, query = &quot;SELECT gp FROM GebruikerGroup gp&quot;)})
 public class GebruikerGroup implements Serializable{
 
     @Id
     private String groupName;
 
     public String getGroupName() {
-<span class="nc" id="L24">        return groupName;</span>
+<span class="nc" id="L26">        return groupName;</span>
     }
 
     public void setGroupName(String groupName) {
-<span class="nc" id="L28">        this.groupName = groupName;</span>
-<span class="nc" id="L29">    }</span>
+<span class="nc" id="L30">        this.groupName = groupName;</span>
+<span class="nc" id="L31">    }</span>
 
     public List&lt;Gebruiker&gt; getGebruikers() {
-<span class="nc" id="L32">        return gebruikers;</span>
+<span class="nc" id="L34">        return gebruikers;</span>
     }
 
     public void setGebruikers(List&lt;Gebruiker&gt; gebruikers) {
-<span class="nc" id="L36">        this.gebruikers = gebruikers;</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L38">        this.gebruikers = gebruikers;</span>
+<span class="nc" id="L39">    }</span>
     
-    @ManyToMany
-    @JoinTable(name = &quot;GEBRUIKER_GROUP&quot;, joinColumns = @JoinColumn(name = &quot;groupName&quot;, referencedColumnName = &quot;groupName&quot;), inverseJoinColumns = @JoinColumn(name = &quot;email&quot;,
-    referencedColumnName = &quot;email&quot;))
-    private List&lt;Gebruiker&gt; gebruikers;
+<span class="nc" id="L41">    @ManyToMany</span>
+    @JoinTable(name = &quot;GEBRUIKER_GROUP&quot;, 
+            joinColumns = @JoinColumn(name = &quot;groupName&quot;, referencedColumnName = &quot;groupName&quot;), 
+            inverseJoinColumns = @JoinColumn(name = &quot;email&quot;, referencedColumnName = &quot;email&quot;))
+    private List&lt;Gebruiker&gt; gebruikers = new ArrayList();
     
-<span class="nc" id="L44">    public GebruikerGroup(){</span>
+<span class="nc" id="L47">    public GebruikerGroup(){</span>
         
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L49">    }</span>
     
-<span class="nc" id="L48">    public GebruikerGroup(String groupName){</span>
-<span class="nc" id="L49">        this.groupName = groupName;</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L51">    public GebruikerGroup(String groupName){</span>
+<span class="nc" id="L52">        this.groupName = groupName;</span>
+<span class="nc" id="L53">    }</span>
     
-    public void AddGebruikerToUserGroup(Gebruiker gebruiker){
-<span class="nc" id="L53">        this.gebruikers.add(gebruiker);</span>
-<span class="nc" id="L54">    }</span>
+    public void addGebruikerToUserGroup(Gebruiker gebruiker){
+<span class="nc" id="L56">        this.gebruikers.add(gebruiker);</span>
+<span class="nc" id="L57">    }</span>
+    
+    public void removeGebruikerFromUserGroup(Gebruiker gebruiker){
+<span class="nc" id="L60">        this.gebruikers.remove(gebruiker);</span>
+<span class="nc" id="L61">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L65">        int hash = 3;</span>
+<span class="nc" id="L66">        hash = 17 * hash + Objects.hashCode(this.groupName);</span>
+<span class="nc" id="L67">        hash = 17 * hash + Objects.hashCode(this.gebruikers);</span>
+<span class="nc" id="L68">        return hash;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if(obj != null){</span>
+<span class="nc" id="L74">            GebruikerGroup temp = (GebruikerGroup) obj;</span>
+<span class="nc" id="L75">            return this.getGroupName().equals(temp.getGroupName());</span>
+        }
+<span class="nc" id="L77">        return false;</span>
+    }
+    
+    
+
+    @Override
+    public String toString() {
+<span class="nc" id="L84">        return this.groupName;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

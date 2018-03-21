@@ -59,8 +59,8 @@ public class GebruikerDAOImp implements GebruikerDAO{
     }
 
     @Override
-    public void addGebruikerGroup(String gebruikerGroupName) {
-        em.persist(new GebruikerGroup(gebruikerGroupName));
+    public void addGebruikerGroup(GebruikerGroup gebruikerGroup) {
+        em.persist(gebruikerGroup);
     }
 
     @Override
@@ -72,5 +72,11 @@ public class GebruikerDAOImp implements GebruikerDAO{
     @Override
     public void updateGebruikerGroup(GebruikerGroup gebruikerGroup) {
         em.merge(gebruikerGroup);
+    }
+
+    @Override
+    public List<GebruikerGroup> getAllGebruikerGroups() {
+        List<GebruikerGroup> gebruikerGroups = em.createNamedQuery("GebruikerGroup.getAll").getResultList();
+        return gebruikerGroups;
     }
 }

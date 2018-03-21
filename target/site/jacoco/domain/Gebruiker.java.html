@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
+import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -40,159 +41,168 @@ public class Gebruiker implements Serializable{
     
     
     //TODO: change to ManyToMany
-<span class="fc" id="L43">    @OneToMany(cascade = CascadeType.PERSIST)</span>
+<span class="pc" id="L44">    @OneToMany(cascade = CascadeType.PERSIST)</span>
     private final List&lt;Gebruiker&gt; following = new ArrayList();
     
-<span class="fc" id="L46">    @OneToMany(cascade = CascadeType.ALL)</span>
+<span class="pc" id="L47">    @OneToMany(cascade = CascadeType.ALL)</span>
     private final List&lt;Kweet&gt; kweets = new ArrayList();
     
-<span class="fc" id="L49">    @ManyToMany(mappedBy = &quot;gebruikers&quot;)</span>
+<span class="pc" id="L50">    @ManyToMany(mappedBy = &quot;gebruikers&quot;, cascade = ALL)</span>
     private List&lt;GebruikerGroup&gt; gebruikerGroups = new ArrayList();
     
     // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Properties&quot;&gt; 
     
+    @JsonbTransient
     public List&lt;GebruikerGroup&gt; getGebruikerGroups() {
-<span class="nc" id="L55">        return gebruikerGroups;</span>
+<span class="nc" id="L57">        return gebruikerGroups;</span>
     }
-
-    public void setGebruikerGroups(List&lt;GebruikerGroup&gt; gebruikerGroups) {
-<span class="nc" id="L59">        this.gebruikerGroups = gebruikerGroups;</span>
-<span class="nc" id="L60">    }</span>
     
     public long getId(){
-<span class="nc" id="L63">        return this.id;</span>
+<span class="nc" id="L61">        return this.id;</span>
     }
     
     public void setId(long id){
-<span class="nc" id="L67">        this.id = id;</span>
-<span class="nc" id="L68">    }</span>
+<span class="nc" id="L65">        this.id = id;</span>
+<span class="nc" id="L66">    }</span>
     
     @JsonbTransient
     public List&lt;Kweet&gt; getKweets(){
-<span class="nc" id="L72">        return this.kweets;</span>
+<span class="nc" id="L70">        return this.kweets;</span>
     }
 
     public String getFirstName() {
-<span class="fc" id="L76">        return firstName;</span>
+<span class="fc" id="L74">        return firstName;</span>
     }
 
     public void setFirstName(String firstName) {
-<span class="fc" id="L80">        this.firstName = firstName;</span>
-<span class="fc" id="L81">    }</span>
+<span class="fc" id="L78">        this.firstName = firstName;</span>
+<span class="fc" id="L79">    }</span>
 
     public String getLastName() {
-<span class="fc" id="L84">        return lastName;</span>
+<span class="fc" id="L82">        return lastName;</span>
     }
 
     public void setLastName(String lastName) {
-<span class="fc" id="L88">        this.lastName = lastName;</span>
-<span class="fc" id="L89">    }</span>
+<span class="fc" id="L86">        this.lastName = lastName;</span>
+<span class="fc" id="L87">    }</span>
 
     public String getEmail() {
-<span class="fc" id="L92">        return email;</span>
+<span class="fc" id="L90">        return email;</span>
     }
 
     public void setEmail(String email) {
-<span class="fc" id="L96">        this.email = email;</span>
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L94">        this.email = email;</span>
+<span class="fc" id="L95">    }</span>
 
     public String getProfilePicture() {
-<span class="fc" id="L100">        return profilePicture;</span>
+<span class="fc" id="L98">        return profilePicture;</span>
     }
 
     public void setProfilePicture(String profilePicture) {
-<span class="fc" id="L104">        this.profilePicture = profilePicture;</span>
-<span class="fc" id="L105">    }</span>
+<span class="fc" id="L102">        this.profilePicture = profilePicture;</span>
+<span class="fc" id="L103">    }</span>
 
     public String getPassword() {
-<span class="fc" id="L108">        return password;</span>
+<span class="fc" id="L106">        return password;</span>
     }
 
     public void setPassword(String password) {
-<span class="fc" id="L112">        this.password = password;</span>
-<span class="fc" id="L113">    }</span>
+<span class="fc" id="L110">        this.password = password;</span>
+<span class="fc" id="L111">    }</span>
 
     public String getBio() {
-<span class="fc" id="L116">        return bio;</span>
+<span class="fc" id="L114">        return bio;</span>
     }
 
     public void setBio(String bio) {
-<span class="fc" id="L120">        this.bio = bio;</span>
-<span class="fc" id="L121">    }</span>
+<span class="fc" id="L118">        this.bio = bio;</span>
+<span class="fc" id="L119">    }</span>
 
     public String getWebsite() {
-<span class="fc" id="L124">        return website;</span>
+<span class="fc" id="L122">        return website;</span>
     }
 
     public void setWebsite(String website) {
-<span class="fc" id="L128">        this.website = website;</span>
-<span class="fc" id="L129">    }</span>
+<span class="fc" id="L126">        this.website = website;</span>
+<span class="fc" id="L127">    }</span>
 
     public String getLocation() {
-<span class="fc" id="L132">        return location;</span>
+<span class="fc" id="L130">        return location;</span>
     }
 
     public void setLocation(String location) {
-<span class="fc" id="L136">        this.location = location;</span>
-<span class="fc" id="L137">    }</span>
+<span class="fc" id="L134">        this.location = location;</span>
+<span class="fc" id="L135">    }</span>
 
     @JsonbTransient
     public List&lt;Gebruiker&gt; getFollowing() {
-<span class="fc" id="L141">        return following;</span>
+<span class="fc" id="L139">        return following;</span>
     }
     // &lt;/editor-fold&gt;
     
-<span class="fc" id="L145">    public Gebruiker(){</span>
+<span class="fc" id="L143">    public Gebruiker(){</span>
         
-<span class="fc" id="L147">    }</span>
+<span class="fc" id="L145">    }</span>
     
-<span class="fc" id="L149">    public Gebruiker(String email, String password){</span>
-<span class="fc" id="L150">        this.email = email;</span>
-<span class="fc" id="L151">        this.password = password;</span>
-<span class="fc" id="L152">    }</span>
+<span class="fc" id="L147">    public Gebruiker(String email, String password){</span>
+<span class="fc" id="L148">        this.email = email;</span>
+<span class="fc" id="L149">        this.password = password;</span>
+<span class="fc" id="L150">    }</span>
 
-<span class="fc" id="L154">    public Gebruiker(String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location) {</span>
-<span class="fc" id="L155">        this.firstName = firstName;</span>
-<span class="fc" id="L156">        this.lastName = lastName;</span>
-<span class="fc" id="L157">        this.email = email;</span>
-<span class="fc" id="L158">        this.profilePicture = profilePicture;</span>
-<span class="fc" id="L159">        this.password = password;</span>
-<span class="fc" id="L160">        this.bio = bio;</span>
-<span class="fc" id="L161">        this.website = website;</span>
-<span class="fc" id="L162">        this.location = location;</span>
-<span class="fc" id="L163">    }</span>
+<span class="fc" id="L152">    public Gebruiker(String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location) {</span>
+<span class="fc" id="L153">        this.firstName = firstName;</span>
+<span class="fc" id="L154">        this.lastName = lastName;</span>
+<span class="fc" id="L155">        this.email = email;</span>
+<span class="fc" id="L156">        this.profilePicture = profilePicture;</span>
+<span class="fc" id="L157">        this.password = password;</span>
+<span class="fc" id="L158">        this.bio = bio;</span>
+<span class="fc" id="L159">        this.website = website;</span>
+<span class="fc" id="L160">        this.location = location;</span>
+<span class="fc" id="L161">    }</span>
+    
+<span class="nc" id="L163">    public Gebruiker(String firstName, String lastName, String email, String profilePicture, String password, String bio, String website, String location, GebruikerGroup group) {</span>
+<span class="nc" id="L164">        this.firstName = firstName;</span>
+<span class="nc" id="L165">        this.lastName = lastName;</span>
+<span class="nc" id="L166">        this.email = email;</span>
+<span class="nc" id="L167">        this.profilePicture = profilePicture;</span>
+<span class="nc" id="L168">        this.password = password;</span>
+<span class="nc" id="L169">        this.bio = bio;</span>
+<span class="nc" id="L170">        this.website = website;</span>
+<span class="nc" id="L171">        this.location = location;</span>
+<span class="nc" id="L172">        this.addGebruikerGroup(group);</span>
+<span class="nc" id="L173">    }</span>
     
     /**
      * Makes this user follow the given user.
      * @param gebruiker the given user TO follow
      */
     public void makeFollow(Gebruiker gebruiker){
-<span class="pc bpc" id="L170" title="1 of 2 branches missed.">        if(this.following == null){</span>
-<span class="nc" id="L171">            return;</span>
+<span class="pc bpc" id="L180" title="1 of 2 branches missed.">        if(this.following == null){</span>
+<span class="nc" id="L181">            return;</span>
         }
-<span class="fc bfc" id="L173" title="All 2 branches covered.">        if(gebruiker == null){</span>
-<span class="fc" id="L174">            return;</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">        if(gebruiker == null){</span>
+<span class="fc" id="L184">            return;</span>
         }
-<span class="fc bfc" id="L176" title="All 2 branches covered.">        if(!this.following.contains(gebruiker)){</span>
-<span class="fc" id="L177">                this.following.add(gebruiker);</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        if(!this.following.contains(gebruiker)){</span>
+<span class="fc" id="L187">                this.following.add(gebruiker);</span>
         }
-<span class="fc" id="L179">    }</span>
+<span class="fc" id="L189">    }</span>
     
     /**
      * Makes this user ufollow the given user
      * @param gebruiker the given user TO unfollow
      */
     public void makeUnfollow(Gebruiker gebruiker){
-<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        if(this.following == null){</span>
-<span class="nc" id="L187">            return;</span>
+<span class="pc bpc" id="L196" title="1 of 2 branches missed.">        if(this.following == null){</span>
+<span class="nc" id="L197">            return;</span>
         }
-<span class="fc bfc" id="L189" title="All 2 branches covered.">        if(gebruiker == null){</span>
-<span class="fc" id="L190">            return;</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        if(gebruiker == null){</span>
+<span class="fc" id="L200">            return;</span>
         }
-<span class="pc bpc" id="L192" title="1 of 2 branches missed.">        if(this.following.contains(gebruiker)){</span>
-<span class="fc" id="L193">            this.following.remove(gebruiker);</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">        if(this.following.contains(gebruiker)){</span>
+<span class="fc" id="L203">            this.following.remove(gebruiker);</span>
         }
-<span class="fc" id="L195">    }</span>
+<span class="fc" id="L205">    }</span>
     
     // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Old user role code&quot;&gt; 
     /**
@@ -231,45 +241,69 @@ public class Gebruiker implements Serializable{
 
     //&lt;/editor-fold&gt;
     
-    public String getGebruikerRole(){
-<span class="nc" id="L235">        return this.gebruikerGroups.get(0).toString();</span>
+    public void addGebruikerGroup(GebruikerGroup group){
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        if(!this.gebruikerGroups.contains(group)){</span>
+<span class="nc" id="L246">            this.gebruikerGroups.add(group);</span>
+<span class="nc" id="L247">            group.addGebruikerToUserGroup(this);</span>
+        }
+<span class="nc" id="L249">    }</span>
+    
+    public void removeGebruikerGroup(GebruikerGroup group){
+<span class="nc bnc" id="L252" title="All 2 branches missed.">        if(this.gebruikerGroups.contains(group)){</span>
+<span class="nc" id="L253">            this.gebruikerGroups.remove(group);</span>
+<span class="nc" id="L254">            group.removeGebruikerFromUserGroup(this);</span>
+        }
+<span class="nc" id="L256">    }</span>
+    
+    public String getGebruikerGroupsToString(){
+<span class="nc bnc" id="L259" title="All 2 branches missed.">        if(this.gebruikerGroups.size() &gt; 0){</span>
+<span class="nc" id="L260">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">            for(GebruikerGroup gg : this.getGebruikerGroups()){</span>
+<span class="nc" id="L262">                sb.append(gg.getGroupName());</span>
+<span class="nc" id="L263">                sb.append(&quot; - &quot;);</span>
+<span class="nc" id="L264">            }</span>
+            
+<span class="nc" id="L266">            return sb.toString();</span>
+        }else{
+<span class="nc" id="L268">            return &quot;None&quot;;</span>
+        }
     }
     
     @Override
     public int hashCode() {
-<span class="fc" id="L240">        int hash = 7;</span>
-<span class="fc" id="L241">        hash = 29 * hash + Objects.hashCode(this.firstName);</span>
-<span class="fc" id="L242">        hash = 29 * hash + Objects.hashCode(this.lastName);</span>
-<span class="fc" id="L243">        hash = 29 * hash + Objects.hashCode(this.email);</span>
-<span class="fc" id="L244">        hash = 29 * hash + Objects.hashCode(this.profilePicture);</span>
-<span class="fc" id="L245">        hash = 29 * hash + Objects.hashCode(this.password);</span>
-<span class="fc" id="L246">        hash = 29 * hash + Objects.hashCode(this.bio);</span>
-<span class="fc" id="L247">        hash = 29 * hash + Objects.hashCode(this.website);</span>
-<span class="fc" id="L248">        hash = 29 * hash + Objects.hashCode(this.location);</span>
-<span class="fc" id="L249">        return hash;</span>
+<span class="fc" id="L274">        int hash = 7;</span>
+<span class="fc" id="L275">        hash = 29 * hash + Objects.hashCode(this.firstName);</span>
+<span class="fc" id="L276">        hash = 29 * hash + Objects.hashCode(this.lastName);</span>
+<span class="fc" id="L277">        hash = 29 * hash + Objects.hashCode(this.email);</span>
+<span class="fc" id="L278">        hash = 29 * hash + Objects.hashCode(this.profilePicture);</span>
+<span class="fc" id="L279">        hash = 29 * hash + Objects.hashCode(this.password);</span>
+<span class="fc" id="L280">        hash = 29 * hash + Objects.hashCode(this.bio);</span>
+<span class="fc" id="L281">        hash = 29 * hash + Objects.hashCode(this.website);</span>
+<span class="fc" id="L282">        hash = 29 * hash + Objects.hashCode(this.location);</span>
+<span class="fc" id="L283">        return hash;</span>
     }
 
     @Override
     public boolean equals(Object obj) {
-<span class="fc bfc" id="L254" title="All 2 branches covered.">        if (this == obj) {</span>
-<span class="fc" id="L255">            return true;</span>
+<span class="fc bfc" id="L288" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L289">            return true;</span>
         }
-<span class="pc bpc" id="L257" title="1 of 2 branches missed.">        if (obj == null) {</span>
-<span class="nc" id="L258">            return false;</span>
+<span class="pc bpc" id="L291" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L292">            return false;</span>
         }
-<span class="pc bpc" id="L260" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
-<span class="nc" id="L261">            return false;</span>
+<span class="pc bpc" id="L294" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L295">            return false;</span>
         }
-<span class="fc" id="L263">        final Gebruiker other = (Gebruiker) obj;</span>
-<span class="fc bfc" id="L264" title="All 2 branches covered.">        if (!Objects.equals(this.email, other.email)) {</span>
-<span class="fc" id="L265">            return false;</span>
+<span class="fc" id="L297">        final Gebruiker other = (Gebruiker) obj;</span>
+<span class="fc bfc" id="L298" title="All 2 branches covered.">        if (!Objects.equals(this.email, other.email)) {</span>
+<span class="fc" id="L299">            return false;</span>
         }
-<span class="fc" id="L267">        return true;</span>
+<span class="fc" id="L301">        return true;</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L272">        return &quot;Gebruiker{&quot; + &quot;id=&quot; + id + &quot;, firstName=&quot; + firstName + &quot;, lastName=&quot; + lastName + &quot;, email=&quot; + email + &quot;, profilePicture=&quot; + profilePicture + &quot;, password=&quot; + password + &quot;, bio=&quot; + bio + &quot;, website=&quot; + website + &quot;, location=&quot; + location + &quot;, following=&quot; + following + '}';</span>
+<span class="nc" id="L306">        return &quot;Gebruiker{&quot; + &quot;id=&quot; + id + &quot;, firstName=&quot; + firstName + &quot;, lastName=&quot; + lastName + &quot;, email=&quot; + email + &quot;, profilePicture=&quot; + profilePicture + &quot;, password=&quot; + password + &quot;, bio=&quot; + bio + &quot;, website=&quot; + website + &quot;, location=&quot; + location + &quot;, following=&quot; + following + '}';</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
