@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.times;
@@ -26,6 +27,7 @@ import org.mockito.MockitoAnnotations;
  *
  * @author Tvrie
  */
+@Ignore
 public class KweetServiceTest {
     
     @Mock
