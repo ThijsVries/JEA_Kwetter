@@ -95,6 +95,10 @@ public class AdminController implements Serializable{
         }
     }
     
+    public void removeKweet(){
+        
+    }
+    
     public void demoteGebruiker(){
         if(selectedGebruiker != null && selectedGroup != null){
             GebruikerGroup managedGroup = gebruikerService.getGebruikerGroup(selectedGroup);

@@ -35,6 +35,7 @@ public class Init {
         Gebruiker testGebruiker6 = new Gebruiker("Thijs", "Vries", "thijs@mail.com", "Z:/admin", "admin", "admin", "www.reddit.com", "Den Bosch");
         Gebruiker testGebruiker5 = new Gebruiker("test@mail5.com", "122445");
         
+        
         testGebruiker6.addGebruikerGroup(gebruikerGroupAdmin);
         testGebruiker5.addGebruikerGroup(gebruikerGroupAdmin);
         testGebruiker1.addGebruikerGroup(gebruikerGroupAdmin);
