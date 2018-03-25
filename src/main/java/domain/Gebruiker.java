@@ -303,6 +303,6 @@ public class Gebruiker implements Serializable{
 
     @Override
     public String toString() {
-        return "Gebruiker{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", profilePicture=" + profilePicture + ", password=" + password + ", bio=" + bio + ", website=" + website + ", location=" + location + ", following=" + following + '}';
+        return "Gebruiker{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", profilePicture=" + profilePicture + ", password=" + password + ", bio=" + bio + ", website=" + website + ", location=" + location + '}';
     }
 }

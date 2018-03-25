@@ -33,36 +33,44 @@ import javax.inject.Inject;
 <span class="nc" id="L33">        Gebruiker testGebruiker3 = new Gebruiker(&quot;Ka hing&quot;, &quot;Wong&quot;, &quot;kahing@mail.com&quot;, &quot;Z:/china_flag.png&quot;, &quot;13371337&quot;, &quot;mr. Wong&quot;, &quot;fhict.nl&quot;, &quot;Den Bosch&quot;);</span>
 <span class="nc" id="L34">        Gebruiker testGebruiker4 = new Gebruiker(&quot;Nicole&quot;, &quot;Pietersen&quot;, &quot;nico@mail.com&quot;, &quot;Z:/janjteheeftswag.png&quot;, &quot;123456789&quot;, &quot;Ik ben Jantjuuuuh&quot;, &quot;www.reddit.com&quot;, &quot;Eindhoven&quot;);</span>
 <span class="nc" id="L35">        Gebruiker testGebruiker6 = new Gebruiker(&quot;Thijs&quot;, &quot;Vries&quot;, &quot;thijs@mail.com&quot;, &quot;Z:/admin&quot;, &quot;admin&quot;, &quot;admin&quot;, &quot;www.reddit.com&quot;, &quot;Den Bosch&quot;);</span>
-<span class="nc" id="L36">        Gebruiker testGebruiker5 = new Gebruiker(&quot;test@mail5.com&quot;, &quot;122445&quot;);</span>
-        
-<span class="nc" id="L38">        testGebruiker6.addGebruikerGroup(gebruikerGroupAdmin);</span>
-<span class="nc" id="L39">        testGebruiker5.addGebruikerGroup(gebruikerGroupAdmin);</span>
-<span class="nc" id="L40">        testGebruiker1.addGebruikerGroup(gebruikerGroupAdmin);</span>
-        
-<span class="nc" id="L42">        gebruikerDAO.addGebruikerGroup(gebruikerGroupAdmin);</span>
-<span class="nc" id="L43">        gebruikerDAO.addGebruikerGroup(gebruikerGroupMod);</span>
-<span class="nc" id="L44">        gebruikerDAO.addGebruikerGroup(gebruikerGroupUser);</span>
-        
-<span class="nc" id="L46">        testGebruiker1.makeFollow(testGebruiker5);</span>
-<span class="nc" id="L47">        testGebruiker1.makeFollow(testGebruiker6);</span>
-        
-<span class="nc" id="L49">        gebruikerDAO.addGebruiker(testGebruiker1);</span>
-<span class="nc" id="L50">        gebruikerDAO.addGebruiker(testGebruiker2);</span>
-<span class="nc" id="L51">        gebruikerDAO.addGebruiker(testGebruiker3);</span>
-<span class="nc" id="L52">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
-<span class="nc" id="L53">        gebruikerDAO.addGebruiker(testGebruiker6);</span>
+<span class="nc" id="L36">        Gebruiker testGebruiker5 = new Gebruiker(&quot;Karel&quot;, &quot;Peter&quot;, &quot;karel@mail.com&quot;, &quot;Z:/admin&quot;, &quot;karel&quot;, &quot;karel&quot;, &quot;www.reddit.com&quot;, &quot;Den Bosch&quot;);</span>
         
         
-<span class="nc" id="L56">        testGebruiker5.makeFollow(testGebruiker1);</span>
-<span class="nc" id="L57">        testGebruiker5.makeFollow(testGebruiker2);</span>
-<span class="nc" id="L58">        testGebruiker4.makeFollow(testGebruiker3);</span>
-<span class="nc" id="L59">        testGebruiker2.makeFollow(testGebruiker1);</span>
+<span class="nc" id="L39">        testGebruiker6.addGebruikerGroup(gebruikerGroupAdmin);</span>
+<span class="nc" id="L40">        testGebruiker5.addGebruikerGroup(gebruikerGroupAdmin);</span>
+<span class="nc" id="L41">        testGebruiker1.addGebruikerGroup(gebruikerGroupAdmin);</span>
+        
+<span class="nc" id="L43">        gebruikerDAO.addGebruikerGroup(gebruikerGroupAdmin);</span>
+<span class="nc" id="L44">        gebruikerDAO.addGebruikerGroup(gebruikerGroupMod);</span>
+<span class="nc" id="L45">        gebruikerDAO.addGebruikerGroup(gebruikerGroupUser);</span>
+        
+<span class="nc" id="L47">        testGebruiker1.makeFollow(testGebruiker5);</span>
+<span class="nc" id="L48">        testGebruiker1.makeFollow(testGebruiker6);</span>
+        
+<span class="nc" id="L50">        gebruikerDAO.addGebruiker(testGebruiker1);</span>
+<span class="nc" id="L51">        gebruikerDAO.addGebruiker(testGebruiker2);</span>
+<span class="nc" id="L52">        gebruikerDAO.addGebruiker(testGebruiker3);</span>
+<span class="nc" id="L53">        gebruikerDAO.addGebruiker(testGebruiker4);</span>
+<span class="nc" id="L54">        gebruikerDAO.addGebruiker(testGebruiker6);</span>
+        
+        
+<span class="nc" id="L57">        testGebruiker5.makeFollow(testGebruiker1);</span>
+<span class="nc" id="L58">        testGebruiker5.makeFollow(testGebruiker2);</span>
+<span class="nc" id="L59">        testGebruiker4.makeFollow(testGebruiker3);</span>
+<span class="nc" id="L60">        testGebruiker2.makeFollow(testGebruiker1);</span>
 
-<span class="nc" id="L61">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
+<span class="nc" id="L62">        gebruikerDAO.addGebruiker(testGebruiker5);</span>
         
-<span class="nc" id="L63">        kweetDAO.createKweet(3, &quot;Dit is een test kweet&quot;);</span>
-<span class="nc" id="L64">        kweetDAO.createKweet(2, &quot;Hallo allemaal!&quot;);</span>
-<span class="nc" id="L65">        kweetDAO.createKweet(6, &quot;C# &gt; Java&quot;);</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L64">        Gebruiker managedGebruiker = gebruikerDAO.getGebruikerByEmail(&quot;damail@mail.jm&quot;).get(0);</span>
+<span class="nc" id="L65">        kweetDAO.createKweet((int)managedGebruiker.getId(), &quot;Dit is een test kweet&quot;);</span>
+        
+<span class="nc" id="L67">        Gebruiker managedGebruiker2 = gebruikerDAO.getGebruikerByEmail(&quot;kahing@mail.com&quot;).get(0);</span>
+<span class="nc" id="L68">        kweetDAO.createKweet((int)managedGebruiker2.getId(), &quot;Dit is ook een test kweet&quot;);</span>
+<span class="nc" id="L69">        kweetDAO.createKweet((int)managedGebruiker2.getId(), &quot;Dit is ook een test kweet 2.0&quot;);</span>
+        
+<span class="nc" id="L71">        Gebruiker managedGebruiker3 = gebruikerDAO.getGebruikerByEmail(&quot;jantje@mail.com&quot;).get(0);</span>
+<span class="nc" id="L72">        kweetDAO.createKweet((int)managedGebruiker3.getId(), &quot;Hallo wereld&quot;);</span>
+<span class="nc" id="L73">        kweetDAO.createKweet((int)managedGebruiker3.getId(), &quot;Hello world&quot;);</span>
+<span class="nc" id="L74">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

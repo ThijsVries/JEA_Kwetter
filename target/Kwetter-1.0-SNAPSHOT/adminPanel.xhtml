@@ -46,6 +46,9 @@ and open the template in the editor.
                 <p:column headerText="Kweeted by">
                     <h:outputText value="#{Kweet.ownedBy.firstName}" />
                 </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="deleteKweet" value="Delete" action="#{adminController.removeKweet()}" update="kweetsTable"/>
+                </f:facet>
             </p:dataTable>
         </h:form>
     </h:body>

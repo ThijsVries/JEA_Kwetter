@@ -17,6 +17,7 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin_role</role-name>
+            <role-name>mod_role</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>

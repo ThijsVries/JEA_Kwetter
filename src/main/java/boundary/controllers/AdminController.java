@@ -96,7 +96,12 @@ public class AdminController implements Serializable{
     }
     
     public void removeKweet(){
-        
+        if(selectedKweet != null){
+            Kweet managedKweet = kweetService.getKweet((int)selectedKweet.getId()).get(0);
+            kweetService.deleteKweet(managedKweet);
+            
+            allKweets = kweetService.getRecentKweets(200);
+        }
     }
     
     public void demoteGebruiker(){

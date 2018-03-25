@@ -33,7 +33,7 @@ public class Init {
         Gebruiker testGebruiker3 = new Gebruiker("Ka hing", "Wong", "kahing@mail.com", "Z:/china_flag.png", "13371337", "mr. Wong", "fhict.nl", "Den Bosch");
         Gebruiker testGebruiker4 = new Gebruiker("Nicole", "Pietersen", "nico@mail.com", "Z:/janjteheeftswag.png", "123456789", "Ik ben Jantjuuuuh", "www.reddit.com", "Eindhoven");
         Gebruiker testGebruiker6 = new Gebruiker("Thijs", "Vries", "thijs@mail.com", "Z:/admin", "admin", "admin", "www.reddit.com", "Den Bosch");
-        Gebruiker testGebruiker5 = new Gebruiker("test@mail5.com", "122445");
+        Gebruiker testGebruiker5 = new Gebruiker("Karel", "Peter", "karel@mail.com", "Z:/admin", "karel", "karel", "www.reddit.com", "Den Bosch");
         
         
         testGebruiker6.addGebruikerGroup(gebruikerGroupAdmin);
@@ -61,8 +61,15 @@ public class Init {
 
         gebruikerDAO.addGebruiker(testGebruiker5);
         
-        kweetDAO.createKweet(3, "Dit is een test kweet");
-        kweetDAO.createKweet(2, "Hallo allemaal!");
-        kweetDAO.createKweet(6, "C# > Java");
+        Gebruiker managedGebruiker = gebruikerDAO.getGebruikerByEmail("damail@mail.jm").get(0);
+        kweetDAO.createKweet((int)managedGebruiker.getId(), "Dit is een test kweet");
+        
+        Gebruiker managedGebruiker2 = gebruikerDAO.getGebruikerByEmail("kahing@mail.com").get(0);
+        kweetDAO.createKweet((int)managedGebruiker2.getId(), "Dit is ook een test kweet");
+        kweetDAO.createKweet((int)managedGebruiker2.getId(), "Dit is ook een test kweet 2.0");
+        
+        Gebruiker managedGebruiker3 = gebruikerDAO.getGebruikerByEmail("jantje@mail.com").get(0);
+        kweetDAO.createKweet((int)managedGebruiker3.getId(), "Hallo wereld");
+        kweetDAO.createKweet((int)managedGebruiker3.getId(), "Hello world");
     }
 }
