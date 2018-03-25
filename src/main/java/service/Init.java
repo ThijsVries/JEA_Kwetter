@@ -3,6 +3,7 @@ package service;
 import dao.GebruikerDAO;
 import dao.KweetDAO;
 import domain.Gebruiker;
+import domain.GebruikerGroup;
 import domain.Kweet;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -22,32 +23,53 @@ public class Init {
     
     @PostConstruct
     public void init(){
-        Gebruiker testGebruiker1 = new Gebruiker("test@mail.com", "12345");
-        Gebruiker testGebruiker2 = new Gebruiker("test@mail2.com", "1756745");
-        Gebruiker testGebruiker3 = new Gebruiker("test@mail3.com", "12356755");
-        Gebruiker testGebruiker4 = new Gebruiker("test@mail4.com", "1223423445");
-        Gebruiker testGebruiker5 = new Gebruiker("test@mail5.com", "122445");
+        
+        GebruikerGroup gebruikerGroupAdmin = new GebruikerGroup("Admin");
+        GebruikerGroup gebruikerGroupUser = new GebruikerGroup("User");
+        GebruikerGroup gebruikerGroupMod = new GebruikerGroup("Moderator");
+        
+        Gebruiker testGebruiker1 = new Gebruiker("Jan", "Pietersen", "jantje@mail.com", "Z:/janjteheeftswag.png", "123456789", "Ik ben Jantjuuuuh", "www.reddit.com", "Eindhoven");
+        Gebruiker testGebruiker2 = new Gebruiker("Mary-Jane", "Sensi", "damail@mail.jm", "Z:/plants.png", "420erryday", "Sup people", "www.reddit.com/r/trees", "Everywhere?");
+        Gebruiker testGebruiker3 = new Gebruiker("Ka hing", "Wong", "kahing@mail.com", "Z:/china_flag.png", "13371337", "mr. Wong", "fhict.nl", "Den Bosch");
+        Gebruiker testGebruiker4 = new Gebruiker("Nicole", "Pietersen", "nico@mail.com", "Z:/janjteheeftswag.png", "123456789", "Ik ben Jantjuuuuh", "www.reddit.com", "Eindhoven");
+        Gebruiker testGebruiker6 = new Gebruiker("Thijs", "Vries", "thijs@mail.com", "Z:/admin", "admin", "admin", "www.reddit.com", "Den Bosch");
+        Gebruiker testGebruiker5 = new Gebruiker("Karel", "Peter", "karel@mail.com", "Z:/admin", "karel", "karel", "www.reddit.com", "Den Bosch");
+        
+        
+        testGebruiker6.addGebruikerGroup(gebruikerGroupAdmin);
+        testGebruiker5.addGebruikerGroup(gebruikerGroupAdmin);
+        testGebruiker1.addGebruikerGroup(gebruikerGroupAdmin);
+        
+        gebruikerDAO.addGebruikerGroup(gebruikerGroupAdmin);
+        gebruikerDAO.addGebruikerGroup(gebruikerGroupMod);
+        gebruikerDAO.addGebruikerGroup(gebruikerGroupUser);
+        
+        testGebruiker1.makeFollow(testGebruiker5);
+        testGebruiker1.makeFollow(testGebruiker6);
         
         gebruikerDAO.addGebruiker(testGebruiker1);
         gebruikerDAO.addGebruiker(testGebruiker2);
         gebruikerDAO.addGebruiker(testGebruiker3);
         gebruikerDAO.addGebruiker(testGebruiker4);
+        gebruikerDAO.addGebruiker(testGebruiker6);
+        
         
         testGebruiker5.makeFollow(testGebruiker1);
         testGebruiker5.makeFollow(testGebruiker2);
         testGebruiker4.makeFollow(testGebruiker3);
-        testGebruiker2.makeFollow(testGebruiker2);
+        testGebruiker2.makeFollow(testGebruiker1);
+
         gebruikerDAO.addGebruiker(testGebruiker5);
         
-//        kweetDAO
-//        kweetDAO.createKweet(new Kweet(2, "Hello world"));
-//        kweetDAO.createKweet(new Kweet(3, "Swagg"));
-//        List<Kweet> kweetsGebruiker1 = kweetDAO.getGebruikerKweets("test@mail.com", 20);
-//        kweetsGebruiker1.get(0).like(testGebruiker5);
-//        
-//        List<Kweet> kweets = kweetDAO.getGebruikerKweets(testGebruiker5.getEmail(), 20);
-//        
-//        kweets.get(0).like(testGebruiker3);
-//        kweetDAO.updateKweet(kweets.get(0));
+        Gebruiker managedGebruiker = gebruikerDAO.getGebruikerByEmail("damail@mail.jm").get(0);
+        kweetDAO.createKweet((int)managedGebruiker.getId(), "Dit is een test kweet");
+        
+        Gebruiker managedGebruiker2 = gebruikerDAO.getGebruikerByEmail("kahing@mail.com").get(0);
+        kweetDAO.createKweet((int)managedGebruiker2.getId(), "Dit is ook een test kweet");
+        kweetDAO.createKweet((int)managedGebruiker2.getId(), "Dit is ook een test kweet 2.0");
+        
+        Gebruiker managedGebruiker3 = gebruikerDAO.getGebruikerByEmail("jantje@mail.com").get(0);
+        kweetDAO.createKweet((int)managedGebruiker3.getId(), "Hallo wereld");
+        kweetDAO.createKweet((int)managedGebruiker3.getId(), "Hello world");
     }
 }

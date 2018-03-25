@@ -2,6 +2,7 @@
 
 import dao.GebruikerDAO;
 import domain.Gebruiker;
+import domain.GebruikerGroup;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,65 +17,100 @@ public class GebruikerService {
     @Inject
     GebruikerDAO gebruikerDAO;
     
-<span class="fc" id="L19">    private static final Logger LOGGER = Logger.getLogger(GebruikerService.class.getName());</span>
+<span class="fc" id="L20">    private static final Logger LOGGER = Logger.getLogger(GebruikerService.class.getName());</span>
     
-<span class="fc" id="L21">    public GebruikerService(){</span>
+<span class="fc" id="L22">    public GebruikerService(){</span>
         
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L24">    }</span>
     
     public void addGebruiker(Gebruiker gebruiker){
         try{
-<span class="fc" id="L27">            gebruikerDAO.addGebruiker(gebruiker);</span>
-<span class="nc" id="L28">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L29">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
-<span class="fc" id="L30">        }</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L28">            gebruikerDAO.addGebruiker(gebruiker);</span>
+<span class="nc" id="L29">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L30">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="fc" id="L31">        }</span>
+<span class="fc" id="L32">    }</span>
     
     
     public void followGebruiker(Gebruiker gebruiker, Gebruiker gebruikerToFollow){
-<span class="nc" id="L35">        gebruiker.makeFollow(gebruikerToFollow);</span>
-<span class="nc" id="L36">        updateGebruiker(gebruiker);</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L36">        gebruiker.makeFollow(gebruikerToFollow);</span>
+<span class="nc" id="L37">        updateGebruiker(gebruiker);</span>
+<span class="nc" id="L38">    }</span>
     public void updateGebruiker(Gebruiker gebruiker){
         try{
-<span class="fc" id="L40">            gebruikerDAO.updateGebruiker(gebruiker);</span>
-<span class="nc" id="L41">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L42">            LOGGER.log(Level.FINE, &quot;ERROR while performing updateGebruiker method; {0}&quot;, pe.getMessage());</span>
-<span class="fc" id="L43">        }</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L41">            gebruikerDAO.updateGebruiker(gebruiker);</span>
+<span class="nc" id="L42">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L43">            LOGGER.log(Level.FINE, &quot;ERROR while performing updateGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="fc" id="L44">        }</span>
+<span class="fc" id="L45">    }</span>
     
     public void deleteGebruiker(Gebruiker gebruiker){
         try{
-<span class="fc" id="L48">            gebruikerDAO.deleteGebruiker(gebruiker);</span>
-<span class="nc" id="L49">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L50">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
-<span class="fc" id="L51">        }</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L49">            gebruikerDAO.deleteGebruiker(gebruiker);</span>
+<span class="nc" id="L50">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L51">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="fc" id="L52">        }</span>
+<span class="fc" id="L53">    }</span>
     
     public List&lt;Gebruiker&gt; getGebruikerByEmail(String email){
         try{
-<span class="fc" id="L56">            return gebruikerDAO.getGebruikerByEmail(email);</span>
-<span class="nc" id="L57">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L58">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L59">            return null;</span>
+<span class="fc" id="L57">            return gebruikerDAO.getGebruikerByEmail(email);</span>
+<span class="nc" id="L58">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L59">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L60">            return null;</span>
         }
     }
     
     public List&lt;Gebruiker&gt; getGebruikerFollowers(String email){
         try{
-<span class="fc" id="L65">            return gebruikerDAO.getGebruikerFollowers(email);</span>
-<span class="nc" id="L66">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L67">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L68">            return null;</span>
+<span class="fc" id="L66">            return gebruikerDAO.getGebruikerFollowers(email);</span>
+<span class="nc" id="L67">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L68">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L69">            return null;</span>
+        }
+    }
+    
+    public List&lt;Gebruiker&gt; getAllGebruikers(){
+        try{
+<span class="nc" id="L75">            return gebruikerDAO.getAllGebruikers();</span>
+<span class="nc" id="L76">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L77">            LOGGER.log(Level.FINE, &quot;ERROR while performing getAllGebruikers method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L78">            return null;</span>
         }
     }
     
     public List&lt;Gebruiker&gt; getGebruikerByName(String firstName){
         try{
-<span class="fc" id="L74">            return gebruikerDAO.getGebruikerByName(firstName);</span>
-<span class="nc" id="L75">        } catch(PersistenceException pe){</span>
-<span class="nc" id="L76">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
-<span class="nc" id="L77">            return null;</span>
+<span class="fc" id="L84">            return gebruikerDAO.getGebruikerByName(firstName);</span>
+<span class="nc" id="L85">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L86">            LOGGER.log(Level.FINE, &quot;ERROR while performing addGebruiker method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L87">            return null;</span>
+        }
+    }
+    
+    public void updateGebruikerGroup(GebruikerGroup gebruikerGroup){
+        try{
+<span class="nc" id="L93">            gebruikerDAO.updateGebruikerGroup(gebruikerGroup);</span>
+<span class="nc" id="L94">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L95">            LOGGER.log(Level.FINE, &quot;ERROR while performing updateGebruikerGroup method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L96">        }</span>
+<span class="nc" id="L97">    }</span>
+    
+    public GebruikerGroup getGebruikerGroup(String groupName){
+        try{
+<span class="nc" id="L101">            return gebruikerDAO.getGebruikerGroup(groupName);</span>
+<span class="nc" id="L102">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L103">            LOGGER.log(Level.FINE, &quot;ERROR while performing getGebruikerGroup method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L104">            return null;</span>
+        }
+    }
+    
+    public List&lt;GebruikerGroup&gt; getAllGebruikerGroups(){
+        try{
+<span class="nc" id="L110">            return gebruikerDAO.getAllGebruikerGroups();</span>
+<span class="nc" id="L111">        } catch(PersistenceException pe){</span>
+<span class="nc" id="L112">            LOGGER.log(Level.FINE, &quot;ERROR while performing getAllGebruikerGroups method; {0}&quot;, pe.getMessage());</span>
+<span class="nc" id="L113">            return null;</span>
         }
     }
 }

@@ -1,3 +1,4 @@
+domain\GebruikerGroup.class
 domain\Kweet_.class
 dao\GebruikerDAO.class
 service\GebruikerService.class
@@ -7,10 +8,11 @@ rest\KweetResource.class
 domain\Kweet.class
 dao\KweetDAOImp.class
 domain\Gebruiker.class
-domain\Gebruiker$1.class
 rest\GebruikerResource.class
 domain\GebruikerRole.class
 domain\Gebruiker_.class
+domain\GebruikerGroup_.class
 service\Init.class
 service\KweetService.class
+boundary\controllers\AdminController.class
 dao\GebruikerDAOImp.class
