@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nl"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AdminController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Kwetter</a> &gt; <a href="index.source.html" class="el_package">boundary.controllers</a> &gt; <span class="el_source">AdminController.java</span></div><h1>AdminController.java</h1><pre class="source lang-java linenums">package boundary.controllers;
+
+import domain.Gebruiker;
+import domain.GebruikerGroup;
+import domain.GebruikerRole;
+import domain.Kweet;
+import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import service.GebruikerService;
+import service.KweetService;
+
+@Named
+@SessionScoped
+public class AdminController implements Serializable{
+
+    @Inject
+    private GebruikerService gebruikerService;
+    
+    @Inject
+    private KweetService kweetService;
+
+    private List&lt;GebruikerGroup&gt; gebruikerGroups;
+    private String selectedGroup;
+    
+    private List&lt;Gebruiker&gt; allGebruikers;
+    private Gebruiker selectedGebruiker;
+    
+    private List&lt;Kweet&gt; allKweets;
+    private Kweet selectedKweet;
+
+    public List&lt;Kweet&gt; getAllKweets() {
+<span class="nc" id="L36">        return allKweets;</span>
+    }
+
+    public void setAllKweets(List&lt;Kweet&gt; allKweets) {
+<span class="nc" id="L40">        this.allKweets = allKweets;</span>
+<span class="nc" id="L41">    }</span>
+
+    public Kweet getSelectedKweet() {
+<span class="nc" id="L44">        return selectedKweet;</span>
+    }
+
+    public void setSelectedKweet(Kweet selectedKweet) {
+<span class="nc" id="L48">        this.selectedKweet = selectedKweet;</span>
+<span class="nc" id="L49">    }</span>
+    
+    public Gebruiker getSelectedGebruiker() {
+<span class="nc" id="L52">        return selectedGebruiker;</span>
+    }
+
+    public void setSelectedGebruiker(Gebruiker selectedGebruiker) {
+<span class="nc" id="L56">        this.selectedGebruiker = selectedGebruiker;</span>
+<span class="nc" id="L57">    }</span>
+
+    public String getSelectedGroup() {
+<span class="nc" id="L60">        return selectedGroup;</span>
+    }
+
+    public void setSelectedGroup(String selectedGroup) {
+<span class="nc" id="L64">        this.selectedGroup = selectedGroup;</span>
+<span class="nc" id="L65">    }</span>
+
+    public List&lt;GebruikerGroup&gt; getGebruikerGroups() {
+<span class="nc" id="L68">        return gebruikerGroups;</span>
+    }
+
+    public void setGebruikerGroups(List&lt;GebruikerGroup&gt; gebruikerGroups) {
+<span class="nc" id="L72">        this.gebruikerGroups = gebruikerGroups;</span>
+<span class="nc" id="L73">    }</span>
+    
+<span class="nc" id="L75">    public AdminController(){</span>
+        
+<span class="nc" id="L77">    }</span>
+    
+    @PostConstruct
+    public void init(){
+<span class="nc" id="L81">        gebruikerGroups = gebruikerService.getAllGebruikerGroups();</span>
+<span class="nc" id="L82">        allKweets = kweetService.getRecentKweets(2000);</span>
+<span class="nc" id="L83">    }</span>
+    
+    public void promoteGebruiker(){
+<span class="nc" id="L86">        System.out.println(&quot;yo&quot;);</span>
+<span class="nc bnc" id="L87" title="All 4 branches missed.">        if(selectedGebruiker != null &amp;&amp; selectedGroup != null){</span>
+<span class="nc" id="L88">            GebruikerGroup managedGroup = gebruikerService.getGebruikerGroup(selectedGroup);</span>
+<span class="nc" id="L89">            selectedGebruiker.addGebruikerGroup(managedGroup);</span>
+            
+<span class="nc" id="L91">            gebruikerService.updateGebruikerGroup(managedGroup);</span>
+<span class="nc" id="L92">            gebruikerService.updateGebruiker(selectedGebruiker);</span>
+            
+<span class="nc" id="L94">            gebruikerGroups = gebruikerService.getAllGebruikerGroups();</span>
+        }
+<span class="nc" id="L96">    }</span>
+    
+    public void removeKweet(){
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if(selectedKweet != null){</span>
+<span class="nc" id="L100">            Kweet managedKweet = kweetService.getKweet((int)selectedKweet.getId()).get(0);</span>
+<span class="nc" id="L101">            kweetService.deleteKweet(managedKweet);</span>
+            
+<span class="nc" id="L103">            allKweets = kweetService.getRecentKweets(200);</span>
+        }
+<span class="nc" id="L105">    }</span>
+    
+    public void demoteGebruiker(){
+<span class="nc bnc" id="L108" title="All 4 branches missed.">        if(selectedGebruiker != null &amp;&amp; selectedGroup != null){</span>
+<span class="nc" id="L109">            GebruikerGroup managedGroup = gebruikerService.getGebruikerGroup(selectedGroup);</span>
+<span class="nc" id="L110">            selectedGebruiker.removeGebruikerGroup(managedGroup);</span>
+            
+<span class="nc" id="L112">            gebruikerService.updateGebruikerGroup(managedGroup);</span>
+<span class="nc" id="L113">            gebruikerService.updateGebruiker(selectedGebruiker);</span>
+            
+<span class="nc" id="L115">            gebruikerGroups = gebruikerService.getAllGebruikerGroups();</span>
+        }
+<span class="nc" id="L117">    }</span>
+    
+    public List&lt;Gebruiker&gt; getAllGebruikers(){
+<span class="nc" id="L120">        allGebruikers = gebruikerService.getAllGebruikers();</span>
+<span class="nc" id="L121">        return allGebruikers;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
