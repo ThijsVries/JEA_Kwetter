@@ -26,15 +26,15 @@ node {
         }
     }
     
-    stage ('Artifactory configuration') {
-        try{
+    stage('Artifactory configuration'){
+        try {
         rtMaven.tool = MAVEN_TOOL // Tool name from Jenkins configuration
         rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
         rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
         buildInfo = Artifactory.newBuildInfo()
         server.publishBuildInfo buildInfo
         } catch(error){
-        
+            echo "The artifactory server could not be reached ${error}"
         }
     }
     
