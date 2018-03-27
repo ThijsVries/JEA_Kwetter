@@ -11,7 +11,7 @@ Kwetter,domain,Gebruiker_,3,0,0,0,1,0,1,0,1,0
 Kwetter,domain,Gebruiker,178,270,13,15,37,74,18,29,9,24
 Kwetter,domain,GebruikerGroup_,3,0,0,0,1,0,1,0,1,0
 Kwetter,domain,Kweet,69,280,9,29,14,72,14,30,5,20
-Kwetter,domain,GebruikerRole,48,0,0,0,2,0,4,0,4,0
+Kwetter,domain,GebruikerRole,39,0,0,0,2,0,2,0,2,0
 Kwetter,domain,Kweet_,3,0,0,0,1,0,1,0,1,0
 Kwetter,domain,GebruikerGroup,81,0,2,0,25,0,12,0,11,0
 Kwetter,boundary.controllers,AdminController,148,0,10,0,42,0,21,0,16,0
